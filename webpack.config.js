@@ -7,42 +7,33 @@ module.exports = {
 	entry: './src/index.tsx',
 	output: {
 		path: path.resolve(__dirname, 'build'),
-		filename: 'bundle.js',
+		filename:
+			process.env.NODE_ENV === 'development'
+				? '[name].js'
+				: '[name]-[hash:8].js',
 	},
 	resolve: {
-		extensions: ['.ts', '.tsx', '.js', '.jsx'],
+		extensions: ['.ts', '.tsx', '.js'],
 	},
 	devtool: 'inline-source-map',
 	module: {
 		rules: [
 			{
-				test: /\.(js|jsx|ts|tsx)$/,
+				test: /\.(ts|tsx)$/,
 				exclude: /node_modules/,
-				use: [
-					{
-						loader: 'babel-loader',
-					},
-				],
+				use: 'babel-loader',
 			},
 			{
 				test: /\.html$/,
-				use: [
-					{
-						loader: 'html-loader',
-					},
-				],
+				use: 'html-loader',
 			},
 			{
 				test: /\.(png|jpe?g|gif)$/i,
-				use: [
-					{
-						loader: 'file-loader',
-					},
-				],
+				use: 'file-loader',
 			},
 			{
 				test: /\.s[ac]ss$/i,
-				use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+				use: [MiniCssExtractPlugin.loader, 'css-loader'],
 			},
 		],
 	},
