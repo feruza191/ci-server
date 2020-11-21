@@ -16,7 +16,7 @@
 		"src/**/*.{ts,tsx,json,css}": [
 			"eslint --fix",
 			"npx prettier --write",
-			"tsc"
+			"tsc src/"
 		]
 	},
 	"author": "",

@@ -22,6 +22,7 @@ module.exports = {
 				test: /\.(ts|tsx)$/,
 				exclude: /node_modules/,
 				use: 'babel-loader',
+				include: path.resolve(__dirname, 'src'),
 			},
 			{
 				test: /\.html$/,
