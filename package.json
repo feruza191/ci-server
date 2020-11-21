@@ -13,10 +13,9 @@
 		}
 	},
 	"lint-staged": {
-		"src/**/*.{ts,tsx,json,css}": [
+		"**/!(node_modules|dist)/*.{ts,tsx,json,css}": [
 			"eslint --fix",
-			"npx prettier --write",
-			"tsc src/"
+			"npx prettier --write"
 		]
 	},
 	"author": "",
