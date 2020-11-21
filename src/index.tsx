@@ -6,7 +6,7 @@ import Img from './images/m3.jpg';
 
 const App: FC = () => (
 	<Wrapper>
-		<p>Hello world!!</p>
+		<p>Hello world!!csdcsd</p>
 		<img src={Img} />
 	</Wrapper>
 );
