@@ -1,4 +1,4 @@
-export const palettes = {
+export const CONSTANT_PALETTES = {
 	black: '#000000',
 	yellow: '#FFCC00',
 	yellowHovered: '#F2C200',

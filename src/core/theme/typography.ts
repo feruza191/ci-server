@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { CommonTextProps, TextProps } from './types';
-import { palettes } from './palette';
+import { CONSTANT_PALETTES } from './palette';
 
 const CommonTextProperties = styled.div<CommonTextProps>`
 	text-align: ${({ align }) => {
@@ -11,13 +11,13 @@ const CommonTextProperties = styled.div<CommonTextProps>`
 	}};
 	color: ${({ type }) => {
 		if (type === 'secondary') {
-			return palettes.greyDark;
+			return CONSTANT_PALETTES.greyDark;
 		}
-		return palettes.black;
+		return CONSTANT_PALETTES.black;
 	}};
 `;
 
-export const text = styled(CommonTextProperties)<TextProps>`
+export const TextConfig = styled(CommonTextProperties)<TextProps>`
 	font-size: ${(props) => props.fontSize || '14'}px;
 	line-height: ${(props) => props.lineHeight}px;
 	font-weight: ${(props) => props.fontWeight || 400};

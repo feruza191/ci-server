@@ -1,18 +1,17 @@
-import { Layout, Row } from 'antd';
+import { Layout } from 'antd';
 import styled from 'styled-components';
 import { palette, device, Text } from '../theme';
-import { FLEX_SPACE_BETWEEN } from '../theme/common';
-import Button from '../atoms/Button';
+import { FlexBox } from '../theme/common';
+import { Button } from '../atoms/Button';
 
 const { Content } = Layout;
 
-export const FooterWrapper = styled(Row)`
+export const FooterWrapper = styled.div`
 	background: ${palette.greyLight};
-	${FLEX_SPACE_BETWEEN};
 	padding: 8px 100px;
 	flex-shrink: 0;
 
-	& ul {
+	ul {
 		list-style-type: none;
 		margin-bottom: 0;
 		li {
@@ -25,16 +24,15 @@ export const FooterWrapper = styled(Row)`
 	@media ${device.mobileL} {
 		padding: 8px 16px;
 
-		& ul {
+		ul {
 			margin-bottom: 8px;
 		}
 	}
 `;
 
-export const HeaderWrapper = styled.div`
+export const HeaderWrapper = styled(FlexBox)`
 	margin: 0 100px;
 	flex-shrink: 0;
-	${FLEX_SPACE_BETWEEN};
 
 	@media ${device.mobileL} {
 		margin: 0 53px 0 16px;

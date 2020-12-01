@@ -8,7 +8,7 @@ export interface ButtonProps {
 	height: string;
 }
 
-const Button = styled(ButtonStyle)<ButtonProps>`
+export const Button = styled(ButtonStyle)<ButtonProps>`
 	background: ${({ bg }) => {
 		if (bg === 'primary') {
 			return palette.yellow;
@@ -17,7 +17,7 @@ const Button = styled(ButtonStyle)<ButtonProps>`
 			return palette.greyDarker;
 		}
 	}};
-	width: ${(props) => props.width || 'auto'}px;
+	width: ${(props) => (props.width ? `${props.width}px` : 'auto')};
 	height: ${(props) => props.height}px;
 	font-size: 13px;
 	font-weight: 400;
@@ -47,5 +47,3 @@ const Button = styled(ButtonStyle)<ButtonProps>`
 		}};
 	}
 `;
-
-export default Button;

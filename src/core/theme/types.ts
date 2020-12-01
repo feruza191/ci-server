@@ -15,3 +15,10 @@ export interface MarginContainerProps {
 	left?: string;
 	right?: string;
 }
+
+export interface FlexBoxProps {
+	flexDirection?: string;
+	justifyContent?: string;
+	alignItems?: string;
+	alignContent?: string;
+}

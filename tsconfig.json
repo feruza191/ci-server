@@ -16,6 +16,6 @@
 		"jsx": "react",
 		"removeComments": true
 	},
-	"include": ["src", "src/images/images.d.ts"],
+	"include": ["src", "global.d.ts"],
 	"exclude": ["node_modules"]
 }

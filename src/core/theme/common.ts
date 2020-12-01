@@ -1,55 +1,12 @@
-import styled, { css } from 'styled-components';
-import { MarginContainerProps } from './types';
+import styled from 'styled-components';
+import { MarginContainerProps, FlexBoxProps } from './types';
 
-export const DisplayFlex = styled.div`
+export const FlexBox = styled.div<FlexBoxProps>`
 	display: flex;
-`;
-export const FlexContainer = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-`;
-
-export const FlexSpaceBetween = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-`;
-
-export const FlexSpaceAround = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-`;
-
-export const FlexAlignVertical = styled.div`
-	display: flex;
-	align-items: center;
-`;
-export const FlexAlignEnd = styled.div`
-	display: flex;
-	justify-content: flex-end;
-`;
-export const FlexAlignVerticallyEnd = styled.div`
-	display: flex;
-	align-items: flex-end;
-	justify-content: space-between;
-`;
-
-export const FLEX_HORIZONTAL = css`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-`;
-export const FLEX_SPACE_BETWEEN = css`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-`;
-export const FLEX_SPACE_AROUND = css`
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
+	flex-direction: ${(props) => props.flexDirection || 'row'};
+	justify-content: ${(props) => props.justifyContent || 'flex-start'};
+	align-items: ${(props) => props.alignItems || 'flex-start'};
+	align-content: ${(props) => props.alignContent || 'flex-start'};
 `;
 
 export const MarginContainer = styled.div<MarginContainerProps>`

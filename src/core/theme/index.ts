@@ -1,11 +1,11 @@
-import { palettes } from './palette';
+import { CONSTANT_PALETTES } from './palette';
 import { devices, sizes } from './devices';
 import textKeys from './textKeys';
-import { text } from './typography';
+import { TextConfig } from './typography';
 
-export const palette = palettes;
+export const palette = CONSTANT_PALETTES;
 export const device = devices;
 export const size = sizes;
 
 export const TextKey = textKeys;
-export const Text = text;
+export const Text = TextConfig;

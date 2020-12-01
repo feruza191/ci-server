@@ -1,12 +1,8 @@
 import styled from 'styled-components';
-import { FLEX_HORIZONTAL } from '../core/theme/common';
+import { FlexBox } from '../core/theme/common';
 import { Text } from '../core/theme';
 
-export const InstrumentLogo = styled.img``;
-
-export const StartScreenWrapper = styled.div`
-	${FLEX_HORIZONTAL};
-	flex-direction: column;
+export const StartScreenWrapper = styled(FlexBox)`
 	height: 84vh;
 `;
 

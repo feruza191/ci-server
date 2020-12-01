@@ -1,15 +1,19 @@
 import React, { FC } from 'react';
-import Layout from '../core/layout/Layout';
-import Instrument from '../images/instrument.svg';
-import { InstrumentLogo, StartScreenWrapper, SettingsText } from './style';
+import { Layout } from '../core/layout/Layout';
+import { StartScreenWrapper, SettingsText } from './style';
 import TextKey from '../core/theme/textKeys';
 import { MarginContainer } from '../core/theme/common';
-import Button from '../core/atoms/Button';
+import { Button } from '../core/atoms/Button';
+import Instrument from '../images/instrument.svg';
 
-const StartScreenPage: FC = () => (
+export const StartScreenPage: FC = () => (
 	<Layout>
-		<StartScreenWrapper>
-			<InstrumentLogo src={Instrument} />
+		<StartScreenWrapper
+			flexDirection='column'
+			justifyContent='center'
+			alignItems='center'
+		>
+			<img src={Instrument} />
 			<MarginContainer top='32' />
 			<SettingsText lineHeight='16'>
 				{TextKey.ConfigureRepository}
@@ -21,5 +25,3 @@ const StartScreenPage: FC = () => (
 		</StartScreenWrapper>
 	</Layout>
 );
-
-export default StartScreenPage;
