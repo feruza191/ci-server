@@ -17,6 +17,13 @@ module.exports = {
 		sourceType: 'module', // Allows for the use of imports
 	},
 	plugins: ['import', 'react', 'jsx-a11y'],
+	settings: {
+		'import/resolver': {
+			node: {
+				extensions: ['.js', '.ts', '.tsx'],
+			},
+		},
+	},
 	rules: {
 		'no-shadow': 'off',
 		'no-console': 'error',
@@ -36,17 +43,8 @@ module.exports = {
 		'import/namespace': 'error',
 		'import/default': 'error',
 		'import/export': 'error',
+		'import/extensions': 'off',
 		'import/prefer-default-export': 'off',
-		'import/extensions': [
-			'error',
-			'ignorePackages',
-			{
-				js: 'never',
-				jsx: 'never',
-				ts: 'never',
-				tsx: 'never',
-			},
-		],
 		'jsx-a11y/alt-text': 'off',
 		'@typescript-eslint/no-var-requires': 'off',
 		'@typescript-eslint/no-shadow': ['error'],
