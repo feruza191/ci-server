@@ -17,23 +17,36 @@ module.exports = {
 		sourceType: 'module', // Allows for the use of imports
 	},
 	plugins: ['import', 'react', 'jsx-a11y'],
+	settings: {
+		'import/resolver': {
+			node: {
+				extensions: ['.js', '.ts', '.tsx'],
+			},
+		},
+	},
 	rules: {
-		'no-shadow': 'warn',
+		'no-shadow': 'off',
 		'no-console': 'error',
 		'no-tabs': 'off',
 		'no-use-before-define': 'off',
 		'no-undef': 'off',
 		indent: 'off',
+		'consistent-return': 'off',
 		'react/jsx-indent': 'off',
+		'react/jsx-indent-props': 'off',
 		'react/jsx-filename-extension': 'off',
 		'react/jsx-uses-vars': 'error',
 		'react/jsx-uses-react': 'error',
+		'react/prop-types': 'off',
 		'import/no-unresolved': 'error',
 		'import/named': 'error',
 		'import/namespace': 'error',
 		'import/default': 'error',
 		'import/export': 'error',
+		'import/extensions': 'off',
+		'import/prefer-default-export': 'off',
 		'jsx-a11y/alt-text': 'off',
 		'@typescript-eslint/no-var-requires': 'off',
+		'@typescript-eslint/no-shadow': ['error'],
 	},
 };

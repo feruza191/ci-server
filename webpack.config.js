@@ -25,16 +25,22 @@ module.exports = {
 				include: path.resolve(__dirname, 'src'),
 			},
 			{
-				test: /\.html$/,
-				use: 'html-loader',
-			},
-			{
-				test: /\.(png|jpe?g|gif)$/i,
+				test: /\.(png|jpe?g|gif|ttf|woff|woff2|eot|svg)$/i,
 				use: 'file-loader',
 			},
 			{
-				test: /\.s[ac]ss$/i,
-				use: [MiniCssExtractPlugin.loader, 'css-loader'],
+				test: /\.css$/,
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader,
+						options: {
+							publicPath: '',
+						},
+					},
+					{
+						loader: 'css-loader',
+					},
+				],
 			},
 		],
 	},
