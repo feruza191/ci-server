@@ -4,9 +4,9 @@ export interface CommonTextProps {
 }
 
 export interface TextProps {
-	fontSize?: string;
-	lineHeight?: string;
-	fontWeight?: string;
+	fontSize?: number;
+	lineHeight?: number;
+	fontWeight?: number;
 }
 
 export interface MarginContainerProps {

@@ -1,5 +1,4 @@
-**/images/**
-**/fonts/**
+**/assets/**
 /**/*.jpg
 /**/*.png
 /**/*.svg

@@ -14,7 +14,11 @@
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"jsx": "react",
-		"removeComments": true
+		"removeComments": true,
+		"baseUrl": ".",
+		"paths": {
+			"src/*": ["./src/*"]
+		}
 	},
 	"include": ["src", "global.d.ts"],
 	"exclude": ["node_modules"]

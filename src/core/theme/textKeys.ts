@@ -1,12 +1,26 @@
 enum TextKey {
+	BranchName = 'branch name',
+	Cancel = 'Cancel',
 	CopyRight = '© 2020 Kirkl CI',
 	ConfigureRepository = 'Configure repository connection and synchronization settings',
 	CompanyLogo = 'CI server',
+	CommitHash = 'Commit hash',
+	GitHubRepository = 'GitHub repository ',
 	OpenSettings = 'Open settings',
 	Learning = 'Learning',
+	NewJob = 'New Job',
+	NewJobDescription = 'Enter the commit hash and job command that run job',
+	MainBranch = 'Main branch',
+	Minutes = 'minutes',
+	RepoName = 'user-name/repo-name',
 	RussianVersion = 'Русская версия',
 	Settings = 'Settings',
 	Support = 'Support',
+	Save = 'Save',
+	ShowMore = 'Show more',
+	RunJob = 'Run Job',
+	Rebuild = 'Rebuild',
+	JobCommand = 'Job command',
 }
 
 export default TextKey;

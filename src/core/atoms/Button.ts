@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { Button as ButtonStyle } from 'antd';
-import { palette } from '../theme';
+import { palette, fontSize, fontWeight } from '../theme';
 
 export interface ButtonProps {
 	bg?: string;
 	width?: string;
-	height: string;
+	height?: string;
 }
 
 export const Button = styled(ButtonStyle)<ButtonProps>`
@@ -18,9 +18,9 @@ export const Button = styled(ButtonStyle)<ButtonProps>`
 		}
 	}};
 	width: ${(props) => (props.width ? `${props.width}px` : 'auto')};
-	height: ${(props) => props.height}px;
-	font-size: 13px;
-	font-weight: 400;
+	height: ${(props) => props.height || '36'}px;
+	font-size: ${fontSize.small}px;
+	font-weight: ${fontWeight.regular};
 	border-radius: 4px;
 	border: none;
 
