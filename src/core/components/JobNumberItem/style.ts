@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+
+import { JobStatus } from 'src/core/enums/JobStatus';
+import { Text, device } from 'src/core/theme';
 import { FlexBox } from 'src/core/theme/common';
 import { CONSTANT_PALETTES } from 'src/core/theme/palette';
-import { Text, device } from 'src/core/theme';
-import { JobStatus } from 'src/components/BuildHistoryPage/types';
 
-export interface JobNumberProps {
+interface JobNumberProps {
 	status: string;
 }
 

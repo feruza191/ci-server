@@ -1,6 +1,6 @@
-import { CONSTANT_PALETTES } from './palette';
+import textKeys from '../enums/TextKeys';
 import { devices, sizes } from './devices';
-import textKeys from './textKeys';
+import { CONSTANT_PALETTES } from './palette';
 import { TextConfig, fontSizes, lineHeights, fontWeights } from './typography';
 
 export const palette = CONSTANT_PALETTES;

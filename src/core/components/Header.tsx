@@ -1,126 +1,15 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
+
 import { Row, Col } from 'antd';
-import {
-	SettingFilled,
-	CaretRightOutlined,
-	UndoOutlined,
-} from '@ant-design/icons';
-import { Link, useLocation } from 'react-router-dom';
-import TextKey from '../theme/textKeys';
-import { CompanyLogo, HeaderWrapper, IconButton } from './style';
-import { SETTINGS_PATH } from '../../constants';
-import { Modal } from './Modal';
-import { Text, fontSize } from '../theme';
-import { FlexBox, MarginContainer } from '../theme/common';
+import { Link } from 'react-router-dom';
 
-export const Header: FC = () => {
-	const [isModalVisible, setIsModalVisible] = useState(false);
-	const location = useLocation();
+import { CompanyLogo, HeaderWrapper } from './style';
 
-	const showModal = () => {
-		setIsModalVisible(true);
-	};
+interface HeaderProps {
+	title: string;
+}
 
-	const handleRunJob = () => {
-		setIsModalVisible(false);
-	};
-
-	const handleCancel = () => {
-		setIsModalVisible(false);
-	};
-
-	const path = location.pathname;
-
-	const handleHeaders = () => {
-		switch (path) {
-			case '/':
-				return (
-					<>
-						<Link to='/'>
-							<CompanyLogo>{TextKey.CompanyLogo}</CompanyLogo>
-						</Link>
-						<Link to={SETTINGS_PATH}>
-							<IconButton
-								icon={<SettingFilled />}
-								bg='secondary'
-								height='28'
-							>
-								{TextKey.Settings}
-							</IconButton>
-						</Link>
-					</>
-				);
-
-			case '/settings':
-				return (
-					<Link to='/'>
-						<CompanyLogo>{TextKey.CompanyLogo}</CompanyLogo>
-					</Link>
-				);
-
-			case '/build-history':
-				return (
-					<>
-						<Text fontSize={fontSize.medium}>testUser/my-repo</Text>
-						<FlexBox>
-							<IconButton
-								icon={<CaretRightOutlined />}
-								bg='secondary'
-								height='28'
-								onClick={showModal}
-							>
-								{TextKey.RunJob}
-							</IconButton>
-							<MarginContainer left='8' />
-							<Link to={SETTINGS_PATH}>
-								<IconButton
-									icon={<SettingFilled />}
-									bg='secondary'
-									height='28'
-									width='28'
-								/>
-							</Link>
-						</FlexBox>
-
-						<Modal
-							isModalVisible={isModalVisible}
-							handleRunJob={handleRunJob}
-							handleCancel={handleCancel}
-						/>
-					</>
-				);
-
-			case '/build-details':
-				return (
-					<>
-						<Text fontSize={fontSize.medium}>testUser/my-repo</Text>
-						<FlexBox>
-							<IconButton
-								icon={<UndoOutlined />}
-								bg='secondary'
-								height='28'
-								onClick={showModal}
-							>
-								{TextKey.Rebuild}
-							</IconButton>
-							<MarginContainer left='8' />
-							<Link to={SETTINGS_PATH}>
-								<IconButton
-									icon={<SettingFilled />}
-									bg='secondary'
-									height='28'
-									width='28'
-								/>
-							</Link>
-						</FlexBox>
-					</>
-				);
-
-			default:
-				break;
-		}
-	};
-
+export const Header: FC<HeaderProps> = ({ title, children }) => {
 	return (
 		<Row>
 			<Col xs={24}>
@@ -128,7 +17,10 @@ export const Header: FC = () => {
 					justifyContent='space-between'
 					alignItems='center'
 				>
-					{handleHeaders()}
+					<Link to='/'>
+						<CompanyLogo>{title}</CompanyLogo>
+					</Link>
+					{children}
 				</HeaderWrapper>
 			</Col>
 		</Row>

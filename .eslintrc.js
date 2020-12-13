@@ -23,6 +23,7 @@ module.exports = {
 				extensions: ['.js', '.ts', '.tsx'],
 			},
 		},
+		'import/internal-regex': '^src/',
 	},
 	rules: {
 		'no-shadow': 'off',
@@ -39,6 +40,7 @@ module.exports = {
 		'react/jsx-uses-react': 'error',
 		'react/prop-types': 'off',
 		'react/jsx-props-no-spreading': 'off',
+		'react/jsx-one-expression-per-line': 'off',
 		'import/no-unresolved': 'error',
 		'import/named': 'error',
 		'import/namespace': 'error',
@@ -47,6 +49,25 @@ module.exports = {
 		'import/extensions': 'off',
 		'import/prefer-default-export': 'off',
 		'import/no-unresolved': 'off',
+		'import/order': [
+			'error',
+			{
+				groups: ['builtin', 'external', 'internal'],
+				pathGroups: [
+					{
+						pattern: 'react',
+						group: 'external',
+						position: 'before',
+					},
+				],
+				pathGroupsExcludedImportTypes: ['react'],
+				'newlines-between': 'always',
+				alphabetize: {
+					order: 'asc',
+					caseInsensitive: true,
+				},
+			},
+		],
 		'jsx-a11y/alt-text': 'off',
 		'@typescript-eslint/no-var-requires': 'off',
 		'@typescript-eslint/no-shadow': ['error'],

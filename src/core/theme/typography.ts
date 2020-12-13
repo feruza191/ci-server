@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { CommonTextProps, TextProps } from './types';
+
 import { CONSTANT_PALETTES } from './palette';
+import { CommonTextProps, TextProps } from './types';
 
 export const fontSizes: Record<string, number> = {
 	micro: 12,
@@ -30,14 +31,7 @@ export const lineHeights: Record<string, number> = {
 };
 
 const CommonTextProperties = styled.div<CommonTextProps>`
-	text-align: ${({ align }) => {
-		if (align === 'center') {
-			return 'center';
-		}
-		if (align === 'right') {
-			return 'right';
-		}
-	}};
+	text-align: ${({ align }) => align};
 	color: ${({ type }) => {
 		if (type === 'secondary') {
 			return CONSTANT_PALETTES.greyDark;

@@ -1,7 +1,8 @@
-import styled from 'styled-components';
 import { Form } from 'antd';
-import { FlexBox } from '../../core/theme/common';
-import { device } from '../../core/theme';
+import styled from 'styled-components';
+
+import { device } from 'src/core/theme';
+import { FlexBox } from 'src/core/theme/common';
 
 export const FormTime = styled(Form.Item)`
 	margin-bottom: 0;

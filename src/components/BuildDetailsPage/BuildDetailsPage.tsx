@@ -1,9 +1,12 @@
 import React, { FC } from 'react';
-import { Layout } from 'src/core/layout/Layout';
+
 import { Row, Col } from 'antd';
+
+import { JobStatus } from 'src/core/enums/JobStatus';
+import { Layout } from 'src/core/layout/Layout';
+
 import { BuildDetailsItem } from './components/BuildDetailsItem';
 import { BuildLogs } from './components/BuildLogs';
-import { JobStatus } from '../BuildHistoryPage/types';
 
 const buildProps = {
 	status: JobStatus.Fail,

@@ -1,5 +1,6 @@
-const HtmlPlugin = require('html-webpack-plugin');
 const path = require('path');
+
+const HtmlPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 
@@ -16,6 +17,7 @@ module.exports = {
 		extensions: ['.ts', '.tsx', '.js'],
 		alias: {
 			src: path.resolve(__dirname, 'src'),
+			assets: path.resolve(__dirname, 'assets'),
 		},
 	},
 	devtool: 'inline-source-map',

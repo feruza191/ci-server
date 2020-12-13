@@ -1,6 +1,11 @@
 import React, { FC } from 'react';
+
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import { BuildDetails } from './components/BuildDetailsPage/BuildDetailsPage';
+import { BuildHistory } from './components/BuildHistoryPage/BuildHistoryPage';
+import { SettingsPage } from './components/SettingsPage/SettingsPage';
 import { StartScreenPage } from './components/StartScreenPage/StartScreenPage';
 import {
 	HOME_PATH,
@@ -9,9 +14,6 @@ import {
 	BUILD_DETAILS_PATH,
 } from './constants';
 import './index.css';
-import { SettingsPage } from './components/SettingsPage/SettingsPage';
-import { BuildDetails } from './components/BuildDetailsPage/BuildDetailsPage';
-import { BuildHistory } from './components/BuildHistoryPage/BuildHistoryPage';
 
 const App: FC = () => (
 	<Router>

@@ -1,21 +1,23 @@
 import styled from 'styled-components';
-import { MarginContainerProps, FlexBoxProps } from './types';
-import { device } from '.';
-import { CONSTANT_PALETTES } from './palette';
 
-export const FlexBox = styled.div<FlexBoxProps>`
+import { device } from './index';
+import { CONSTANT_PALETTES } from './palette';
+import { BlockContainerProps, FlexBoxProps } from './types';
+
+export const BlockContainer = styled.div<BlockContainerProps>`
+	margin-top: ${(props) => (props.top ? props.top : 0)}px;
+	margin-bottom: ${(props) => (props.bottom ? props.bottom : 0)}px;
+	margin-left: ${(props) => (props.left ? props.left : 0)}px;
+	margin-right: ${(props) => (props.right ? props.right : 0)}px;
+	padding: ${({ padding }) => padding};
+`;
+
+export const FlexBox = styled(BlockContainer)<FlexBoxProps>`
 	display: flex;
 	flex-direction: ${(props) => props.flexDirection || 'row'};
 	justify-content: ${(props) => props.justifyContent || 'flex-start'};
 	align-items: ${(props) => props.alignItems || 'flex-start'};
 	align-content: ${(props) => props.alignContent || 'flex-start'};
-`;
-
-export const MarginContainer = styled.div<MarginContainerProps>`
-	margin-top: ${(props) => (props.top ? props.top : 0)}px;
-	margin-bottom: ${(props) => (props.bottom ? props.bottom : 0)}px;
-	margin-left: ${(props) => (props.left ? props.left : 0)}px;
-	margin-right: ${(props) => (props.right ? props.right : 0)}px;
 `;
 
 export const BoxShadow = styled.div`

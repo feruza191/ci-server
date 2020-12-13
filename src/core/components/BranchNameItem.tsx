@@ -1,7 +1,9 @@
 import React, { FC } from 'react';
-import BranchSvg from 'src/assets/images/branch.svg';
-import { FlexBox, MarginContainer } from '../theme/common';
+
+import BranchSvg from 'assets/images/branch.svg';
+
 import { Text } from '../theme';
+import { FlexBox, BlockContainer } from '../theme/common';
 
 interface BranchNameItemProps {
 	branchName: string | null;
@@ -13,10 +15,13 @@ export const BranchNameItem: FC<BranchNameItemProps> = ({
 	commitHash,
 }) => (
 	<FlexBox alignItems='center'>
-		<img src={BranchSvg} />
-		<MarginContainer left='5' />
-		<Text>{branchName}</Text>
-		<MarginContainer left='5' />
-		<Text type='secondary'>{commitHash}</Text>
+		<img src={BranchSvg} alt='branch' />
+		<BlockContainer left='5'>
+			<Text>{branchName}</Text>
+		</BlockContainer>
+
+		<BlockContainer left='5'>
+			<Text type='secondary'>{commitHash}</Text>
+		</BlockContainer>
 	</FlexBox>
 );

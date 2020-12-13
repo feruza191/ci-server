@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
-import CalendarSvg from 'src/assets/images/calendar.svg';
-import ClockSvg from 'src/assets/images/clock.svg';
-import { FlexBox, MarginContainer } from '../theme/common';
+
+import CalendarSvg from 'assets/images/calendar.svg';
+import ClockSvg from 'assets/images/clock.svg';
+
 import { Text } from '../theme';
+import { FlexBox, BlockContainer } from '../theme/common';
 
 interface DateTimeSectionProps {
 	start: string | null;
@@ -15,15 +17,18 @@ export const DateTimeSection: FC<DateTimeSectionProps> = ({
 }) => (
 	<>
 		<FlexBox>
-			<img src={CalendarSvg} />
-			<MarginContainer left='5' />
-			<Text>{start}</Text>
+			<img src={CalendarSvg} alt='calendar' />
+			<BlockContainer left='5'>
+				<Text>{start}</Text>
+			</BlockContainer>
 		</FlexBox>
-		<MarginContainer left='10' />
-		<FlexBox>
-			<img src={ClockSvg} />
-			<MarginContainer left='5' />
-			<Text>{duration}</Text>
-		</FlexBox>
+		<BlockContainer left='10'>
+			<FlexBox>
+				<img src={ClockSvg} alt='clock' />
+				<BlockContainer left='5'>
+					<Text>{duration}</Text>
+				</BlockContainer>
+			</FlexBox>
+		</BlockContainer>
 	</>
 );

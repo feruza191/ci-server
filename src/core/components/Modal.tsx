@@ -1,41 +1,38 @@
 import React, { FC } from 'react';
+
 import { Modal as ModalStyle } from 'antd';
-import TextKey from 'src/core/theme/textKeys';
-import { Text } from 'src/core/theme';
-import { Input } from 'src/core/atoms/Input';
-import { MarginContainer } from 'src/core/theme/common';
 import styled from 'styled-components';
+
 import { Button } from 'src/core/atoms/Button';
+import { Input } from 'src/core/atoms/Input';
+import TextKey from 'src/core/enums/TextKeys';
+import { Text } from 'src/core/theme';
+import { BlockContainer } from 'src/core/theme/common';
 
 interface ModalProps {
 	isModalVisible: boolean;
-	handleRunJob: () => void;
-	handleCancel: () => void;
+	hideModal: () => void;
 }
 
-export const Modal: FC<ModalProps> = ({
-	isModalVisible,
-	handleRunJob,
-	handleCancel,
-}) => (
+export const Modal: FC<ModalProps> = ({ isModalVisible, hideModal }) => (
 	<ModalWrapper
 		title={TextKey.NewJob}
 		visible={isModalVisible}
-		onOk={handleRunJob}
-		onCancel={handleCancel}
+		onOk={hideModal}
+		onCancel={hideModal}
 		footer={[
-			<Button key='submit' bg='primary' onClick={handleRunJob}>
+			<Button key='submit' bg='primary' onClick={hideModal}>
 				{TextKey.RunJob}
 			</Button>,
-			<Button key='back' bg='secondary' onClick={handleCancel}>
+			<Button key='back' bg='secondary' onClick={hideModal}>
 				{TextKey.Cancel}
 			</Button>,
 		]}
 	>
 		<Text>{TextKey.NewJobDescription}</Text>
-		<MarginContainer top='12' />
-		<Input placeholder={TextKey.CommitHash} height='40' />
-		<MarginContainer top='10' />
+		<BlockContainer top='12' bottom='10'>
+			<Input placeholder={TextKey.CommitHash} height='40' />
+		</BlockContainer>
 		<Input placeholder={TextKey.JobCommand} height='40' />
 	</ModalWrapper>
 );

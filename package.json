@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "cross-env NODE_ENV=development webpack serve",
 		"build": "cross-env NODE_ENV=production webpack",
-		"eslint": "eslint src/**/* --ext .js,.ts,.tsx",
+		"eslint": "eslint src/**/* --ext .js,.ts,.tsx --no-error-on-unmatched-pattern",
 		"prettier": "prettier -c src/**/*.{ts,tsx}",
 		"ts-check": "tsc -p tsconfig.json --noEmit"
 	},

@@ -1,24 +1,41 @@
-import React, { FC } from 'react';
-import { JobNumberItem } from 'src/core/components/JobNumberItem/JobNumberItem';
-import { DateTimeSection } from 'src/core/components/DateTimeSection';
+import React, { FC, useMemo } from 'react';
+
+import CalendarSvg from 'assets/images/calendar.svg';
+import ClockSvg from 'assets/images/clock.svg';
+import FailSvg from 'assets/images/fail.svg';
+import SuccessSvg from 'assets/images/success.svg';
+import WaitingSvg from 'assets/images/waiting.svg';
+
 import { BranchNameItem } from 'src/core/components/BranchNameItem';
-import { Text } from '../../../core/theme';
+import { DateTimeSection } from 'src/core/components/DateTimeSection';
+import { JobNumberItem } from 'src/core/components/JobNumberItem/JobNumberItem';
+import { JobStatus } from 'src/core/enums/JobStatus';
+import { Text } from 'src/core/theme';
+import { BoxShadow, FlexBox, BlockContainer } from 'src/core/theme/common';
+
 import {
 	DateTimeSectionDesktop,
 	DateTimeSectionMobile,
 	LineDeviderItem,
 } from '../style';
-import {
-	BoxShadow,
-	FlexBox,
-	MarginContainer,
-} from '../../../core/theme/common';
-import SuccessSvg from '../../../assets/images/success.svg';
-import CalendarSvg from '../../../assets/images/calendar.svg';
-import ClockSvg from '../../../assets/images/clock.svg';
-import FailSvg from '../../../assets/images/fail.svg';
-import WaitingSvg from '../../../assets/images/waiting.svg';
-import { JobProps, JobStatus } from '../types';
+
+interface JobItem {
+	id: string;
+	jobNumber: number;
+	commitMessage: string;
+	commitHash: string;
+	branchName: string;
+	status: JobStatus;
+	start: string | null;
+	finish: string | null;
+	duration: number | null;
+	jobLogs: string | null;
+	buildCommand: string;
+}
+
+interface JobProps {
+	job: JobItem;
+}
 
 export const BuildItem: FC<JobProps> = ({ job }) => {
 	const {
@@ -31,61 +48,61 @@ export const BuildItem: FC<JobProps> = ({ job }) => {
 		jobNumber,
 	} = job;
 
-	const handleJobStatus = () => {
-		switch (status) {
-			case JobStatus.Success:
-				return <img src={SuccessSvg} />;
-			case JobStatus.Fail:
-				return <img src={FailSvg} />;
-			case JobStatus.Waiting:
-				return <img src={WaitingSvg} />;
-
-			default:
-				break;
-		}
-	};
+	const jobStatus = useMemo(() => {
+		return {
+			[JobStatus.Success]: SuccessSvg,
+			[JobStatus.Fail]: FailSvg,
+			[JobStatus.Cancelled]: FailSvg,
+			[JobStatus.Waiting]: WaitingSvg,
+			[JobStatus.InProgress]: WaitingSvg,
+		}[status];
+	}, [status]);
 
 	return (
 		<BoxShadow>
 			<FlexBox alignItems='center' justifyContent='space-between'>
 				<FlexBox>
-					{handleJobStatus()}
-					<MarginContainer left='10' />
-					<div>
+					<img src={jobStatus} />
+					<BlockContainer left='10'>
 						<JobNumberItem
 							status={status}
 							commitMessage={commitMessage}
 							jobNumber={jobNumber}
 						/>
-						<MarginContainer top='10' />
-						<BranchNameItem
-							branchName={branchName}
-							commitHash={commitHash}
-						/>
+						<BlockContainer top='10'>
+							<BranchNameItem
+								branchName={branchName}
+								commitHash={commitHash}
+							/>
+						</BlockContainer>
 
-						<MarginContainer top='8' />
-						<LineDeviderItem />
-						<MarginContainer top='8' />
+						<BlockContainer top='8' bottom='8'>
+							<LineDeviderItem />
+						</BlockContainer>
+
 						<DateTimeSectionMobile>
 							<DateTimeSection
 								start={start}
 								duration={duration}
 							/>
 						</DateTimeSectionMobile>
-					</div>
+					</BlockContainer>
 				</FlexBox>
 				<DateTimeSectionDesktop>
 					<FlexBox>
-						<img src={CalendarSvg} />
-						<MarginContainer left='5' />
-						<Text>{start}</Text>
+						<img src={CalendarSvg} alt='calendar' />
+						<BlockContainer left='5'>
+							<Text>{start}</Text>
+						</BlockContainer>
 					</FlexBox>
-					<MarginContainer top='10' />
-					<FlexBox>
-						<img src={ClockSvg} />
-						<MarginContainer left='5' />
-						<Text>{duration}</Text>
-					</FlexBox>
+					<BlockContainer top='10'>
+						<FlexBox>
+							<img src={ClockSvg} alt='clock' />
+							<BlockContainer left='5'>
+								<Text>{duration}</Text>
+							</BlockContainer>
+						</FlexBox>
+					</BlockContainer>
 				</DateTimeSectionDesktop>
 			</FlexBox>
 		</BoxShadow>

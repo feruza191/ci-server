@@ -1,6 +1,3 @@
-**/assets/**
-**/images/**
-**/fonts/**
 /**/*.jpg
 /**/*.png
 /**/*.svg

@@ -1,13 +1,16 @@
 import React, { FC } from 'react';
+
+import Instrument from 'assets/images/instrument.svg';
 import { Link } from 'react-router-dom';
-import { Layout } from '../../core/layout/Layout';
+
+import { SETTINGS_PATH } from 'src/constants';
+import { Button } from 'src/core/atoms/Button';
+import TextKey from 'src/core/enums/TextKeys';
+import { Layout } from 'src/core/layout/Layout';
+import { lineHeight } from 'src/core/theme';
+import { BlockContainer } from 'src/core/theme/common';
+
 import { StartScreenWrapper, SettingsText } from './style';
-import TextKey from '../../core/theme/textKeys';
-import { MarginContainer } from '../../core/theme/common';
-import { Button } from '../../core/atoms/Button';
-import { SETTINGS_PATH } from '../../constants';
-import Instrument from '../../assets/images/instrument.svg';
-import { lineHeight } from '../../core/theme';
 
 export const StartScreenPage: FC = () => (
 	<Layout>
@@ -16,12 +19,12 @@ export const StartScreenPage: FC = () => (
 			justifyContent='center'
 			alignItems='center'
 		>
-			<img src={Instrument} />
-			<MarginContainer top='32' />
-			<SettingsText lineHeight={lineHeight.micro}>
-				{TextKey.ConfigureRepository}
-			</SettingsText>
-			<MarginContainer top='24' />
+			<img src={Instrument} alt='instrument' />
+			<BlockContainer top='32' bottom='24'>
+				<SettingsText lineHeight={lineHeight.micro}>
+					{TextKey.ConfigureRepository}
+				</SettingsText>
+			</BlockContainer>
 			<Link to={SETTINGS_PATH}>
 				<Button bg='primary' height='36' width='123'>
 					{TextKey.OpenSettings}

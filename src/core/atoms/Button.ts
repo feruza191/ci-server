@@ -1,5 +1,6 @@
-import styled from 'styled-components';
 import { Button as ButtonStyle } from 'antd';
+import styled from 'styled-components';
+
 import { palette, fontSize, fontWeight } from '../theme';
 
 export interface ButtonProps {
@@ -17,7 +18,7 @@ export const Button = styled(ButtonStyle)<ButtonProps>`
 			return palette.greyDarker;
 		}
 	}};
-	width: ${(props) => (props.width ? `${props.width}px` : 'auto')};
+	width: ${({ width }) => (width ? `${width}px` : 'auto')};
 	height: ${(props) => props.height || '36'}px;
 	font-size: ${fontSize.small}px;
 	font-weight: ${fontWeight.regular};

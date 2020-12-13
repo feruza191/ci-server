@@ -1,5 +1,6 @@
-import styled, { css } from 'styled-components';
 import { Input as InputStyle, InputNumber as InputNumberStyle } from 'antd';
+import styled, { css } from 'styled-components';
+
 import { fontSize, lineHeight, fontWeight, palette } from '../theme';
 
 interface InputProps {
@@ -7,7 +8,7 @@ interface InputProps {
 	height?: string;
 }
 
-const styles = css<InputProps>`
+const inputStyles = css<InputProps>`
 	width: ${(props) => (props.width ? `${props.width}px` : '100%')};
 	max-width: 100%;
 	height: ${(props) => (props.height ? `${props.height}px` : '100%')};
@@ -20,9 +21,9 @@ const styles = css<InputProps>`
 `;
 
 export const Input = styled(InputStyle)`
-	${styles};
+	${inputStyles};
 `;
 
 export const InputNumber = styled(InputNumberStyle)`
-	${styles};
+	${inputStyles};
 `;

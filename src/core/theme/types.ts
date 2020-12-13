@@ -9,11 +9,12 @@ export interface TextProps {
 	fontWeight?: number;
 }
 
-export interface MarginContainerProps {
+export interface BlockContainerProps {
 	top?: string;
 	bottom?: string;
 	left?: string;
 	right?: string;
+	padding?: string;
 }
 
 export interface FlexBoxProps {

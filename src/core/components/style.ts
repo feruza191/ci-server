@@ -1,5 +1,7 @@
 import { Layout } from 'antd';
 import styled from 'styled-components';
+
+import { Button } from '../atoms/Button';
 import {
 	palette,
 	device,
@@ -9,7 +11,6 @@ import {
 	fontWeight,
 } from '../theme';
 import { FlexBox } from '../theme/common';
-import { Button } from '../atoms/Button';
 
 const { Content } = Layout;
 
