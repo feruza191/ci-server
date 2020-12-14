@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 
 import { UserOutlined } from '@ant-design/icons';
-import SuccessSvg from 'assets/images/success.svg';
 
+import SuccessSvg from 'assets/images/success.svg';
 import { BranchNameItem } from 'src/core/components/BranchNameItem';
 import { DateTimeSection } from 'src/core/components/DateTimeSection';
 import { JobNumberItem } from 'src/core/components/JobNumberItem/JobNumberItem';

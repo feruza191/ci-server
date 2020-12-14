@@ -23,7 +23,7 @@ module.exports = {
 				extensions: ['.js', '.ts', '.tsx'],
 			},
 		},
-		'import/internal-regex': '^src/',
+		'import/internal-regex': '^(src|assets)/',
 	},
 	rules: {
 		'no-shadow': 'off',

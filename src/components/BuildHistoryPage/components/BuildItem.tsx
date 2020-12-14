@@ -5,7 +5,6 @@ import ClockSvg from 'assets/images/clock.svg';
 import FailSvg from 'assets/images/fail.svg';
 import SuccessSvg from 'assets/images/success.svg';
 import WaitingSvg from 'assets/images/waiting.svg';
-
 import { BranchNameItem } from 'src/core/components/BranchNameItem';
 import { DateTimeSection } from 'src/core/components/DateTimeSection';
 import { JobNumberItem } from 'src/core/components/JobNumberItem/JobNumberItem';

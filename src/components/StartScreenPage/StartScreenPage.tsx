@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 
-import Instrument from 'assets/images/instrument.svg';
 import { Link } from 'react-router-dom';
 
+import Instrument from 'assets/images/instrument.svg';
 import { SETTINGS_PATH } from 'src/constants';
 import { Button } from 'src/core/atoms/Button';
 import TextKey from 'src/core/enums/TextKeys';
