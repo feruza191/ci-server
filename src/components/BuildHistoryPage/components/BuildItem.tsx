@@ -1,12 +1,10 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC } from 'react';
 
 import CalendarSvg from 'assets/images/calendar.svg';
 import ClockSvg from 'assets/images/clock.svg';
-import FailSvg from 'assets/images/fail.svg';
-import SuccessSvg from 'assets/images/success.svg';
-import WaitingSvg from 'assets/images/waiting.svg';
 import { BranchNameItem } from 'src/core/components/BranchNameItem';
 import { DateTimeSection } from 'src/core/components/DateTimeSection';
+import { IconState } from 'src/core/components/IconState';
 import { JobNumberItem } from 'src/core/components/JobNumberItem/JobNumberItem';
 import { JobStatus } from 'src/core/enums/JobStatus';
 import { Text } from 'src/core/theme';
@@ -47,35 +45,25 @@ export const BuildItem: FC<JobProps> = ({ job }) => {
 		jobNumber,
 	} = job;
 
-	const jobStatus = useMemo(() => {
-		return {
-			[JobStatus.Success]: SuccessSvg,
-			[JobStatus.Fail]: FailSvg,
-			[JobStatus.Cancelled]: FailSvg,
-			[JobStatus.Waiting]: WaitingSvg,
-			[JobStatus.InProgress]: WaitingSvg,
-		}[status];
-	}, [status]);
-
 	return (
 		<BoxShadow>
-			<FlexBox alignItems='center' justifyContent='space-between'>
+			<FlexBox alignItems="center" justifyContent="space-between">
 				<FlexBox>
-					<img src={jobStatus} />
-					<BlockContainer left='10'>
+					<IconState status={status} />
+					<BlockContainer left="10">
 						<JobNumberItem
 							status={status}
 							commitMessage={commitMessage}
 							jobNumber={jobNumber}
 						/>
-						<BlockContainer top='10'>
+						<BlockContainer top="10">
 							<BranchNameItem
 								branchName={branchName}
 								commitHash={commitHash}
 							/>
 						</BlockContainer>
 
-						<BlockContainer top='8' bottom='8'>
+						<BlockContainer top="8" bottom="8">
 							<LineDeviderItem />
 						</BlockContainer>
 
@@ -89,15 +77,15 @@ export const BuildItem: FC<JobProps> = ({ job }) => {
 				</FlexBox>
 				<DateTimeSectionDesktop>
 					<FlexBox>
-						<img src={CalendarSvg} alt='calendar' />
-						<BlockContainer left='5'>
+						<img src={CalendarSvg} alt="calendar" />
+						<BlockContainer left="5">
 							<Text>{start}</Text>
 						</BlockContainer>
 					</FlexBox>
-					<BlockContainer top='10'>
+					<BlockContainer top="10">
 						<FlexBox>
-							<img src={ClockSvg} alt='clock' />
-							<BlockContainer left='5'>
+							<img src={ClockSvg} alt="clock" />
+							<BlockContainer left="5">
 								<Text>{duration}</Text>
 							</BlockContainer>
 						</FlexBox>

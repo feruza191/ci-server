@@ -6,7 +6,7 @@ import { FlexBox } from 'src/core/theme/common';
 import { CONSTANT_PALETTES } from 'src/core/theme/palette';
 
 interface JobNumberProps {
-	status: string;
+	status: JobStatus;
 }
 
 export const JobNumberWrapper = styled(FlexBox)`
@@ -19,14 +19,12 @@ export const JobNumberWrapper = styled(FlexBox)`
 
 export const JobNumber = styled(Text)<JobNumberProps>`
 	color: ${({ status }) => {
-		if (status === JobStatus.Success) {
-			return CONSTANT_PALETTES.green;
-		}
-		if (status === JobStatus.Fail) {
-			return CONSTANT_PALETTES.red;
-		}
-		if (status === JobStatus.Waiting) {
-			return CONSTANT_PALETTES.orange;
-		}
+		return {
+			[JobStatus.Success]: CONSTANT_PALETTES.green,
+			[JobStatus.Fail]: CONSTANT_PALETTES.red,
+			[JobStatus.Cancelled]: CONSTANT_PALETTES.red,
+			[JobStatus.Waiting]: CONSTANT_PALETTES.orange,
+			[JobStatus.InProgress]: CONSTANT_PALETTES.orange,
+		}[status];
 	}};
 `;

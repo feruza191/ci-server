@@ -20,6 +20,6 @@
 			"src/*": ["./src/*"]
 		}
 	},
-	"include": ["src", "global.d.ts", "assets"],
+	"include": ["src", "assets/images/global.d.ts"],
 	"exclude": ["node_modules"]
 }

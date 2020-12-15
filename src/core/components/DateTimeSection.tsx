@@ -17,15 +17,15 @@ export const DateTimeSection: FC<DateTimeSectionProps> = ({
 }) => (
 	<>
 		<FlexBox>
-			<img src={CalendarSvg} alt='calendar' />
-			<BlockContainer left='5'>
+			<img src={CalendarSvg} alt="calendar" />
+			<BlockContainer left="5">
 				<Text>{start}</Text>
 			</BlockContainer>
 		</FlexBox>
-		<BlockContainer left='10'>
+		<BlockContainer left="10">
 			<FlexBox>
-				<img src={ClockSvg} alt='clock' />
-				<BlockContainer left='5'>
+				<img src={ClockSvg} alt="clock" />
+				<BlockContainer left="5">
 					<Text>{duration}</Text>
 				</BlockContainer>
 			</FlexBox>

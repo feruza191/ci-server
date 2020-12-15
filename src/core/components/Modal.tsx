@@ -21,19 +21,19 @@ export const Modal: FC<ModalProps> = ({ isModalVisible, hideModal }) => (
 		onOk={hideModal}
 		onCancel={hideModal}
 		footer={[
-			<Button key='submit' bg='primary' onClick={hideModal}>
+			<Button key="submit" bg="primary" onClick={hideModal}>
 				{TextKey.RunJob}
 			</Button>,
-			<Button key='back' bg='secondary' onClick={hideModal}>
+			<Button key="back" bg="secondary" onClick={hideModal}>
 				{TextKey.Cancel}
 			</Button>,
 		]}
 	>
 		<Text>{TextKey.NewJobDescription}</Text>
-		<BlockContainer top='12' bottom='10'>
-			<Input placeholder={TextKey.CommitHash} height='40' />
+		<BlockContainer top="12" bottom="10">
+			<Input placeholder={TextKey.CommitHash} height="40" />
 		</BlockContainer>
-		<Input placeholder={TextKey.JobCommand} height='40' />
+		<Input placeholder={TextKey.JobCommand} height="40" />
 	</ModalWrapper>
 );
 

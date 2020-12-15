@@ -14,10 +14,10 @@ export const Header: FC<HeaderProps> = ({ title, children }) => {
 		<Row>
 			<Col xs={24}>
 				<HeaderWrapper
-					justifyContent='space-between'
-					alignItems='center'
+					justifyContent="space-between"
+					alignItems="center"
 				>
-					<Link to='/'>
+					<Link to="/">
 						<CompanyLogo>{title}</CompanyLogo>
 					</Link>
 					{children}

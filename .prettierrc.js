@@ -1,6 +1,6 @@
 module.exports = {
 	arrowParens: 'always',
-	jsxSingleQuote: true,
+	jsxSingleQuote: false,
 	printWidth: 80,
 	semi: true,
 	singleQuote: true,

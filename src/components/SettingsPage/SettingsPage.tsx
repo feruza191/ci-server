@@ -24,40 +24,40 @@ export const SettingsPage: FC = () => {
 			<Text fontSize={fontSize.normal} fontWeight={fontWeight.bold}>
 				{TextKey.Settings}
 			</Text>
-			<BlockContainer top='3'>
-				<Text type='secondary' fontWeight={fontWeight.regular}>
+			<BlockContainer top="3">
+				<Text type="secondary" fontWeight={fontWeight.regular}>
 					{TextKey.ConfigureRepository}
 				</Text>
 			</BlockContainer>
 
-			<BlockContainer top='22'>
-				<Form name='settings' onFinish={onFinish}>
+			<BlockContainer top="22">
+				<Form name="settings" onFinish={onFinish}>
 					<Form.Item>
 						<Text>{TextKey.GitHubRepository}</Text>
-						<Form.Item name='repo_name'>
+						<Form.Item name="repo_name">
 							<Input
 								allowClear
 								placeholder={TextKey.RepoName}
-								width='474'
+								width="474"
 							/>
 						</Form.Item>
 					</Form.Item>
 					<Form.Item>
 						<Text>{TextKey.MainBranch}</Text>
-						<Form.Item name='main_branch'>
+						<Form.Item name="main_branch">
 							<Input
 								allowClear
 								placeholder={TextKey.BranchName}
-								width='474'
+								width="474"
 							/>
 						</Form.Item>
 					</Form.Item>
 					<Form.Item>
-						<FlexBox alignItems='center'>
+						<FlexBox alignItems="center">
 							<Text>{TextKey.MainBranch}</Text>
-							<BlockContainer right='8' left='8'>
-								<FormTime name='time'>
-									<Input width='52' />
+							<BlockContainer right="8" left="8">
+								<FormTime name="time">
+									<Input width="52" />
 								</FormTime>
 							</BlockContainer>
 
@@ -65,19 +65,19 @@ export const SettingsPage: FC = () => {
 						</FlexBox>
 					</Form.Item>
 					<Form.Item>
-						<ButtonsWrapper alignItems='center'>
+						<ButtonsWrapper alignItems="center">
 							<Link to={BUILD_HISTORY_PATH}>
 								<Button
-									bg='primary'
-									width='69'
-									htmlType='submit'
+									bg="primary"
+									width="69"
+									htmlType="submit"
 								>
 									{TextKey.Save}
 								</Button>
 							</Link>
 
-							<BlockContainer left='8'>
-								<Button bg='secondary' width='80'>
+							<BlockContainer left="8">
+								<Button bg="secondary" width="80">
 									{TextKey.Cancel}
 								</Button>
 							</BlockContainer>

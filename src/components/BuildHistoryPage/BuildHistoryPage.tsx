@@ -20,7 +20,7 @@ export const BuildHistory: FC = () => (
 						<BuildItem key={job.id} job={job} />
 					))}
 				</Link>
-				<ShowMoreButton bg='secondary'>
+				<ShowMoreButton bg="secondary">
 					{TextKey.ShowMore}
 				</ShowMoreButton>
 			</Col>

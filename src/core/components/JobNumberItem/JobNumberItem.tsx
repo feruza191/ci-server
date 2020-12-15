@@ -21,7 +21,7 @@ export const JobNumberItem: FC<JobNumberItemProps> = ({
 		<JobNumber status={status} fontSize={fontSize.semiMedium}>
 			#{jobNumber}
 		</JobNumber>
-		<BlockContainer left='5'>
+		<BlockContainer left="5">
 			<Text>{commitMessage}</Text>
 		</BlockContainer>
 	</JobNumberWrapper>

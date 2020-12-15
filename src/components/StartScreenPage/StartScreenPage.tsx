@@ -15,18 +15,18 @@ import { StartScreenWrapper, SettingsText } from './style';
 export const StartScreenPage: FC = () => (
 	<Layout>
 		<StartScreenWrapper
-			flexDirection='column'
-			justifyContent='center'
-			alignItems='center'
+			flexDirection="column"
+			justifyContent="center"
+			alignItems="center"
 		>
-			<img src={Instrument} alt='instrument' />
-			<BlockContainer top='32' bottom='24'>
+			<img src={Instrument} alt="instrument" />
+			<BlockContainer top="32" bottom="24">
 				<SettingsText lineHeight={lineHeight.micro}>
 					{TextKey.ConfigureRepository}
 				</SettingsText>
 			</BlockContainer>
 			<Link to={SETTINGS_PATH}>
-				<Button bg='primary' height='36' width='123'>
+				<Button bg="primary" height="36" width="123">
 					{TextKey.OpenSettings}
 				</Button>
 			</Link>

@@ -17,6 +17,12 @@ import { ContentWrapper, IconButton } from '../components/style';
 import TextKey from '../enums/TextKeys';
 import { FlexBox, BlockContainer } from '../theme/common';
 
+interface HeaderContent {
+	url: RegExp;
+	title: string;
+	children?: ReactNode;
+}
+
 export const Layout: FC = ({ children }) => {
 	const { pathname } = useLocation();
 	const [isModalVisible, setIsModalVisible] = useState(false);
@@ -28,12 +34,6 @@ export const Layout: FC = ({ children }) => {
 	const hideModal = () => {
 		setIsModalVisible(false);
 	};
-
-	interface HeaderContent {
-		url: RegExp;
-		title: string;
-		children?: ReactNode;
-	}
 
 	const headersContent: HeaderContent[] = [
 		{
@@ -48,19 +48,19 @@ export const Layout: FC = ({ children }) => {
 					<FlexBox>
 						<IconButton
 							icon={<CaretRightOutlined />}
-							bg='secondary'
-							height='28'
+							bg="secondary"
+							height="28"
 							onClick={showModal}
 						>
 							{TextKey.RunJob}
 						</IconButton>
-						<BlockContainer left='8'>
+						<BlockContainer left="8">
 							<Link to={SETTINGS_PATH}>
 								<IconButton
 									icon={<SettingFilled />}
-									bg='secondary'
-									height='28'
-									width='28'
+									bg="secondary"
+									height="28"
+									width="28"
 								/>
 							</Link>
 						</BlockContainer>
@@ -81,19 +81,19 @@ export const Layout: FC = ({ children }) => {
 					<FlexBox>
 						<IconButton
 							icon={<UndoOutlined />}
-							bg='secondary'
-							height='28'
+							bg="secondary"
+							height="28"
 							onClick={showModal}
 						>
 							{TextKey.Rebuild}
 						</IconButton>
-						<BlockContainer left='8'>
+						<BlockContainer left="8">
 							<Link to={SETTINGS_PATH}>
 								<IconButton
 									icon={<SettingFilled />}
-									bg='secondary'
-									height='28'
-									width='28'
+									bg="secondary"
+									height="28"
+									width="28"
 								/>
 							</Link>
 						</BlockContainer>
@@ -108,8 +108,8 @@ export const Layout: FC = ({ children }) => {
 				<Link to={SETTINGS_PATH}>
 					<IconButton
 						icon={<SettingFilled />}
-						bg='secondary'
-						height='28'
+						bg="secondary"
+						height="28"
 					>
 						{TextKey.Settings}
 					</IconButton>

@@ -5,11 +5,11 @@ import { CONSTANT_PALETTES } from './palette';
 import { BlockContainerProps, FlexBoxProps } from './types';
 
 export const BlockContainer = styled.div<BlockContainerProps>`
-	margin-top: ${(props) => (props.top ? props.top : 0)}px;
-	margin-bottom: ${(props) => (props.bottom ? props.bottom : 0)}px;
-	margin-left: ${(props) => (props.left ? props.left : 0)}px;
-	margin-right: ${(props) => (props.right ? props.right : 0)}px;
-	padding: ${({ padding }) => padding};
+	margin-top: ${(props) => props.top || 0}px;
+	margin-bottom: ${(props) => props.bottom || 0}px;
+	margin-left: ${(props) => props.left || 0}px;
+	margin-right: ${(props) => props.right || 0}px;
+	padding: ${({ padding }) => padding || 0};
 `;
 
 export const FlexBox = styled(BlockContainer)<FlexBoxProps>`

@@ -9,7 +9,7 @@ import { BuildDetailsItem } from './components/BuildDetailsItem';
 import { BuildLogs } from './components/BuildLogs';
 
 const buildProps = {
-	status: JobStatus.Fail,
+	status: JobStatus.Success,
 	commitMessage: 'add documentation for postgres scaler',
 	jobNumber: 1564,
 	start: '22 янв, 03:06',

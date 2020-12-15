@@ -18,9 +18,9 @@ export const Footer: FC = () => (
 			</Col>
 			<Col xs={24} sm={12}>
 				<CopyRight
-					align='right'
+					align="right"
 					lineHeight={lineHeight.micro}
-					type='secondary'
+					type="secondary"
 				>
 					{TextKey.CopyRight}
 				</CopyRight>

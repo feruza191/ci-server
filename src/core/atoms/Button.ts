@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { palette, fontSize, fontWeight } from '../theme';
 
-export interface ButtonProps {
+interface ButtonProps {
 	bg?: string;
 	width?: string;
 	height?: string;
