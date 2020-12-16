@@ -23,7 +23,7 @@ module.exports = {
 				extensions: ['.js', '.ts', '.tsx'],
 			},
 		},
-		'import/internal-regex': '^(src|assets)/',
+		'import/internal-regex': '^(src|assets)/', //to recognize assets and src folders as internal files
 	},
 	rules: {
 		'no-shadow': 'off',
