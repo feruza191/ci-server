@@ -52,7 +52,10 @@ module.exports = {
 		'import/order': [
 			'error',
 			{
-				groups: ['builtin', 'external', 'internal'],
+				groups: [
+					['builtin', 'external'],
+					['internal', 'parent', 'index', 'sibling'],
+				],
 				pathGroups: [
 					{
 						pattern: 'react',

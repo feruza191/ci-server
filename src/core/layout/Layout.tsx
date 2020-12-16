@@ -8,14 +8,13 @@ import {
 import { Layout as LayoutDesign } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
 
-import { SETTINGS_PATH } from 'src/constants';
-
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { Modal } from '../components/Modal';
 import { ContentWrapper, IconButton } from '../components/style';
 import TextKey from '../enums/TextKeys';
 import { FlexBox, BlockContainer } from '../theme/common';
+import { SETTINGS_PATH } from 'src/constants';
 
 interface HeaderContent {
 	url: RegExp;

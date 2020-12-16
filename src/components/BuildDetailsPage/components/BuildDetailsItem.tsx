@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 
 import { UserOutlined } from '@ant-design/icons';
 
+import { LineDeviderItem } from '../style';
 import { BranchNameItem } from 'src/core/components/BranchNameItem';
 import { DateTimeSection } from 'src/core/components/DateTimeSection';
 import { IconState } from 'src/core/components/IconState';
@@ -9,8 +10,6 @@ import { JobNumberItem } from 'src/core/components/JobNumberItem/JobNumberItem';
 import { JobStatus } from 'src/core/enums/JobStatus';
 import { Text } from 'src/core/theme';
 import { BoxShadow, FlexBox, BlockContainer } from 'src/core/theme/common';
-
-import { LineDeviderItem } from '../style';
 
 interface BuildDetailsItemProps {
 	status: JobStatus;

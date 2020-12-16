@@ -1,10 +1,9 @@
 import React, { useMemo, FC } from 'react';
 
+import { JobStatus } from '../enums/JobStatus';
 import FailSvg from 'assets/images/fail.svg';
 import SuccessSvg from 'assets/images/success.svg';
 import WaitingSvg from 'assets/images/waiting.svg';
-
-import { JobStatus } from '../enums/JobStatus';
 
 interface IconStateProps {
 	status: JobStatus;

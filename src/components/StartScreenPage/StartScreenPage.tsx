@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 
 import { Link } from 'react-router-dom';
 
+import { StartScreenWrapper, SettingsText } from './style';
 import Instrument from 'assets/images/instrument.svg';
 import { SETTINGS_PATH } from 'src/constants';
 import { Button } from 'src/core/atoms/Button';
@@ -9,8 +10,6 @@ import TextKey from 'src/core/enums/TextKeys';
 import { Layout } from 'src/core/layout/Layout';
 import { lineHeight } from 'src/core/theme';
 import { BlockContainer } from 'src/core/theme/common';
-
-import { StartScreenWrapper, SettingsText } from './style';
 
 export const StartScreenPage: FC = () => (
 	<Layout>

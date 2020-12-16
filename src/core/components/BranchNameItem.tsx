@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 
-import BranchSvg from 'assets/images/branch.svg';
-
 import { Text } from '../theme';
 import { FlexBox, BlockContainer } from '../theme/common';
+import BranchSvg from 'assets/images/branch.svg';
 
 interface BranchNameItemProps {
 	branchName: string | null;

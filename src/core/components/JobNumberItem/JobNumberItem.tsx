@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
 
-import { JobStatus } from 'src/core/enums/JobStatus';
-
 import { Text, fontSize } from '../../theme';
 import { BlockContainer } from '../../theme/common';
 import { JobNumberWrapper, JobNumber } from './style';
+import { JobStatus } from 'src/core/enums/JobStatus';
 
 interface JobNumberItemProps {
 	status: JobStatus;

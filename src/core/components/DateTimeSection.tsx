@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
 
-import CalendarSvg from 'assets/images/calendar.svg';
-import ClockSvg from 'assets/images/clock.svg';
-
 import { Text } from '../theme';
 import { FlexBox, BlockContainer } from '../theme/common';
+import CalendarSvg from 'assets/images/calendar.svg';
+import ClockSvg from 'assets/images/clock.svg';
 
 interface DateTimeSectionProps {
 	start: string | null;
