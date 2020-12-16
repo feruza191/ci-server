@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import { Row, Col } from 'antd';
-import TextKey from '../theme/textKeys';
+
+import TextKey from '../enums/TextKeys';
+import { lineHeight } from '../theme';
 import { FooterWrapper, CopyRight } from './style';
 
 export const Footer: FC = () => (
@@ -14,7 +16,11 @@ export const Footer: FC = () => (
 				</ul>
 			</Col>
 			<Col xs={24} sm={12}>
-				<CopyRight align='right' lineHeight='18' type='secondary'>
+				<CopyRight
+					align="right"
+					lineHeight={lineHeight.micro}
+					type="secondary"
+				>
 					{TextKey.CopyRight}
 				</CopyRight>
 			</Col>

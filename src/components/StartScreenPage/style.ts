@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { FlexBox } from '../core/theme/common';
-import { Text } from '../core/theme';
+
+import { Text } from 'src/core/theme';
+import { FlexBox } from 'src/core/theme/common';
 
 export const StartScreenWrapper = styled(FlexBox)`
 	height: 84vh;

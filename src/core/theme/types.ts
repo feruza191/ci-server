@@ -4,16 +4,17 @@ export interface CommonTextProps {
 }
 
 export interface TextProps {
-	fontSize?: string;
-	lineHeight?: string;
-	fontWeight?: string;
+	fontSize?: number;
+	lineHeight?: number;
+	fontWeight?: number;
 }
 
-export interface MarginContainerProps {
+export interface BlockContainerProps {
 	top?: string;
 	bottom?: string;
 	left?: string;
 	right?: string;
+	padding?: string;
 }
 
 export interface FlexBoxProps {

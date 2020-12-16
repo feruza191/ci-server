@@ -23,6 +23,7 @@ module.exports = {
 				extensions: ['.js', '.ts', '.tsx'],
 			},
 		},
+		'import/internal-regex': '^(src|assets)/', //to recognize assets and src folders as internal files
 	},
 	rules: {
 		'no-shadow': 'off',
@@ -38,6 +39,8 @@ module.exports = {
 		'react/jsx-uses-vars': 'error',
 		'react/jsx-uses-react': 'error',
 		'react/prop-types': 'off',
+		'react/jsx-props-no-spreading': 'off',
+		'react/jsx-one-expression-per-line': 'off',
 		'import/no-unresolved': 'error',
 		'import/named': 'error',
 		'import/namespace': 'error',
@@ -45,6 +48,17 @@ module.exports = {
 		'import/export': 'error',
 		'import/extensions': 'off',
 		'import/prefer-default-export': 'off',
+		'import/no-unresolved': 'off',
+		'import/order': [
+			'error',
+			{
+				groups: [
+					['builtin', 'external'],
+					['internal', 'parent', 'index', 'sibling'],
+				],
+				'newlines-between': 'always',
+			},
+		],
 		'jsx-a11y/alt-text': 'off',
 		'@typescript-eslint/no-var-requires': 'off',
 		'@typescript-eslint/no-shadow': ['error'],

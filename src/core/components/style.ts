@@ -1,8 +1,16 @@
 import { Layout } from 'antd';
 import styled from 'styled-components';
-import { palette, device, Text } from '../theme';
-import { FlexBox } from '../theme/common';
+
 import { Button } from '../atoms/Button';
+import {
+	palette,
+	device,
+	Text,
+	fontSize,
+	lineHeight,
+	fontWeight,
+} from '../theme';
+import { FlexBox } from '../theme/common';
 
 const { Content } = Layout;
 
@@ -40,14 +48,19 @@ export const HeaderWrapper = styled(FlexBox)`
 `;
 
 export const CompanyLogo = styled.div`
-	font-size: 24px;
-	line-height: 28px;
-	font-weight: 500;
+	font-size: ${fontSize.medium}px;
+	line-height: ${lineHeight.medium}px;
+	font-weight: ${fontWeight.medium}px;
 	color: ${palette.greyDark};
 `;
 
 export const ContentWrapper = styled(Content)`
+	margin: 20px 100px;
 	flex-grow: 1;
+
+	@media ${device.mobileL} {
+		margin: 20px 16px;
+	}
 `;
 
 export const IconButton = styled(Button)`

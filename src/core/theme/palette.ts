@@ -8,4 +8,9 @@ export const CONSTANT_PALETTES = {
 	greyDark: '#7F8285',
 	greyDarker: '#E6E6E6',
 	greyLight: '#F0F2F3',
+	greyBorder: '#D9D9D9',
+	greyBg: '#F2F2F2',
+	green: '#00B341',
+	red: '#FF3333',
+	orange: '#FF9A00',
 };
