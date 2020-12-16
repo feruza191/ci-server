@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-
 import { Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 

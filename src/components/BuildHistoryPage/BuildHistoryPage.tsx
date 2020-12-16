@@ -1,14 +1,13 @@
 import React, { FC } from 'react';
-
 import { Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 
-import { BuildItem } from './components/BuildItem';
-import { jobs } from './jobs';
 import { ShowMoreButton } from './style';
 import { BUILD_DETAILS_PATH } from 'src/constants';
 import TextKey from 'src/core/enums/TextKeys';
 import { Layout } from 'src/core/layout/Layout';
+import { BuildItem } from './components/BuildItem';
+import { jobs } from './jobs';
 
 export const BuildHistory: FC = () => (
 	<Layout>

@@ -56,19 +56,7 @@ module.exports = {
 					['builtin', 'external'],
 					['internal', 'parent', 'index', 'sibling'],
 				],
-				pathGroups: [
-					{
-						pattern: 'react',
-						group: 'external',
-						position: 'before',
-					},
-				],
-				pathGroupsExcludedImportTypes: ['react'],
 				'newlines-between': 'always',
-				alphabetize: {
-					order: 'asc',
-					caseInsensitive: true,
-				},
 			},
 		],
 		'jsx-a11y/alt-text': 'off',

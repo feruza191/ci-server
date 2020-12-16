@@ -1,9 +1,7 @@
 import React, { FC } from 'react';
-
 import { Form } from 'antd';
 import { Link } from 'react-router-dom';
 
-import { FormTime, ButtonsWrapper } from './style';
 import { BUILD_HISTORY_PATH } from 'src/constants';
 import { Button } from 'src/core/atoms/Button';
 import { Input } from 'src/core/atoms/Input';
@@ -11,6 +9,7 @@ import TextKey from 'src/core/enums/TextKeys';
 import { Layout } from 'src/core/layout/Layout';
 import { Text, fontSize, fontWeight } from 'src/core/theme';
 import { BlockContainer, FlexBox } from 'src/core/theme/common';
+import { FormTime, ButtonsWrapper } from './style';
 
 export const SettingsPage: FC = () => {
 	const onFinish = () => {

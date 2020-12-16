@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-
 import { Modal as ModalStyle } from 'antd';
 import styled from 'styled-components';
 
