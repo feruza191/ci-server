@@ -10,6 +10,9 @@
 		"allowSyntheticDefaultImports": true,
 		"strict": true,
 		"forceConsistentCasingInFileNames": false,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"strictPropertyInitialization": false,
 		"module": "esnext",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
@@ -20,6 +23,6 @@
 			"src/*": ["./src/*"]
 		}
 	},
-	"include": ["src", "assets/images/global.d.ts"],
+	"include": ["src", "assets/images/global.d.ts", "server"],
 	"exclude": ["node_modules"]
 }
