@@ -1,8 +1,15 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+// import { v4 as uuid } from 'uuid';
 
-import { JobStatus } from 'src/core/enums/JobStatus';
+enum JobStatus {
+	Waiting = 'Waiting',
+	InProgress = 'InProgress',
+	Success = 'Success',
+	Fail = 'Fail',
+	Cancelled = 'Canceled',
+}
 
-@Entity()
+@Entity('jobs')
 export class Job {
 	@PrimaryGeneratedColumn('uuid')
 	id: string;

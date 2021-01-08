@@ -3,16 +3,13 @@
 		"target": "es5",
 		"sourceMap": true,
 		"outDir": "./build",
-		"lib": ["dom", "dom.iterable", "esnext"],
+		"lib": ["dom", "dom.iterable", "esnext", "es6"],
 		"allowJs": true,
 		"skipLibCheck": true,
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 		"strict": true,
 		"forceConsistentCasingInFileNames": false,
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"strictPropertyInitialization": false,
 		"module": "esnext",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
@@ -23,6 +20,6 @@
 			"src/*": ["./src/*"]
 		}
 	},
-	"include": ["src", "assets/images/global.d.ts", "server"],
+	"include": ["src", "assets/images/global.d.ts"],
 	"exclude": ["node_modules"]
 }
