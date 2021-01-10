@@ -1,28 +1,27 @@
 import 'reflect-metadata';
 
-import { createConnection } from 'typeorm';
 import express from 'express';
+import bodyParser from 'body-parser';
 
-const bodyParser = require('body-parser');
+import { typeOrmConfig } from './typeormconfig';
+import { connectDb } from './connectDb';
+import { jobsRoutes } from './src/Jobs/routes/jobs.routes';
 
-const jobsRoutes = require('./routes/jobs.routes');
+async function createApp() {
+	const app = express();
 
-// import { Routes } from './routes/Routes';
+	app.use(bodyParser.urlencoded({ extended: false }));
+	app.use(bodyParser.json());
 
-const app = express();
+	app.use('/api', jobsRoutes);
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+	const PORT = 3000;
+	await connectDb(typeOrmConfig);
 
-app.use('/api', jobsRoutes);
+	app.listen(PORT, () => {
+		// eslint-disable-next-line no-console
+		console.log('Express server listening on http://localhost:3000');
+	});
+}
 
-const PORT = 3000;
-createConnection()
-	.then(async () => {
-		app.listen(PORT, () => {
-			// eslint-disable-next-line no-console
-			console.log('Express server listening on http://localhost:3000');
-		});
-	})
-	// eslint-disable-next-line no-console
-	.catch((error) => console.log(error));
+createApp();

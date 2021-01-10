@@ -1,5 +1,4 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-// import { v4 as uuid } from 'uuid';
 
 enum JobStatus {
 	Waiting = 'Waiting',
@@ -9,38 +8,38 @@ enum JobStatus {
 	Cancelled = 'Canceled',
 }
 
-@Entity('jobs')
+@Entity()
 export class Job {
 	@PrimaryGeneratedColumn('uuid')
 	id: string;
 
-	@Column()
+	@Column('int')
 	jobNumber: number;
 
-	@Column()
+	@Column('text')
 	commitMessage: string;
 
-	@Column()
+	@Column('text')
 	commitHash: string;
 
-	@Column()
+	@Column('text')
 	branchName: string;
 
-	@Column()
+	@Column({ type: 'enum', enum: JobStatus, default: JobStatus.Waiting })
 	status: JobStatus;
 
-	@Column()
+	@Column({ nullable: true, type: 'text' })
 	start: string | null;
 
-	@Column()
+	@Column({ nullable: true, type: 'text' })
 	finish: string | null;
 
-	@Column()
+	@Column({ nullable: true, type: 'int' })
 	duration: number | null;
 
-	@Column()
+	@Column({ nullable: true, type: 'text' })
 	jobLogs: string | null;
 
-	@Column()
+	@Column('text')
 	buildCommand: string;
 }

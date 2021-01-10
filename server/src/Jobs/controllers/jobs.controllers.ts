@@ -3,7 +3,8 @@ import { getRepository } from 'typeorm';
 
 import { Job } from '../entity/job';
 
-exports.getAllJobs = async (_: Request, res: Response) => {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const getAllJobs = async (_: Request, res: Response) => {
 	try {
 		const jobRepository = getRepository(Job);
 		const jobs = await jobRepository.find();
