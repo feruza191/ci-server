@@ -3,9 +3,9 @@ import 'reflect-metadata';
 import express from 'express';
 import bodyParser from 'body-parser';
 
-import { typeOrmConfig } from './typeormconfig';
-import { connectDb } from './connectDb';
-import { jobsRoutes } from './src/Jobs/routes/jobs.routes';
+import { typeOrmConfig } from '../typeormconfig';
+import { connectDb } from '../connectDb';
+import { jobsRoutes } from './Jobs/routes/jobs.routes';
 
 async function createApp() {
 	const app = express();
