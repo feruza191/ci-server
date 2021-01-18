@@ -1,16 +1,16 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
-export class Setting {
-	@PrimaryGeneratedColumn()
+export class Settings {
+	@PrimaryGeneratedColumn('uuid')
 	id: string;
 
-	@Column()
+	@Column('text')
 	repoName: string;
 
-	@Column()
+	@Column('text')
 	mainBranch: string;
 
-	@Column()
+	@Column('int')
 	period: number;
 }

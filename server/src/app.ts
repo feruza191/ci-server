@@ -5,7 +5,16 @@ import bodyParser from 'body-parser';
 
 import { typeOrmConfig } from '../typeormconfig';
 import { connectDb } from '../connectDb';
-import { jobsRoutes } from './Jobs/routes/jobs.routes';
+import {
+	getAllJobsRoute,
+	getJobRoute,
+	addJobRoute,
+	getLogsRoute,
+} from './Jobs/jobs.routes';
+import {
+	getSettingsRoute,
+	saveSettingsRoute,
+} from './Settings/settings.routes';
 
 async function createApp() {
 	const app = express();
@@ -13,7 +22,12 @@ async function createApp() {
 	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(bodyParser.json());
 
-	app.use('/api', jobsRoutes);
+	app.use('/api', getAllJobsRoute);
+	app.use('/api', getJobRoute);
+	app.use('/api', addJobRoute);
+	app.use('/api', getLogsRoute);
+	app.use('/api', getSettingsRoute);
+	app.use('/api', saveSettingsRoute);
 
 	const PORT = 3000;
 	await connectDb(typeOrmConfig);
