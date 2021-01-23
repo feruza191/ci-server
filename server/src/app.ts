@@ -6,7 +6,7 @@ import bodyParser from 'body-parser';
 import { typeOrmConfig } from '../typeormconfig';
 import { connectDb } from '../connectDb';
 import {
-	getAllJobsRoute,
+	getJobsRoute,
 	getJobRoute,
 	addJobRoute,
 	getLogsRoute,
@@ -22,7 +22,7 @@ async function createApp() {
 	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(bodyParser.json());
 
-	app.use('/api', getAllJobsRoute);
+	app.use('/api', getJobsRoute);
 	app.use('/api', getJobRoute);
 	app.use('/api', addJobRoute);
 	app.use('/api', getLogsRoute);

@@ -1,39 +1,39 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-console */
 import { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
 
-import { Settings } from './settings.entity';
+import { SettingsServices } from './settings.services';
 
-export const getSettings = async (_: Request, res: Response) => {
+const settingServices = new SettingsServices();
+
+export const getSettings = async (_: Request, res: Response): Promise<any> => {
 	try {
-		const settingRepository = getRepository(Settings);
-		const settings = await settingRepository.find();
+		const settings = await settingServices.getAllSettings();
 
 		return res.json(settings);
 	} catch (err) {
-		// eslint-disable-next-line no-console
 		console.log(err);
-		return res.status(500).json({ error: 'Something went wrong' });
+		return res.status(500).json({ message: err.message });
 	}
 };
 
-export const saveSettings = async (req: Request, res: Response) => {
+export const saveSettings = async (
+	req: Request,
+	res: Response
+): Promise<any> => {
 	const { repoName, mainBranch, period } = req.body;
 
 	try {
-		const settingRepository = getRepository(Settings);
-
-		const settings = settingRepository.create({
+		const settings = await settingServices.saveAllSettings(
 			repoName,
 			mainBranch,
-			period,
-		});
+			period
+		);
 
-		await settingRepository.save(settings);
+		await settingServices.gitClone(repoName);
 
 		return res.status(201).json(settings);
 	} catch (err) {
-		// eslint-disable-next-line no-console
 		console.log(err);
 		return res.status(500).json(err);
 	}

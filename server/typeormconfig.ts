@@ -1,10 +1,12 @@
 import { ConnectionOptions } from 'typeorm';
 import dotenv from 'dotenv';
+import path from 'path';
 
 import { Job } from './src/Jobs/job.entity';
 import { Settings } from './src/Settings/settings.entity';
 
-dotenv.config();
+dotenv.config({ path: path.resolve(__filename, '.env.local') });
+dotenv.config({ path: path.resolve(__filename, '.env') });
 
 export const typeOrmConfig: ConnectionOptions = {
 	type: 'postgres',
