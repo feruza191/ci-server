@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { getSettings, saveSettings } from './settings.controllers';
+import { getSettings, saveSettings } from './settings.controller';
 
 const router = express.Router();
 

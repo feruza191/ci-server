@@ -10,7 +10,7 @@ import {
 	getJobRoute,
 	addJobRoute,
 	getLogsRoute,
-} from './Jobs/jobs.routes';
+} from './Jobs/job.routes';
 import {
 	getSettingsRoute,
 	saveSettingsRoute,

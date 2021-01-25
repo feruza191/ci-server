@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import { Request, Response } from 'express';
 
-import { JobsServices } from './jobs.services';
+import { JobsServices } from './job.service';
 
 const jobsServices = new JobsServices();
 

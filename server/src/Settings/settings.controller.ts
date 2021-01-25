@@ -2,9 +2,11 @@
 /* eslint-disable no-console */
 import { Request, Response } from 'express';
 
-import { SettingsServices } from './settings.services';
+import { SettingsServices } from './settings.service';
+import { Services } from '../share/service';
 
 const settingServices = new SettingsServices();
+const services = new Services();
 
 export const getSettings = async (_: Request, res: Response): Promise<any> => {
 	try {
@@ -30,7 +32,7 @@ export const saveSettings = async (
 			period
 		);
 
-		await settingServices.gitClone(repoName);
+		await services.gitClone(repoName);
 
 		return res.status(201).json(settings);
 	} catch (err) {
