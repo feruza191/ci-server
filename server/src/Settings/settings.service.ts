@@ -8,10 +8,9 @@ export class SettingsServices {
 
 	public async getAllSettings(): Promise<Settings[] | void> {
 		try {
-			this.settingRepository = getRepository(Settings);
+			const settingRepository = getRepository(Settings);
 
-			const settings = await this.settingRepository.find();
-			return settings;
+			return await settingRepository.find();
 		} catch (e) {
 			throw Error('Could not retrieved all settings!');
 		}
@@ -23,15 +22,15 @@ export class SettingsServices {
 		period: number
 	): Promise<Settings | void> {
 		try {
-			this.settingRepository = getRepository(Settings);
+			const settingRepository = getRepository(Settings);
 
-			const settings = this.settingRepository.create({
+			const settings = settingRepository.create({
 				repoName,
 				mainBranch,
 				period,
 			});
 
-			return await this.settingRepository.save(settings);
+			return settingRepository.save(settings);
 		} catch (e) {
 			throw Error('Could not save settings!');
 		}

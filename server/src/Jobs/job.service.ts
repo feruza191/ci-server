@@ -7,10 +7,9 @@ export class JobsServices {
 
 	public async getAllJobs(): Promise<Job[] | void> {
 		try {
-			this.jobRepository = getRepository(Job);
-			const jobs = await this.jobRepository.find();
+			const jobRepository = getRepository(Job);
 
-			return jobs;
+			return await jobRepository.find();
 		} catch (e) {
 			throw Error('Could not retrieve all jobs!');
 		}
@@ -18,10 +17,9 @@ export class JobsServices {
 
 	public async getJobById(jobId: string): Promise<Job | void> {
 		try {
-			this.jobRepository = getRepository(Job);
-			const job = await this.jobRepository.findOneOrFail({ id: jobId });
+			const jobRepository = getRepository(Job);
 
-			return job;
+			return await jobRepository.findOneOrFail({ id: jobId });
 		} catch (e) {
 			throw Error('Job is not found');
 		}
@@ -32,10 +30,10 @@ export class JobsServices {
 		buildCommand: string
 	): Promise<Job | void> {
 		try {
-			this.jobRepository = getRepository(Job);
-			const job = this.jobRepository.create({ commitHash, buildCommand });
+			const jobRepository = getRepository(Job);
+			const job = jobRepository.create({ commitHash, buildCommand });
 
-			return await this.jobRepository.save(job);
+			return jobRepository.save(job);
 		} catch (e) {
 			throw Error('Failed to add job to the queque!');
 		}
@@ -43,10 +41,9 @@ export class JobsServices {
 
 	public async getJobLogs(jobId: string): Promise<Job | void> {
 		try {
-			this.jobRepository = getRepository(Job);
-			const logs = this.jobRepository.findOneOrFail({ id: jobId });
+			const jobRepository = getRepository(Job);
 
-			return logs;
+			return jobRepository.findOneOrFail({ id: jobId });
 		} catch (e) {
 			throw Error('Failed to retrieve the job logs');
 		}

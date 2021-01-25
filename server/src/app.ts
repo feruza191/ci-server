@@ -23,11 +23,11 @@ async function createApp() {
 	app.use(bodyParser.json());
 
 	app.use('/api', getJobsRoute);
-	app.use('/api', getJobRoute);
-	app.use('/api', addJobRoute);
-	app.use('/api', getLogsRoute);
-	app.use('/api', getSettingsRoute);
-	app.use('/api', saveSettingsRoute);
+	app.use('/api/jobs', getJobRoute);
+	app.use('/api/jobs', addJobRoute);
+	app.use('/api/jobs', getLogsRoute);
+	app.use('/api/jobs', getSettingsRoute);
+	app.use('/api/jobs', saveSettingsRoute);
 
 	const PORT = 3000;
 	await connectDb(typeOrmConfig);

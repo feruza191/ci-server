@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-console */
 import { Request, Response } from 'express';
 
@@ -8,7 +7,10 @@ import { Services } from '../share/service';
 const settingServices = new SettingsServices();
 const services = new Services();
 
-export const getSettings = async (_: Request, res: Response): Promise<any> => {
+export const getSettings = async (
+	_: Request,
+	res: Response
+): Promise<Response> => {
 	try {
 		const settings = await settingServices.getAllSettings();
 
@@ -22,7 +24,7 @@ export const getSettings = async (_: Request, res: Response): Promise<any> => {
 export const saveSettings = async (
 	req: Request,
 	res: Response
-): Promise<any> => {
+): Promise<Response> => {
 	const { repoName, mainBranch, period } = req.body;
 
 	try {
@@ -34,7 +36,7 @@ export const saveSettings = async (
 
 		await services.gitClone(repoName);
 
-		return res.status(201).json(settings);
+		return res.json(settings);
 	} catch (err) {
 		console.log(err);
 		return res.status(500).json(err);
