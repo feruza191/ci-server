@@ -5,16 +5,7 @@ import bodyParser from 'body-parser';
 
 import { typeOrmConfig } from '../typeormconfig';
 import { connectDb } from '../connectDb';
-import {
-	getJobsRoute,
-	getJobRoute,
-	addJobRoute,
-	getLogsRoute,
-} from './Jobs/job.routes';
-import {
-	getSettingsRoute,
-	saveSettingsRoute,
-} from './Settings/settings.routes';
+import routes from './routes';
 
 async function createApp() {
 	const app = express();
@@ -22,12 +13,7 @@ async function createApp() {
 	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(bodyParser.json());
 
-	app.use('/api', getJobsRoute);
-	app.use('/api/jobs', getJobRoute);
-	app.use('/api/jobs', addJobRoute);
-	app.use('/api/jobs', getLogsRoute);
-	app.use('/api/jobs', getSettingsRoute);
-	app.use('/api/jobs', saveSettingsRoute);
+	app.use('/api', routes);
 
 	const PORT = 3000;
 	await connectDb(typeOrmConfig);

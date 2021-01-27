@@ -1,10 +1,12 @@
-import express from 'express';
+import { Router } from 'express';
 
 import { getJobs, getJob, addJob, getLogs } from './job.controller';
 
-const router = express.Router();
+const router = Router();
 
-export const getJobsRoute = router.get('/jobs', getJobs);
-export const getJobRoute = router.get('/:jobId', getJob);
-export const addJobRoute = router.post('/:commitHash', addJob);
-export const getLogsRoute = router.get('/:jobId/logs', getLogs);
+router.get('/', getJobs);
+router.get('/:jobId', getJob);
+router.post('/:commitHash', addJob);
+router.get('/:jobId/logs', getLogs);
+
+export default router;
