@@ -3,6 +3,7 @@ import { exec } from 'child_process';
 import util from 'util';
 
 interface JobBuild {
+	authorName: string;
 	commitMessage: string;
 	branchName: string;
 }
@@ -42,8 +43,10 @@ export class Services {
 			cwd: this.localRepoPath,
 		});
 
-		const [commitMessage] = String(stdout).replace(/\n/g, '').split('|');
+		const [authorName, commitMessage] = String(stdout)
+			.replace(/\n/g, '')
+			.split('|');
 
-		return { commitMessage, branchName };
+		return { authorName, commitMessage, branchName };
 	}
 }
