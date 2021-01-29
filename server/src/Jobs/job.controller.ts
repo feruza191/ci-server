@@ -2,8 +2,10 @@
 import { Request, Response } from 'express';
 
 import { JobsServices } from './job.service';
+import { Services } from '../share/service';
 
 const jobsServices = new JobsServices();
+const services = new Services();
 
 export const getJobs = async (_: Request, res: Response): Promise<Response> => {
 	try {
@@ -40,7 +42,20 @@ export const addJob = async (
 	const { buildCommand } = req.body;
 
 	try {
-		const job = await jobsServices.addJobToQueue(commitHash, buildCommand);
+		const jobs = await jobsServices.getAllJobs();
+		const jobNumber = Array(jobs).length + 1;
+
+		const { commitMessage, branchName } = await services.getCommitByHash(
+			commitHash
+		);
+
+		const job = await jobsServices.addJobToQueue(
+			commitHash,
+			buildCommand,
+			commitMessage,
+			branchName,
+			jobNumber
+		);
 
 		return res.json(job);
 	} catch (err) {

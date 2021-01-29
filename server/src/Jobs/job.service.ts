@@ -15,23 +15,37 @@ export class JobsServices {
 		}
 	}
 
-	public async getJobById(jobId: string): Promise<Job | void> {
+	public async getJobById(id: string): Promise<Job | void> {
 		try {
 			const jobRepository = getRepository(Job);
+			const job = await jobRepository.findOne(id);
 
-			return await jobRepository.findOneOrFail({ id: jobId });
+			if (!job) {
+				throw Error('Job is not found!');
+			}
+
+			return job;
 		} catch (e) {
-			throw Error('Job is not found');
+			throw Error('Something went wrong!');
 		}
 	}
 
 	public async addJobToQueue(
 		commitHash: string,
-		buildCommand: string
+		buildCommand: string,
+		commitMessage: string,
+		branchName: string,
+		jobNumber: number
 	): Promise<Job | void> {
 		try {
 			const jobRepository = getRepository(Job);
-			const job = jobRepository.create({ commitHash, buildCommand });
+			const job = jobRepository.create({
+				commitHash,
+				buildCommand,
+				commitMessage,
+				branchName,
+				jobNumber,
+			});
 
 			return jobRepository.save(job);
 		} catch (e) {
