@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
 import { Request, Response } from 'express';
 
-import { SettingsServices } from './settings.service';
-import { Services } from '../share/service';
+import { SettingsService } from './settings.service';
+import { SandboxService } from '../share/sandboxService';
 
-const settingServices = new SettingsServices();
-const services = new Services();
+const settingServices = new SettingsService();
+const services = new SandboxService();
 
 export const getSettings = async (
 	_: Request,
@@ -33,8 +33,7 @@ export const saveSettings = async (
 			mainBranch,
 			period
 		);
-
-		await services.gitClone(repoName);
+		services.gitClone(repoName);
 
 		return res.json(settings);
 	} catch (err) {

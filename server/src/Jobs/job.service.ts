@@ -1,10 +1,8 @@
-import { Repository, getRepository } from 'typeorm';
+import { getRepository } from 'typeorm';
 
 import { Job } from './job.entity';
 
-export class JobsServices {
-	private jobRepository: Repository<Job>;
-
+export class JobService {
 	public async getAllJobs(): Promise<Job[] | void> {
 		try {
 			const jobRepository = getRepository(Job);

@@ -1,11 +1,19 @@
 /* eslint-disable no-console */
 import { Request, Response } from 'express';
 
-import { JobsServices } from './job.service';
-import { Services } from '../share/service';
+import { JobService } from './job.service';
+import { SandboxService } from '../share/sandboxService';
+import { SettingsService } from '../Settings/settings.service';
 
-const jobsServices = new JobsServices();
-const services = new Services();
+const jobsServices = new JobService();
+const services = new SandboxService();
+const settingServices = new SettingsService();
+
+interface ISettings {
+	repoName: string;
+	mainBranch: string;
+	period: number;
+}
 
 export const getJobs = async (_: Request, res: Response): Promise<Response> => {
 	try {
@@ -43,11 +51,23 @@ export const addJob = async (
 
 	try {
 		const jobs = await jobsServices.getAllJobs();
-		const jobNumber = Array(jobs).length + 1;
 
-		const { commitMessage, branchName } = await services.getCommitByHash(
-			commitHash
-		);
+		let jobNumber = 0;
+		if (jobs instanceof Array) {
+			jobNumber = jobs.length + 1;
+		}
+
+		const settings = await settingServices.getAllSettings();
+
+		let mainBranch: string[] = [];
+		if (settings instanceof Array) {
+			mainBranch = settings.map((s: ISettings) => {
+				return s.mainBranch;
+			});
+		}
+		const branchName = mainBranch[0];
+
+		const { commitMessage } = await services.getCommitByHash(commitHash);
 
 		const job = await jobsServices.addJobToQueue(
 			commitHash,

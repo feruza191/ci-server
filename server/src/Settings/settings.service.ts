@@ -3,7 +3,7 @@ import { getRepository, Repository } from 'typeorm';
 
 import { Settings } from './settings.entity';
 
-export class SettingsServices {
+export class SettingsService {
 	private settingRepository: Repository<Settings>;
 
 	public async getAllSettings(): Promise<Settings[] | void> {

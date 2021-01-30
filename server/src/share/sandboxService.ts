@@ -8,25 +8,24 @@ interface JobBuild {
 	branchName: string;
 }
 
-export class Services {
-	public localRepoPath = 'clonedProjects/my-mobx';
+const localRepoPath = 'clonedProjects/my-mobx';
+const execPromise = util.promisify(exec);
 
-	public execPromise = util.promisify(exec);
-
+export class SandboxService {
 	public async gitClone(repoName: string): Promise<void> {
 		const gitCommand = `git clone https://github.com/${repoName}`;
 
 		try {
-			await this.execPromise(gitCommand);
+			await execPromise(gitCommand);
 		} catch (err) {
 			console.error({ err });
 		}
 	}
 
-	private async checkOut(branchName: string) {
+	private async checkout(branchName: string) {
 		try {
-			const gitCommand = `cd ${this.localRepoPath} && git checkout ${branchName}`;
-			await this.execPromise(gitCommand);
+			const gitCommand = `cd ${localRepoPath} && git checkout ${branchName}`;
+			await execPromise(gitCommand);
 		} catch (err) {
 			console.log({ err });
 			throw Error(`Could not check out to ${branchName}`);
@@ -37,10 +36,10 @@ export class Services {
 		commitHash: string,
 		branchName = 'master'
 	): Promise<JobBuild> {
-		await this.checkOut(branchName);
+		await this.checkout(branchName);
 		const gitCommand = `git log -1 --format="%an|%B" ${commitHash}`;
-		const { stdout } = await this.execPromise(gitCommand, {
-			cwd: this.localRepoPath,
+		const { stdout } = await execPromise(gitCommand, {
+			cwd: localRepoPath,
 		});
 
 		const [authorName, commitMessage] = String(stdout)
