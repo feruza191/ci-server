@@ -12,7 +12,7 @@ export const getSettings = async (
 	res: Response
 ): Promise<Response> => {
 	try {
-		const settings = await settingServices.getAllSettings();
+		const settings = await settingServices.getSettings();
 
 		return res.json(settings);
 	} catch (err) {
@@ -28,7 +28,7 @@ export const saveSettings = async (
 	const { repoName, mainBranch, period } = req.body;
 
 	try {
-		const settings = await settingServices.saveAllSettings(
+		const settings = await settingServices.saveSettings(
 			repoName,
 			mainBranch,
 			period

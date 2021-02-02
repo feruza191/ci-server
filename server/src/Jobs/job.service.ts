@@ -3,7 +3,7 @@ import { getRepository } from 'typeorm';
 import { Job } from './job.entity';
 
 export class JobService {
-	public async getAllJobs(): Promise<Job[] | void> {
+	public async getAllJobs(): Promise<Job[]> {
 		try {
 			const jobRepository = getRepository(Job);
 
@@ -13,7 +13,7 @@ export class JobService {
 		}
 	}
 
-	public async getJobById(id: string): Promise<Job | void> {
+	public async getJobById(id: string): Promise<Job> {
 		try {
 			const jobRepository = getRepository(Job);
 			const job = await jobRepository.findOne(id);
@@ -34,7 +34,7 @@ export class JobService {
 		commitMessage: string,
 		branchName: string,
 		jobNumber: number
-	): Promise<Job | void> {
+	): Promise<Job> {
 		try {
 			const jobRepository = getRepository(Job);
 			const job = jobRepository.create({
@@ -51,7 +51,7 @@ export class JobService {
 		}
 	}
 
-	public async getJobLogs(jobId: string): Promise<Job | void> {
+	public async getJobLogs(jobId: string): Promise<Job> {
 		try {
 			const jobRepository = getRepository(Job);
 

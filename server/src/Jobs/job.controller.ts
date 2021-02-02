@@ -4,18 +4,16 @@ import { Request, Response } from 'express';
 import { JobService } from './job.service';
 import { SandboxService } from '../share/sandboxService';
 import { SettingsService } from '../Settings/settings.service';
+import { Job } from './job.entity';
 
 const jobsServices = new JobService();
 const services = new SandboxService();
 const settingServices = new SettingsService();
 
-interface ISettings {
-	repoName: string;
-	mainBranch: string;
-	period: number;
-}
-
-export const getJobs = async (_: Request, res: Response): Promise<Response> => {
+export const getJobs = async (
+	_: Request,
+	res: Response<Job[]>
+): Promise<Response> => {
 	try {
 		const jobs = await jobsServices.getAllJobs();
 
@@ -27,8 +25,8 @@ export const getJobs = async (_: Request, res: Response): Promise<Response> => {
 };
 
 export const getJob = async (
-	req: Request,
-	res: Response
+	req: Request<{ jobId: string }>,
+	res: Response<Job>
 ): Promise<Response> => {
 	const { jobId } = req.params;
 
@@ -43,8 +41,8 @@ export const getJob = async (
 };
 
 export const addJob = async (
-	req: Request,
-	res: Response
+	req: Request<{ commitHash: string }, unknown, { buildCommand: string }>,
+	res: Response<Job>
 ): Promise<Response> => {
 	const { commitHash } = req.params;
 	const { buildCommand } = req.body;
@@ -57,15 +55,12 @@ export const addJob = async (
 			jobNumber = jobs.length + 1;
 		}
 
-		const settings = await settingServices.getAllSettings();
+		const settings = await settingServices.getSettings();
 
-		let mainBranch: string[] = [];
-		if (settings instanceof Array) {
-			mainBranch = settings.map((s: ISettings) => {
-				return s.mainBranch;
-			});
+		let branchName = '';
+		if (settings) {
+			branchName = settings.mainBranch;
 		}
-		const branchName = mainBranch[0];
 
 		const { commitMessage } = await services.getCommitByHash(commitHash);
 
@@ -85,8 +80,8 @@ export const addJob = async (
 };
 
 export const getLogs = async (
-	req: Request,
-	res: Response
+	req: Request<{ jobId: string }>,
+	res: Response<Job>
 ): Promise<Response> => {
 	const { jobId } = req.params;
 
