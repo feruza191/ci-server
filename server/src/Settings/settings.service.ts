@@ -8,9 +8,7 @@ export class SettingsService {
 		try {
 			const settingRepository = getRepository(Settings);
 
-			const settings = await settingRepository.findOne();
-
-			return settings;
+			return await settingRepository.findOne();
 		} catch (e) {
 			throw Error('Could not retrieved all settings!');
 		}
@@ -26,7 +24,6 @@ export class SettingsService {
 			const currentSettings = await this.getSettings();
 
 			if (!currentSettings) {
-				console.log('here');
 				const settings = settingRepository.create({
 					repoName,
 					mainBranch,
@@ -35,10 +32,9 @@ export class SettingsService {
 
 				return settingRepository.save(settings);
 			}
-
 			const { id } = currentSettings;
 
-			settingRepository.update(id, {
+			await settingRepository.update(id, {
 				repoName,
 				mainBranch,
 				period,
@@ -52,6 +48,17 @@ export class SettingsService {
 			};
 		} catch (e) {
 			throw Error('Could not save settings!');
+		}
+	}
+
+	public async deleteSettings(): Promise<Settings> {
+		try {
+			const settingRepository = getRepository(Settings);
+			const settings = await settingRepository.findOneOrFail();
+
+			return settingRepository.remove(settings);
+		} catch (e) {
+			throw Error('Something went wrong!');
 		}
 	}
 }
