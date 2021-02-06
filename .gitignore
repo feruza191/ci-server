@@ -1,3 +1,6 @@
 node_modules
+clonedProjects
 .DS_Store
 build
+.env.local
+pgdata

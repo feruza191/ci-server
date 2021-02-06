@@ -33,6 +33,7 @@ module.exports = {
 		'no-undef': 'off',
 		indent: 'off',
 		'consistent-return': 'off',
+		'class-methods-use-this': 'off',
 		'react/jsx-indent': 'off',
 		'react/jsx-indent-props': 'off',
 		'react/jsx-filename-extension': 'off',
