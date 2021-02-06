@@ -7,7 +7,7 @@ import { SettingsService } from '../Settings/settings.service';
 import { Job } from './job.entity';
 
 const jobsServices = new JobService();
-const services = new SandboxService();
+const sandBoxService = new SandboxService();
 const settingServices = new SettingsService();
 
 export const getJobs = async (
@@ -62,7 +62,9 @@ export const addJob = async (
 			branchName = settings.mainBranch;
 		}
 
-		const { commitMessage } = await services.getCommitByHash(commitHash);
+		const { commitMessage } = await sandBoxService.getCommitByHash(
+			commitHash
+		);
 
 		const job = await jobsServices.addJobToQueue(
 			commitHash,
@@ -81,8 +83,8 @@ export const addJob = async (
 
 export const getLogs = async (
 	req: Request<{ jobId: string }>,
-	res: Response<Job>
-): Promise<Response<Job> | undefined> => {
+	res: Response<string | null>
+): Promise<Response<string | null> | undefined> => {
 	const { jobId } = req.params;
 
 	try {

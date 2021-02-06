@@ -51,11 +51,15 @@ export class JobService {
 		}
 	}
 
-	public async getJobLogs(jobId: string): Promise<Job | undefined> {
+	public async getJobLogs(jobId: string): Promise<string | null> {
 		try {
 			const jobRepository = getRepository(Job);
 
-			return jobRepository.findOneOrFail({ id: jobId });
+			const job = await jobRepository.findOneOrFail({ id: jobId });
+
+			const { jobLogs } = job;
+
+			return jobLogs;
 		} catch (e) {
 			throw Error('Failed to retrieve the job logs');
 		}

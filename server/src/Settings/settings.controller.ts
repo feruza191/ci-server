@@ -4,11 +4,10 @@ import { Request, Response } from 'express';
 import { SettingsService } from './settings.service';
 import { SandboxService } from '../share/sandboxService';
 import { Settings } from './settings.entity';
+import { AnyObject } from '../types';
 
 const settingServices = new SettingsService();
-const services = new SandboxService();
-
-type AnyObject = Record<string, unknown>;
+const sandBoxService = new SandboxService();
 
 export const getSettings = async (
 	_: Request,
@@ -41,7 +40,7 @@ export const saveSettings = async (
 			period
 		);
 
-		services.gitClone(repoName);
+		sandBoxService.gitClone(repoName);
 
 		return res.json(settings);
 	} catch (err) {
