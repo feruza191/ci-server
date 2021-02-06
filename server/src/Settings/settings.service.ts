@@ -4,7 +4,7 @@ import { getRepository } from 'typeorm';
 import { Settings } from './settings.entity';
 
 export class SettingsService {
-	public async getSettings(): Promise<Settings | void> {
+	public async getSettings(): Promise<Settings | undefined> {
 		try {
 			const settingRepository = getRepository(Settings);
 
@@ -18,7 +18,7 @@ export class SettingsService {
 		repoName: string,
 		mainBranch: string,
 		period: number
-	): Promise<Settings> {
+	): Promise<Settings | undefined> {
 		try {
 			const settingRepository = getRepository(Settings);
 			const currentSettings = await this.getSettings();
@@ -51,7 +51,7 @@ export class SettingsService {
 		}
 	}
 
-	public async deleteSettings(): Promise<Settings> {
+	public async deleteSettings(): Promise<Settings | undefined> {
 		try {
 			const settingRepository = getRepository(Settings);
 			const settings = await settingRepository.findOneOrFail();

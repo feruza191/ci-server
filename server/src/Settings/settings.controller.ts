@@ -8,16 +8,16 @@ import { Settings } from './settings.entity';
 const settingServices = new SettingsService();
 const services = new SandboxService();
 
+type AnyObject = Record<string, unknown>;
+
 export const getSettings = async (
 	_: Request,
 	res: Response<Settings>
-): Promise<Response | undefined> => {
+): Promise<Response<Settings> | undefined> => {
 	try {
 		const settings = await settingServices.getSettings();
 
-		if (settings) {
-			return res.json(settings);
-		}
+		return res.json(settings);
 	} catch (err) {
 		console.log(err);
 		return res.status(500).json(err);
@@ -26,12 +26,12 @@ export const getSettings = async (
 
 export const saveSettings = async (
 	req: Request<
-		Record<string, unknown>,
+		AnyObject,
 		unknown,
 		{ repoName: string; mainBranch: string; period: number }
 	>,
 	res: Response
-): Promise<Response> => {
+): Promise<Response<Settings> | undefined> => {
 	const { repoName, mainBranch, period } = req.body;
 
 	try {
@@ -53,7 +53,7 @@ export const saveSettings = async (
 export const deleteSettings = async (
 	_: Request,
 	res: Response<{ message: string }>
-): Promise<Response> => {
+): Promise<Response<{ message: string }> | undefined> => {
 	try {
 		await settingServices.deleteSettings();
 

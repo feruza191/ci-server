@@ -3,7 +3,7 @@ import { getRepository } from 'typeorm';
 import { Job } from './job.entity';
 
 export class JobService {
-	public async getAllJobs(): Promise<Job[]> {
+	public async getAllJobs(): Promise<Job[] | undefined> {
 		try {
 			const jobRepository = getRepository(Job);
 
@@ -13,7 +13,7 @@ export class JobService {
 		}
 	}
 
-	public async getJobById(id: string): Promise<Job> {
+	public async getJobById(id: string): Promise<Job | undefined> {
 		try {
 			const jobRepository = getRepository(Job);
 			const job = await jobRepository.findOne(id);
@@ -51,7 +51,7 @@ export class JobService {
 		}
 	}
 
-	public async getJobLogs(jobId: string): Promise<Job> {
+	public async getJobLogs(jobId: string): Promise<Job | undefined> {
 		try {
 			const jobRepository = getRepository(Job);
 

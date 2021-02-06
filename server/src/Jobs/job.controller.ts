@@ -13,7 +13,7 @@ const settingServices = new SettingsService();
 export const getJobs = async (
 	_: Request,
 	res: Response<Job[]>
-): Promise<Response> => {
+): Promise<Response<Job[]> | undefined> => {
 	try {
 		const jobs = await jobsServices.getAllJobs();
 
@@ -27,7 +27,7 @@ export const getJobs = async (
 export const getJob = async (
 	req: Request<{ jobId: string }>,
 	res: Response<Job>
-): Promise<Response> => {
+): Promise<Response<Job> | undefined> => {
 	const { jobId } = req.params;
 
 	try {
@@ -43,7 +43,7 @@ export const getJob = async (
 export const addJob = async (
 	req: Request<{ commitHash: string }, unknown, { buildCommand: string }>,
 	res: Response<Job>
-): Promise<Response> => {
+): Promise<Response<Job> | undefined> => {
 	const { commitHash } = req.params;
 	const { buildCommand } = req.body;
 
@@ -82,7 +82,7 @@ export const addJob = async (
 export const getLogs = async (
 	req: Request<{ jobId: string }>,
 	res: Response<Job>
-): Promise<Response> => {
+): Promise<Response<Job> | undefined> => {
 	const { jobId } = req.params;
 
 	try {
