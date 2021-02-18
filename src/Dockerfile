@@ -1,7 +1,7 @@
-FROM node:12
-WORKDIR /src
-COPY package.json ./
+FROM node:12.2.0-alpine
+RUN mkdir -p /frontend
+WORKDIR /frontend
+COPY package.json package-lock.json /frontend/
 RUN npm install
-COPY . /src
-EXPOSE 5000
-CMD ["npm", "start"]
+COPY /src /frontend/
+

@@ -1,11 +1,29 @@
 version: '3'
 services:
-    server:
-        build: ./server
+    backend:
+        build:
+            context: .
+            dockerfile: ./server/Dockerfile
+        container_name: backend
+        command: npm run start-server
+        volumes:
+            - .:/backend
+        env_file:
+            - .env
+            - .env.local
         ports:
             - '3000:3000'
-    client:
-        build: ./src
+    frontend:
+        build:
+            context: .
+            dockerfile: ./src/Dockerfile
+        container_name: frontend
+        command: npm run start
+        volumes:
+            - .:/frontend
+        env_file:
+            - .env
+            - .env.local
         ports:
             - '5000:5000'
     db: &postgres
