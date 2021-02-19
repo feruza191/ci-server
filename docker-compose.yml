@@ -7,7 +7,7 @@ services:
         container_name: backend
         command: npm run start-server
         volumes:
-            - .:/backend
+            - .:/backend:delegated
         env_file:
             - .env
             - .env.local
@@ -20,7 +20,7 @@ services:
         container_name: frontend
         command: npm run start
         volumes:
-            - .:/frontend
+            - .:/frontend:delegated
         env_file:
             - .env
             - .env.local
