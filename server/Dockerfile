@@ -3,4 +3,5 @@ RUN mkdir -p /backend
 WORKDIR /backend
 COPY package.json package-lock.json /backend/
 RUN npm install
+RUN apk --no-cache add git
 COPY /server /backend/
