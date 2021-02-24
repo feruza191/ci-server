@@ -18,7 +18,7 @@ async function createApp() {
 	const PORT = 3000;
 	await connectDb(typeOrmConfig);
 
-	app.listen(PORT, '0.0.0.0', () => {
+	app.listen(PORT, () => {
 		// eslint-disable-next-line no-console
 		console.log('Express server listening on http://localhost:3000');
 	});
