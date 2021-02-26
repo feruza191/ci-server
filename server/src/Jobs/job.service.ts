@@ -18,10 +18,6 @@ export class JobService {
 			const jobRepository = getRepository(Job);
 			const job = await jobRepository.findOne(id);
 
-			if (!job) {
-				throw Error('Job is not found!');
-			}
-
 			return job;
 		} catch (e) {
 			throw Error('Something went wrong!');
