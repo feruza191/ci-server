@@ -1,22 +1,16 @@
-export class ErrorHandler {
-	code: number;
+export class ErrorHandler extends Error {
+	public readonly message: string;
 
-	message: string;
+	public readonly httpCode: number;
 
-	constructor(code: number, message: string) {
-		this.code = code;
+	constructor(message: string, httpCode: number) {
+		super();
+
+		Object.setPrototypeOf(this, new.target.prototype); // restore prototype chain
+
 		this.message = message;
-	}
+		this.httpCode = httpCode;
 
-	static badRequest(msg: string): ErrorHandler {
-		return new ErrorHandler(400, msg);
-	}
-
-	static notFoundRequest(msg: string): ErrorHandler {
-		return new ErrorHandler(404, msg);
-	}
-
-	static internalError(msg: string): ErrorHandler {
-		return new ErrorHandler(500, msg);
+		Error.captureStackTrace(this);
 	}
 }

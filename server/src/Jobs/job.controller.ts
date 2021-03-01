@@ -5,6 +5,7 @@ import { SandboxService } from '../share/sandboxService';
 import { SettingsService } from '../Settings/settings.service';
 import { Job } from './job.entity';
 import { ErrorHandler } from '../share/errorHandler';
+import { HttpCodes } from '../share/enum';
 
 const jobsServices = new JobService();
 const sandBoxService = new SandboxService();
@@ -18,9 +19,16 @@ export const getJobs = async (
 	try {
 		const jobs = await jobsServices.getAllJobs();
 
+		if (!jobs) {
+			throw new ErrorHandler(
+				'Could not retrieve all jobs!',
+				HttpCodes.NotFound
+			);
+		}
+
 		return res.json(jobs);
 	} catch (err) {
-		next(ErrorHandler.internalError('Could not retrieve all jobs!'));
+		next(err);
 	}
 };
 
@@ -35,12 +43,12 @@ export const getJob = async (
 		const job = await jobsServices.getJobById(jobId);
 
 		if (!job) {
-			next(ErrorHandler.notFoundRequest('Job is not found!'));
+			throw new ErrorHandler('Job is not found!', HttpCodes.NotFound);
 		}
 
 		return res.json(job);
 	} catch (err) {
-		next(ErrorHandler.internalError('Could not retrieve job!'));
+		next(err);
 	}
 };
 
@@ -52,15 +60,14 @@ export const addJob = async (
 	const { commitHash } = req.params;
 	const { buildCommand } = req.body;
 
-	if (!buildCommand) {
-		next(
-			ErrorHandler.badRequest(
-				'buildCommand is required and must be non blank'
-			)
-		);
-	}
-
 	try {
+		if (!buildCommand) {
+			throw new ErrorHandler(
+				'buildCommand is required and must be non blank',
+				HttpCodes.BadRequest
+			);
+		}
+
 		const jobs = await jobsServices.getAllJobs();
 
 		let jobNumber = 0;
@@ -89,7 +96,7 @@ export const addJob = async (
 
 		return res.json(job);
 	} catch (err) {
-		next(ErrorHandler.internalError('Failed to add job to the queque!'));
+		next(err);
 	}
 };
 
@@ -105,6 +112,6 @@ export const getLogs = async (
 
 		return res.json(logs);
 	} catch (err) {
-		next(ErrorHandler.internalError('Failed to retrieve the job logs'));
+		next(err);
 	}
 };

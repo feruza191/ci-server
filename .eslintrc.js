@@ -31,6 +31,7 @@ module.exports = {
 		'no-tabs': 'off',
 		'no-use-before-define': 'off',
 		'no-undef': 'off',
+		'no-unused-vars': [2, { args: 'all', argsIgnorePattern: '^_' }], //ignore underscore parameters
 		indent: 'off',
 		'consistent-return': 'off',
 		'class-methods-use-this': 'off',
@@ -63,5 +64,9 @@ module.exports = {
 		'jsx-a11y/alt-text': 'off',
 		'@typescript-eslint/no-var-requires': 'off',
 		'@typescript-eslint/no-shadow': ['error'],
+		'@typescript-eslint/no-unused-vars': [
+			2,
+			{ args: 'all', argsIgnorePattern: '^_' },
+		],
 	},
 };
