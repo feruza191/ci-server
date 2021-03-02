@@ -2,6 +2,8 @@
 import { exec } from 'child_process';
 import util from 'util';
 
+import TextKeys from './TextKeys';
+
 interface JobBuild {
 	authorName: string;
 	commitMessage: string;
@@ -24,11 +26,11 @@ export class SandboxService {
 
 	private async checkout(branchName: string) {
 		try {
-			const gitCommand = `cd ${localRepoPath} && git checkout ${branchName}`;
+			const gitCommand = `cd ${localRepoPath} && ${TextKeys.GitCheckout} ${branchName}`;
 			await execPromise(gitCommand);
 		} catch (err) {
 			console.log({ err });
-			throw Error(`Could not check out to ${branchName}`);
+			throw Error(`${TextKeys.FailedToCheckout} ${branchName}`);
 		}
 	}
 

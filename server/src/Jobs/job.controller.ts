@@ -4,8 +4,9 @@ import { JobService } from './job.service';
 import { SandboxService } from '../share/sandboxService';
 import { SettingsService } from '../Settings/settings.service';
 import { Job } from './job.entity';
-import { ErrorHandler } from '../share/errorHandler';
+import { AppError } from '../share/appError';
 import { HttpCodes } from '../share/enum';
+import TextKeys from '../share/TextKeys';
 
 const jobsServices = new JobService();
 const sandBoxService = new SandboxService();
@@ -20,10 +21,7 @@ export const getJobs = async (
 		const jobs = await jobsServices.getAllJobs();
 
 		if (!jobs) {
-			throw new ErrorHandler(
-				'Could not retrieve all jobs!',
-				HttpCodes.NotFound
-			);
+			throw new AppError(TextKeys.NotRetrievedJobs, HttpCodes.NotFound);
 		}
 
 		return res.json(jobs);
@@ -43,7 +41,7 @@ export const getJob = async (
 		const job = await jobsServices.getJobById(jobId);
 
 		if (!job) {
-			throw new ErrorHandler('Job is not found!', HttpCodes.NotFound);
+			throw new AppError(TextKeys.JobIsNotFound, HttpCodes.NotFound);
 		}
 
 		return res.json(job);
@@ -62,8 +60,8 @@ export const addJob = async (
 
 	try {
 		if (!buildCommand) {
-			throw new ErrorHandler(
-				'buildCommand is required and must be non blank',
+			throw new AppError(
+				TextKeys.BuildCommandIsRequired,
 				HttpCodes.BadRequest
 			);
 		}

@@ -2,6 +2,7 @@
 import { getRepository } from 'typeorm';
 
 import { Settings } from './settings.entity';
+import TextKeys from '../share/TextKeys';
 
 export class SettingsService {
 	public async getSettings(): Promise<Settings | undefined> {
@@ -10,7 +11,7 @@ export class SettingsService {
 
 			return await settingRepository.findOne();
 		} catch (e) {
-			throw Error('Could not retrieved all settings!');
+			throw Error(TextKeys.NotRetrievedSettings);
 		}
 	}
 
@@ -47,7 +48,7 @@ export class SettingsService {
 				period,
 			};
 		} catch (e) {
-			throw Error('Could not save settings!');
+			throw Error(TextKeys.FailedSaveSettings);
 		}
 	}
 
@@ -58,7 +59,7 @@ export class SettingsService {
 
 			return settingRepository.remove(settings);
 		} catch (e) {
-			throw Error('Something went wrong!');
+			throw Error(TextKeys.SomethingWentWrong);
 		}
 	}
 }

@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { ErrorHandler } from './errorHandler';
+import { AppError } from './appError';
 import { HttpCodes } from './enum';
+import TextKeys from './TextKeys';
 
 const apiErrorHandler = (
 	err: Error,
@@ -10,12 +11,12 @@ const apiErrorHandler = (
 	_next: NextFunction
 ): Promise<Response<string>> | undefined => {
 	// if our error is expected error, then it is somthing that we want to return to the user
-	if (err instanceof ErrorHandler) {
+	if (err instanceof AppError) {
 		res.status(err.httpCode).json(err.message);
 		return;
 	}
 	// generic internal server error
-	res.status(HttpCodes.ServerError).json('Something went wrong!');
+	res.status(HttpCodes.ServerError).json(TextKeys.SomethingWentWrong);
 };
 
 export default apiErrorHandler;

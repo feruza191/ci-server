@@ -4,8 +4,9 @@ import { SettingsService } from './settings.service';
 import { SandboxService } from '../share/sandboxService';
 import { Settings } from './settings.entity';
 import { AnyObject } from '../types';
-import { ErrorHandler } from '../share/errorHandler';
+import { AppError } from '../share/appError';
 import { HttpCodes } from '../share/enum';
+import TextKeys from '../share/TextKeys';
 
 const settingServices = new SettingsService();
 const sandBoxService = new SandboxService();
@@ -19,8 +20,8 @@ export const getSettings = async (
 		const settings = await settingServices.getSettings();
 
 		if (!settings) {
-			throw new ErrorHandler(
-				'Could not retrieve all settings!',
+			throw new AppError(
+				TextKeys.NotRetrievedSettings,
 				HttpCodes.NotFound
 			);
 		}
@@ -50,24 +51,21 @@ export const saveSettings = async (
 		);
 
 		if (!repoName) {
-			throw new ErrorHandler(
-				'repoName is required and must be non blank',
+			throw new AppError(
+				TextKeys.RepoNameIsRequired,
 				HttpCodes.BadRequest
 			);
 		}
 
 		if (!mainBranch) {
-			throw new ErrorHandler(
-				'mainBranch is required and must be non blank',
+			throw new AppError(
+				TextKeys.MainBranchIsRequired,
 				HttpCodes.BadRequest
 			);
 		}
 
 		if (!period) {
-			throw new ErrorHandler(
-				'period is required and must be non blank',
-				HttpCodes.BadRequest
-			);
+			throw new AppError(TextKeys.PeriodIsRequired, HttpCodes.BadRequest);
 		}
 
 		sandBoxService.gitClone(repoName);
@@ -86,7 +84,7 @@ export const deleteSettings = async (
 	try {
 		await settingServices.deleteSettings();
 
-		return res.json({ message: 'Settings deleted successfully' });
+		return res.json({ message: TextKeys.SettingsDeletedSuccess });
 	} catch (err) {
 		next(err);
 	}

@@ -1,4 +1,4 @@
-export class ErrorHandler extends Error {
+export class AppError extends Error {
 	public readonly message: string;
 
 	public readonly httpCode: number;
