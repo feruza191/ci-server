@@ -12,7 +12,6 @@ enum TextKeys {
 	RepoNameIsRequired = 'repoName is required and must be non blank',
 	MainBranchIsRequired = 'mainBranch is required and must be non blank',
 	PeriodIsRequired = 'period is required and must be non blank',
-	GitCheckout = 'git checkout',
 }
 
 export default TextKeys;

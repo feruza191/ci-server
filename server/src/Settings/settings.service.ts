@@ -2,7 +2,9 @@
 import { getRepository } from 'typeorm';
 
 import { Settings } from './settings.entity';
-import TextKeys from '../share/TextKeys';
+import TextKeys from '../share/enums/TextKeys';
+import { AppError } from '../share/appError';
+import { HttpCodes } from '../share/enums/HttpCodes';
 
 export class SettingsService {
 	public async getSettings(): Promise<Settings | undefined> {
@@ -11,7 +13,10 @@ export class SettingsService {
 
 			return await settingRepository.findOne();
 		} catch (e) {
-			throw Error(TextKeys.NotRetrievedSettings);
+			throw new AppError(
+				TextKeys.NotRetrievedSettings,
+				HttpCodes.NotFound
+			);
 		}
 	}
 
@@ -48,7 +53,10 @@ export class SettingsService {
 				period,
 			};
 		} catch (e) {
-			throw Error(TextKeys.FailedSaveSettings);
+			throw new AppError(
+				TextKeys.FailedSaveSettings,
+				HttpCodes.ServerError
+			);
 		}
 	}
 
@@ -59,7 +67,10 @@ export class SettingsService {
 
 			return settingRepository.remove(settings);
 		} catch (e) {
-			throw Error(TextKeys.SomethingWentWrong);
+			throw new AppError(
+				TextKeys.SomethingWentWrong,
+				HttpCodes.ServerError
+			);
 		}
 	}
 }

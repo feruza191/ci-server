@@ -5,8 +5,8 @@ import { SandboxService } from '../share/sandboxService';
 import { Settings } from './settings.entity';
 import { AnyObject } from '../types';
 import { AppError } from '../share/appError';
-import { HttpCodes } from '../share/enum';
-import TextKeys from '../share/TextKeys';
+import { HttpCodes } from '../share/enums/HttpCodes';
+import TextKeys from '../share/enums/TextKeys';
 
 const settingServices = new SettingsService();
 const sandBoxService = new SandboxService();

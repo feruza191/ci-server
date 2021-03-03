@@ -1,7 +1,9 @@
 import { getRepository } from 'typeorm';
 
 import { Job } from './job.entity';
-import TextKeys from '../share/TextKeys';
+import TextKeys from '../share/enums/TextKeys';
+import { HttpCodes } from '../share/enums/HttpCodes';
+import { AppError } from '../share/appError';
 
 export class JobService {
 	public async getAllJobs(): Promise<Job[] | undefined> {
@@ -10,7 +12,7 @@ export class JobService {
 
 			return await jobRepository.find();
 		} catch (e) {
-			throw Error(TextKeys.NotRetrievedJobs);
+			throw new AppError(TextKeys.NotRetrievedJobs, HttpCodes.NotFound);
 		}
 	}
 
@@ -21,7 +23,10 @@ export class JobService {
 
 			return job;
 		} catch (e) {
-			throw Error(TextKeys.SomethingWentWrong);
+			throw new AppError(
+				TextKeys.SomethingWentWrong,
+				HttpCodes.ServerError
+			);
 		}
 	}
 
@@ -44,7 +49,10 @@ export class JobService {
 
 			return jobRepository.save(job);
 		} catch (e) {
-			throw Error(TextKeys.FailedToAddJobToQueque);
+			throw new AppError(
+				TextKeys.FailedToAddJobToQueque,
+				HttpCodes.ServerError
+			);
 		}
 	}
 
@@ -58,7 +66,10 @@ export class JobService {
 
 			return jobLogs;
 		} catch (e) {
-			throw Error(TextKeys.FailedToRetrieveJobLogs);
+			throw new AppError(
+				TextKeys.FailedToRetrieveJobLogs,
+				HttpCodes.ServerError
+			);
 		}
 	}
 }

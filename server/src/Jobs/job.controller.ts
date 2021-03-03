@@ -5,8 +5,8 @@ import { SandboxService } from '../share/sandboxService';
 import { SettingsService } from '../Settings/settings.service';
 import { Job } from './job.entity';
 import { AppError } from '../share/appError';
-import { HttpCodes } from '../share/enum';
-import TextKeys from '../share/TextKeys';
+import { HttpCodes } from '../share/enums/HttpCodes';
+import TextKeys from '../share/enums/TextKeys';
 
 const jobsServices = new JobService();
 const sandBoxService = new SandboxService();

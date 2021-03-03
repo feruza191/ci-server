@@ -2,7 +2,7 @@
 import { exec } from 'child_process';
 import util from 'util';
 
-import TextKeys from './TextKeys';
+import TextKeys from './enums/TextKeys';
 
 interface JobBuild {
 	authorName: string;
@@ -26,7 +26,7 @@ export class SandboxService {
 
 	private async checkout(branchName: string) {
 		try {
-			const gitCommand = `cd ${localRepoPath} && ${TextKeys.GitCheckout} ${branchName}`;
+			const gitCommand = `cd ${localRepoPath} && git checkout ${branchName}`;
 			await execPromise(gitCommand);
 		} catch (err) {
 			console.log({ err });

@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 
 import { AppError } from './appError';
-import { HttpCodes } from './enum';
-import TextKeys from './TextKeys';
+import { HttpCodes } from './enums/HttpCodes';
+import TextKeys from './enums/TextKeys';
 
 const apiErrorHandler = (
 	err: Error,
