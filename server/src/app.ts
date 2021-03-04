@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import { typeOrmConfig } from '../typeormconfig';
 import { connectDb } from '../connectDb';
 import routes from './routes';
+import apiErrorHandler from './share/apiErrorHandler';
 
 async function createApp() {
 	const app = express();
@@ -14,6 +15,7 @@ async function createApp() {
 	app.use(bodyParser.json());
 
 	app.use('/api', routes);
+	app.use(apiErrorHandler);
 
 	const PORT = 3000;
 	await connectDb(typeOrmConfig);

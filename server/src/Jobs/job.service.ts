@@ -1,6 +1,9 @@
 import { getRepository } from 'typeorm';
 
 import { Job } from './job.entity';
+import TextKeys from '../share/enums/TextKeys';
+import { HttpCodes } from '../share/enums/HttpCodes';
+import { AppError } from '../share/appError';
 
 export class JobService {
 	public async getAllJobs(): Promise<Job[] | undefined> {
@@ -9,7 +12,7 @@ export class JobService {
 
 			return await jobRepository.find();
 		} catch (e) {
-			throw Error('Could not retrieve all jobs!');
+			throw new AppError(TextKeys.NotRetrievedJobs, HttpCodes.NotFound);
 		}
 	}
 
@@ -18,13 +21,12 @@ export class JobService {
 			const jobRepository = getRepository(Job);
 			const job = await jobRepository.findOne(id);
 
-			if (!job) {
-				throw Error('Job is not found!');
-			}
-
 			return job;
 		} catch (e) {
-			throw Error('Something went wrong!');
+			throw new AppError(
+				TextKeys.SomethingWentWrong,
+				HttpCodes.ServerError
+			);
 		}
 	}
 
@@ -47,7 +49,10 @@ export class JobService {
 
 			return jobRepository.save(job);
 		} catch (e) {
-			throw Error('Failed to add job to the queque!');
+			throw new AppError(
+				TextKeys.FailedToAddJobToQueque,
+				HttpCodes.ServerError
+			);
 		}
 	}
 
@@ -61,7 +66,10 @@ export class JobService {
 
 			return jobLogs;
 		} catch (e) {
-			throw Error('Failed to retrieve the job logs');
+			throw new AppError(
+				TextKeys.FailedToRetrieveJobLogs,
+				HttpCodes.ServerError
+			);
 		}
 	}
 }

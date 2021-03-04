@@ -2,6 +2,8 @@
 import { exec } from 'child_process';
 import util from 'util';
 
+import TextKeys from './enums/TextKeys';
+
 interface JobBuild {
 	authorName: string;
 	commitMessage: string;
@@ -28,7 +30,7 @@ export class SandboxService {
 			await execPromise(gitCommand);
 		} catch (err) {
 			console.log({ err });
-			throw Error(`Could not check out to ${branchName}`);
+			throw Error(`${TextKeys.FailedToCheckout} ${branchName}`);
 		}
 	}
 
