@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { loadableReady } from '@loadable/component';
 
 import App from './App';
 
-ReactDOM.hydrate(<App />, document.getElementById('root'));
+loadableReady(() => {
+	ReactDOM.hydrate(<App />, document.getElementById('root'));
+});

@@ -3,6 +3,7 @@ const HtmlPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
+const LoadablePlugin = require('@loadable/webpack-plugin');
 
 const clientConfig = {
 	entry: './src/index.tsx',
@@ -61,6 +62,7 @@ const clientConfig = {
 				NODE_ENV: JSON.stringify(process.env.NODE_ENV),
 			},
 		}),
+		new LoadablePlugin(),
 	],
 
 	devServer: {
@@ -105,6 +107,7 @@ const serverConfig = {
 			},
 		],
 	},
+	plugins: [new LoadablePlugin()],
 	target: 'node',
 	externals: [nodeExternals()], // a way to exclude any dependencies
 	// we wish to not be included in the output bundle

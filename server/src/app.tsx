@@ -4,6 +4,8 @@ import React from 'react';
 import express from 'express';
 import bodyParser from 'body-parser';
 import { renderToString } from 'react-dom/server';
+import { ChunkExtractor } from '@loadable/server';
+import path from 'path';
 
 import { typeOrmConfig } from '../typeormconfig';
 import { connectDb } from '../connectDb';
@@ -13,6 +15,10 @@ import App from '../../src/App';
 
 async function createApp() {
 	const app = express();
+
+	const statsFile = path.resolve('../dist/loadable-stats.json');
+	const extractor = new ChunkExtractor({ statsFile });
+	const jsx = extractor.collectChunks(<App />);
 
 	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(bodyParser.json());
@@ -25,7 +31,7 @@ async function createApp() {
 
 	app.use(express.static('build'));
 	app.get('/', (_, res) => {
-		const component = renderToString(<App />);
+		const component = renderToString(jsx);
 		const html = `
 			<!DOCTYPE html>
 			<html lang="en">
