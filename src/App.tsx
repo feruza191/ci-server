@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import { BuildDetails } from './components/BuildDetailsPage/BuildDetailsPage';
 import { BuildHistory } from './components/BuildHistoryPage/BuildHistoryPage';
@@ -14,14 +14,12 @@ import {
 import './index.css';
 
 const App: FC = () => (
-	<Router>
-		<Switch>
-			<Route exact path={HOME_PATH} component={StartScreenPage} />
-			<Route path={SETTINGS_PATH} component={SettingsPage} />
-			<Route path={BUILD_HISTORY_PATH} component={BuildHistory} />
-			<Route path={BUILD_DETAILS_PATH} component={BuildDetails} />
-		</Switch>
-	</Router>
+	<Switch>
+		<Route exact path={HOME_PATH} component={StartScreenPage} />
+		<Route path={SETTINGS_PATH} component={SettingsPage} />
+		<Route path={BUILD_HISTORY_PATH} component={BuildHistory} />
+		<Route path={BUILD_DETAILS_PATH} component={BuildDetails} />
+	</Switch>
 );
 
 export default App;

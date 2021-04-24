@@ -4,5 +4,10 @@
 		"@babel/preset-react",
 		"@babel/preset-typescript"
 	],
-	"plugins": ["babel-plugin-styled-components"]
+	"plugins": [
+		"babel-plugin-styled-components",
+		"@babel/plugin-transform-runtime",
+		["@babel/plugin-proposal-decorators", { "legacy": true }],
+		["@babel/plugin-proposal-class-properties", { "loose": true }]
+	]
 }

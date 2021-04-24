@@ -4,7 +4,10 @@ import React from 'react';
 import express from 'express';
 import bodyParser from 'body-parser';
 import { renderToString } from 'react-dom/server';
-import { ChunkExtractor } from '@loadable/server';
+import { StaticRouter } from 'react-router-dom';
+// import { Router } from 'react-router';
+// import { createMemoryHistory } from 'history';
+import fs from 'fs';
 import path from 'path';
 
 import { typeOrmConfig } from '../typeormconfig';
@@ -16,10 +19,6 @@ import App from '../../src/App';
 async function createApp() {
 	const app = express();
 
-	const statsFile = path.resolve('../dist/loadable-stats.json');
-	const extractor = new ChunkExtractor({ statsFile });
-	const jsx = extractor.collectChunks(<App />);
-
 	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(bodyParser.json());
 
@@ -29,26 +28,36 @@ async function createApp() {
 	const PORT = 3000;
 	await connectDb(typeOrmConfig);
 
-	app.use(express.static('build'));
-	app.get('/', (_, res) => {
-		const component = renderToString(jsx);
-		const html = `
-			<!DOCTYPE html>
-			<html lang="en">
-				<head>
-					<meta charset="UTF-8" />
-					<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-					<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-					<title>Document</title>
-				</head>
-				<body>
-					<div id="root">${component}</div>
-					<script src='./build/bundle.js'></script>
-				</body>
-			</html>	
-		`;
+	app.use(express.static('dist'));
 
-		res.send(html);
+	app.get('*', (req, res) => {
+		fs.readFile(
+			path.resolve('./dist/client/index.html'),
+			'utf-8',
+			(err, data) => {
+				if (err) {
+					// eslint-disable-next-line no-console
+					console.log({ err });
+					return res.status(500).send('Some error happened');
+				}
+
+				const context = {};
+				// const history = createMemoryHistory();
+
+				const component = renderToString(
+					<StaticRouter location={req.url} context={context}>
+						<App />
+					</StaticRouter>
+				);
+
+				return res.send(
+					data.replace(
+						'<div id="root"></div>',
+						`<div id="root">${component}</div>`
+					)
+				);
+			}
+		);
 	});
 
 	app.listen(PORT, () => {
