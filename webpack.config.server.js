@@ -1,5 +1,7 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const LoadablePlugin = require('@loadable/webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const root = process.cwd();
 
@@ -13,8 +15,8 @@ module.exports = {
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js'],
 		alias: {
-			src: path.resolve(__dirname, 'src'),
-			assets: path.resolve(__dirname, 'assets'),
+			src: path.resolve(root, 'src'),
+			assets: path.resolve(root, 'assets'),
 		},
 	},
 	module: {
@@ -32,12 +34,19 @@ module.exports = {
 				test: /\.css$/,
 				use: [
 					{
+						loader: MiniCssExtractPlugin.loader,
+						options: {
+							publicPath: '',
+						},
+					},
+					{
 						loader: 'css-loader',
 					},
 				],
 			},
 		],
 	},
+	plugins: [new LoadablePlugin(), new MiniCssExtractPlugin()],
 	target: 'node',
 	externals: [nodeExternals()], // a way to exclude any dependencies
 	// we wish to not be included in the output bundle

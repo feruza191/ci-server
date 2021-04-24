@@ -9,6 +9,7 @@ import { StaticRouter } from 'react-router-dom';
 // import { createMemoryHistory } from 'history';
 import fs from 'fs';
 import path from 'path';
+import { ChunkExtractor } from '@loadable/server';
 
 import { typeOrmConfig } from '../typeormconfig';
 import { connectDb } from '../connectDb';
@@ -18,6 +19,8 @@ import App from '../../src/App';
 
 async function createApp() {
 	const app = express();
+	const statsFile = path.resolve('./dist/server/loadable-stats.json');
+	const extractor = new ChunkExtractor({ statsFile });
 
 	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(bodyParser.json());
@@ -43,12 +46,13 @@ async function createApp() {
 
 				const context = {};
 				// const history = createMemoryHistory();
-
-				const component = renderToString(
+				const jsx = extractor.collectChunks(
 					<StaticRouter location={req.url} context={context}>
 						<App />
 					</StaticRouter>
 				);
+
+				const component = renderToString(jsx);
 
 				return res.send(
 					data.replace(

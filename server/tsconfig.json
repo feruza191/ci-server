@@ -19,6 +19,6 @@
 			"src/*": ["../src/*"]
 		}
 	},
-	"include": ["src"],
+	"include": ["src", "assets/images/global.d.ts"],
 	"exclude": ["node_modules"]
 }
