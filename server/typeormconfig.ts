@@ -5,8 +5,10 @@ import path from 'path';
 import { Job } from './src/Jobs/job.entity';
 import { Settings } from './src/Settings/settings.entity';
 
-dotenv.config({ path: path.resolve(__filename, '.env.local') });
-dotenv.config({ path: path.resolve(__filename, '.env') });
+const root = process.cwd();
+
+dotenv.config({ path: path.resolve(root, '.env.local') });
+dotenv.config({ path: path.resolve(root, '.env') });
 
 export const typeOrmConfig: ConnectionOptions = {
 	type: 'postgres',

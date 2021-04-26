@@ -5,7 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "npm run build-client && npm run build-server && nodemon dist/server/server.js",
-		"start-server": "nodemon --exec ts-node --project server/tsconfig.json server/src/app.tsx",
+		"start-sr": "npm run build-server && nodemon dist/server/server.js",
+		"start-server": "nodemon --exec ts-node --project server/tsconfig.json server/src/server.ts",
 		"build-client": "cross-env NODE_ENV=production webpack",
 		"build-server": "cross-env TARGET=server NODE_ENV=production webpack",
 		"eslint": "eslint src/**/* server/src/**/* --ext .js,.ts,.tsx --no-error-on-unmatched-pattern",

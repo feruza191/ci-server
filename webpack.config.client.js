@@ -1,6 +1,6 @@
 const path = require('path');
-const HtmlPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const LoadablePlugin = require('@loadable/webpack-plugin');
 const webpack = require('webpack');
 
 const root = process.cwd();
@@ -9,6 +9,7 @@ module.exports = {
 	entry: './src/index.tsx',
 	output: {
 		path: path.resolve(root, 'dist', 'client'),
+		publicPath: '/',
 		filename:
 			process.env.NODE_ENV === 'development'
 				? '[name].js'
@@ -52,16 +53,13 @@ module.exports = {
 	},
 
 	plugins: [
-		new HtmlPlugin({
-			filename: 'index.html',
-			template: './src/index.html',
-		}),
 		new MiniCssExtractPlugin(),
 		new webpack.DefinePlugin({
 			'process.env': {
 				NODE_ENV: JSON.stringify(process.env.NODE_ENV),
 			},
 		}),
+		new LoadablePlugin(),
 	],
 
 	devServer: {
