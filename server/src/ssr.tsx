@@ -13,15 +13,15 @@ const root = process.cwd();
 const statsFile = path.resolve('./dist/client/loadable-stats.json');
 const extractor = new ChunkExtractor({ statsFile });
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const ssrMiddleware = (
-	req: Request,
-	res: Response,
+	req: Request<string>,
+	res: Response<string>,
 	next: NextFunction
-) => {
+): Promise<Response<string>> | void => {
 	if (req.url.includes('.')) {
 		return next();
 	}
+
 	fs.readFile(
 		path.resolve(root, './src/index.html'),
 		'utf-8',
@@ -53,6 +53,7 @@ export const ssrMiddleware = (
 				'<!--styles-->',
 				styles + css.getStyleTags()
 			);
+
 			return res.send(dataComp);
 		}
 	);

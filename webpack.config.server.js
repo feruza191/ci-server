@@ -11,13 +11,6 @@ module.exports = {
 		path: path.resolve(root, 'dist', 'server'),
 		libraryTarget: 'commonjs',
 	},
-	resolve: {
-		extensions: ['.ts', '.tsx', '.js'],
-		alias: {
-			src: path.resolve(root, 'src'),
-			assets: path.resolve(root, 'assets'),
-		},
-	},
 	module: {
 		rules: [
 			{
