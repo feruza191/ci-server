@@ -13,8 +13,13 @@
 		"strict": true,
 		"jsx": "react",
 		"lib": ["es5", "es6"],
-		"removeComments": true
+		"removeComments": true,
+		"rootDir": ".",
+		"baseUrl": ".",
+		"paths": {
+			"src/*": ["../src/*"]
+		}
 	},
-	"include": ["src"],
+	"include": ["src", "../assets/images/global.d.ts"],
 	"exclude": ["node_modules"]
 }
