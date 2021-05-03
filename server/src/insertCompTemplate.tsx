@@ -13,7 +13,7 @@ const root = process.cwd();
 const statsFile = path.resolve('./dist/client/loadable-stats.json');
 const extractor = new ChunkExtractor({ statsFile });
 
-export const ssrMiddleware = (
+export const ssrInsertAppMiddleware = (
 	req: Request<string>,
 	res: Response<string>,
 	next: NextFunction
@@ -44,14 +44,12 @@ export const ssrMiddleware = (
 
 			const component = renderToString(css.collectStyles(jsx));
 			let dataComp = data;
-			dataComp = dataComp.replace(
-				'<div id="root"></div>',
-				`<div id="root">${component}</div>`
-			);
+
+			dataComp = dataComp.replace('<!--component-->', component);
 			dataComp = dataComp.replace('<!--scripts-->', scripts);
 			dataComp = dataComp.replace(
 				'<!--styles-->',
-				styles + css.getStyleTags()
+				`${styles} ${css.getStyleTags()}`
 			);
 
 			return res.send(dataComp);

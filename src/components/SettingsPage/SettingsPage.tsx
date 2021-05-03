@@ -11,7 +11,7 @@ import { Text, fontSize, fontWeight } from 'src/core/theme';
 import { BlockContainer, FlexBox } from 'src/core/theme/common';
 import { FormTime, ButtonsWrapper } from './style';
 
-export const SettingsPage: FC = () => {
+const SettingsPage: FC = () => {
 	const onFinish = () => {
 		// eslint-disable-next-line no-console
 		console.log('Success:');
@@ -86,3 +86,5 @@ export const SettingsPage: FC = () => {
 		</Layout>
 	);
 };
+
+export default SettingsPage;

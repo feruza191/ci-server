@@ -10,7 +10,7 @@ import { lineHeight } from 'src/core/theme';
 import { BlockContainer } from 'src/core/theme/common';
 import { StartScreenWrapper, SettingsText } from './style';
 
-export const StartScreenPage: FC = () => (
+const StartScreenPage: FC = () => (
 	<Layout>
 		<StartScreenWrapper
 			flexDirection="column"
@@ -31,3 +31,5 @@ export const StartScreenPage: FC = () => (
 		</StartScreenWrapper>
 	</Layout>
 );
+
+export default StartScreenPage;

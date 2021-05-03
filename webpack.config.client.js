@@ -2,11 +2,15 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const webpack = require('webpack');
+const dotenv = require('dotenv');
 
 const root = process.cwd();
 
+dotenv.config({ path: path.resolve(root, '.env.local') });
+dotenv.config({ path: path.resolve(root, '.env') });
+
 module.exports = {
-	entry: './src/index.tsx',
+	entry: path.resolve(root, 'src', 'index.tsx'),
 	output: {
 		path: path.resolve(root, 'dist', 'client'),
 		publicPath: '/',
@@ -29,7 +33,7 @@ module.exports = {
 				test: /\.(ts|tsx)$/,
 				exclude: /node_modules/,
 				use: 'babel-loader',
-				include: path.resolve(__dirname, 'src'),
+				include: path.resolve(root, 'src'),
 			},
 			{
 				test: /\.(png|jpe?g|gif|ttf|woff|woff2|eot|svg)$/i,
@@ -37,17 +41,7 @@ module.exports = {
 			},
 			{
 				test: /\.css$/,
-				use: [
-					{
-						loader: MiniCssExtractPlugin.loader,
-						options: {
-							publicPath: '',
-						},
-					},
-					{
-						loader: 'css-loader',
-					},
-				],
+				use: ['style-loader', 'css-loader'],
 			},
 		],
 	},

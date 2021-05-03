@@ -9,7 +9,7 @@ import { Layout } from 'src/core/layout/Layout';
 import { BuildItem } from './components/BuildItem';
 import { jobs } from './jobs';
 
-export const BuildHistory: FC = () => (
+const BuildHistory: FC = () => (
 	<Layout>
 		<Row>
 			<Col xs={24}>
@@ -25,3 +25,5 @@ export const BuildHistory: FC = () => (
 		</Row>
 	</Layout>
 );
+
+export default BuildHistory;

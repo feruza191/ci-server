@@ -14,7 +14,7 @@ const buildProps = {
 	duration: 26,
 };
 
-export const BuildDetails: FC = () => (
+const BuildDetails: FC = () => (
 	<Layout>
 		<Row>
 			<Col xs={24}>
@@ -24,3 +24,5 @@ export const BuildDetails: FC = () => (
 		</Row>
 	</Layout>
 );
+
+export default BuildDetails;
