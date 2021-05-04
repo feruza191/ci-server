@@ -1,6 +1,7 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const LoadablePlugin = require('@loadable/webpack-plugin');
 
 const root = process.cwd();
 
@@ -42,7 +43,7 @@ module.exports = {
 			},
 		],
 	},
-	plugins: [new MiniCssExtractPlugin()],
+	plugins: [new MiniCssExtractPlugin(), new LoadablePlugin()],
 	target: 'node',
 	externals: [nodeExternals()], // a way to exclude any dependencies
 	// we wish to not be included in the output bundle

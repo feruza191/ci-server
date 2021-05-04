@@ -2,12 +2,14 @@ import 'reflect-metadata';
 
 import express from 'express';
 import bodyParser from 'body-parser';
+import path from 'path';
 
 import { typeOrmConfig } from '../typeormconfig';
 import { connectDb } from '../connectDb';
 import routes from './routes';
 import apiErrorHandler from './share/apiErrorHandler';
-import { ssrMiddleWares } from './ssrMiddlewares';
+// import { ssrMiddleWares } from './ssrMiddlewares';
+import { ssrInsertAppMiddleware } from './insertCompTemplate';
 
 async function createApp() {
 	const app = express();
@@ -21,7 +23,12 @@ async function createApp() {
 	const PORT = 3000;
 	await connectDb(typeOrmConfig);
 
-	app.use(ssrMiddleWares);
+	// ssrMiddleWares();
+
+	const root = process.cwd();
+	app.use(express.static(path.resolve(root, 'dist/client')));
+
+	app.get('*', ssrInsertAppMiddleware);
 
 	app.listen(PORT, () => {
 		// eslint-disable-next-line no-console

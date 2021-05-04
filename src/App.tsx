@@ -14,25 +14,29 @@ const BuildDetails = loadable(
 	() =>
 		import(
 			/* webpackChunkName: "BuildDetails" */ './components/BuildDetailsPage/BuildDetailsPage'
-		)
+		),
+	{ ssr: true }
 );
 const BuildHistory = loadable(
 	() =>
 		import(
 			/* webpackChunkName: "BuildHistory" */ './components/BuildHistoryPage/BuildHistoryPage'
-		)
+		),
+	{ ssr: true }
 );
 const SettingsPage = loadable(
 	() =>
 		import(
 			/* webpackChunkName: "SettingsPage" */ './components/SettingsPage/SettingsPage'
-		)
+		),
+	{ ssr: true }
 );
 const StartScreenPage = loadable(
 	() =>
 		import(
 			/* webpackChunkName: "StartScreenPage" */ './components/StartScreenPage/StartScreenPage'
-		)
+		),
+	{ ssr: true }
 );
 
 const App: FC = () => (
