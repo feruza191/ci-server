@@ -1,11 +1,9 @@
 import path from 'path';
-import express from 'express';
+import express, { Express } from 'express';
 
 import { ssrInsertAppMiddleware } from './insertCompTemplate';
 
-export function ssrMiddleWares(): void {
-	const app = express();
-
+export function ssrMiddlewares(app: Express): void {
 	const root = process.cwd();
 	app.use(express.static(path.resolve(root, 'dist/client')));
 
