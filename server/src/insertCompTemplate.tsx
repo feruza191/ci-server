@@ -10,7 +10,7 @@ import path from 'path';
 import App from '../../src/App';
 
 const root = process.cwd();
-const statsFile = path.resolve('./dist/client/loadable-stats.json');
+const statsFile = path.resolve(root, 'dist', 'client', 'loadable-stats.json');
 const extractor = new ChunkExtractor({ statsFile });
 
 export const ssrInsertAppMiddleware = (
@@ -31,10 +31,10 @@ export const ssrInsertAppMiddleware = (
 				console.log({ err });
 				return res.status(500).send('Some error happened');
 			}
-			const css = new ServerStyleSheet();
-			const context = {};
+			const serverStyles = new ServerStyleSheet();
+
 			const jsx = extractor.collectChunks(
-				<StaticRouter location={req.url} context={context}>
+				<StaticRouter location={req.url}>
 					<App />
 				</StaticRouter>
 			);
@@ -42,14 +42,14 @@ export const ssrInsertAppMiddleware = (
 			const scripts = extractor.getScriptTags();
 			const styles = extractor.getStyleTags();
 
-			const component = renderToString(css.collectStyles(jsx));
+			const component = renderToString(serverStyles.collectStyles(jsx));
 			let dataComp = data;
 
 			dataComp = dataComp.replace('<!--component-->', component);
 			dataComp = dataComp.replace('<!--scripts-->', scripts);
 			dataComp = dataComp.replace(
 				'<!--styles-->',
-				`${styles} ${css.getStyleTags()}`
+				`${styles} ${serverStyles.getStyleTags()}`
 			);
 
 			return res.send(dataComp);
