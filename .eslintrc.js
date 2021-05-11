@@ -32,6 +32,7 @@ module.exports = {
 		'no-use-before-define': 'off',
 		'no-undef': 'off',
 		'no-unused-vars': [2, { args: 'all', argsIgnorePattern: '^_' }], //ignore underscore parameters
+		'no-underscore-dangle': 'off',
 		indent: 'off',
 		'consistent-return': 'off',
 		'class-methods-use-this': 'off',

@@ -20,6 +20,10 @@
 			"src/*": ["../src/*"]
 		}
 	},
-	"include": ["src", "../src/types/global.d.ts"],
+	"include": [
+		"src",
+		"../src/types/global.d.ts",
+		"../webpack.config.client.js"
+	],
 	"exclude": ["node_modules"]
 }
