@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const webpack = require('webpack');
+const WebpackBar = require('webpackbar');
 const dotenv = require('dotenv');
 
 const root = process.cwd();
@@ -61,6 +62,7 @@ module.exports = {
 			},
 		}),
 		new LoadablePlugin(),
+		new WebpackBar({ name: 'client', color: 'green' }),
 	],
 
 	devServer: {

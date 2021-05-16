@@ -1,12 +1,41 @@
-import path from 'path';
+/* eslint-disable import/no-extraneous-dependencies */
 import express, { Express } from 'express';
+import webpack from 'webpack';
+import path from 'path';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 
-import { ssrInsertAppMiddleware } from './insertCompTemplate';
+import { ssrInsertAppMiddleware } from './ssrInsertAppMiddleware';
+import { getRequire } from './share/helpers/getRequire';
 
 const root = process.cwd();
 
+// eslint-disable-next-line import/no-dynamic-require
+const webpackConfig = getRequire()(path.resolve(root, 'webpack.config.client'));
+
+const productionEnabled = process.env.NODE_ENV === 'production';
+const devServerEnabled = process.env.NODE_ENV === 'development';
+
 export function ssrMiddlewares(app: Express): void {
-	app.use(express.static(path.resolve(root, 'dist/client')));
+	if (productionEnabled) {
+		app.use(express.static(path.resolve(root, 'dist', 'client')));
+	}
+
+	if (devServerEnabled) {
+		webpackConfig.entry.src.unshift(
+			'webpack-hot-middleware/client?reload=true&timeout=1000'
+		);
+
+		webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+
+		const compiler = webpack(webpackConfig);
+		app.use(
+			webpackDevMiddleware(compiler, {
+				publicPath: webpackConfig.output.publicPath,
+			})
+		);
+		app.use(webpackHotMiddleware(compiler));
+	}
 
 	app.get('*', ssrInsertAppMiddleware);
 }

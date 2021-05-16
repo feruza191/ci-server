@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "npm run build-client && npm run build-server && nodemon dist/server/server.js",
+		"start": "nodemon",
 		"start-server": "npm run build-server && nodemon dist/server/server.js",
 		"start-dev": "nodemon --exec ts-node --project server/tsconfig.json server/src/server.ts",
 		"build-client": "cross-env NODE_ENV=production webpack",
@@ -74,7 +74,8 @@
 		"webpack-dev-middleware": "^4.1.0",
 		"webpack-dev-server": "^3.11.0",
 		"webpack-hot-middleware": "^2.25.0",
-		"webpack-node-externals": "^2.5.2"
+		"webpack-node-externals": "^2.5.2",
+		"webpackbar": "4.0.0"
 	},
 	"dependencies": {
 		"@ant-design/icons": "^4.3.0",

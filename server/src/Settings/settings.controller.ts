@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { SettingsService } from './settings.service';
 import { SandboxService } from '../share/sandboxService';
 import { Settings } from './settings.entity';
-import { AnyObject } from '../types';
+import { AnyObject } from '../../types/types';
 import { AppError } from '../share/appError';
 import { HttpCodes } from '../share/enums/HttpCodes';
 import TextKeys from '../share/enums/TextKeys';
