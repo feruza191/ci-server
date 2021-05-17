@@ -17,6 +17,6 @@
 		"rootDir": ".",
 		"baseUrl": "."
 	},
-	"include": ["src"],
+	"include": ["src", "./types/global.d.ts"],
 	"exclude": ["node_modules"]
 }

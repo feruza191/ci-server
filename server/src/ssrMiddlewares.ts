@@ -4,11 +4,15 @@ import webpack from 'webpack';
 import path from 'path';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import dotenv from 'dotenv';
 
 import { ssrInsertAppMiddleware } from './ssrInsertAppMiddleware';
 import { getRequire } from './share/helpers/getRequire';
 
 const root = process.cwd();
+
+dotenv.config({ path: path.resolve(root, '.env.local') });
+dotenv.config({ path: path.resolve(root, '.env') });
 
 // eslint-disable-next-line import/no-dynamic-require
 const webpackConfig = getRequire()(path.resolve(root, 'webpack.config.client'));
