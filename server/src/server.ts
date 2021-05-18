@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable camelcase */
-/* eslint-disable import/no-extraneous-dependencies */
 import 'reflect-metadata';
 
 import express from 'express';
