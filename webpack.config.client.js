@@ -11,10 +11,11 @@ dotenv.config({ path: path.resolve(root, '.env.local') });
 dotenv.config({ path: path.resolve(root, '.env') });
 
 module.exports = {
+	mode: 'development',
 	entry: path.resolve(root, 'src', 'index.tsx'),
 	output: {
 		path: path.resolve(root, 'dist', 'client'),
-		publicPath: '/',
+		publicPath: '/', // path until my dist folder
 		filename:
 			process.env.NODE_ENV === 'development'
 				? '[name].js'

@@ -7,6 +7,7 @@ const WebpackBar = require('webpackbar');
 const root = process.cwd();
 
 module.exports = {
+	mode: 'development',
 	entry: path.resolve(root, 'server', 'src', 'server.ts'),
 	output: {
 		filename: 'server.js',

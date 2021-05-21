@@ -1,13 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import express, { Express } from 'express';
-import webpack from 'webpack';
+import webpack, { Compiler } from 'webpack';
 import path from 'path';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import dotenv from 'dotenv';
 
-import { ssrInsertAppMiddleware } from './ssrInsertAppMiddleware';
 import { getRequire } from './share/helpers/getRequire';
+import { createSupportSSR } from './createSupportSSR';
 
 const root = process.cwd();
 
@@ -26,10 +26,6 @@ export function ssrMiddlewares(app: Express): void {
 	}
 
 	if (devServerEnabled) {
-		webpackConfig.entry.src.unshift(
-			'webpack-hot-middleware/client?reload=true&timeout=1000'
-		);
-
 		webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 		const compiler = webpack(webpackConfig);
@@ -38,8 +34,8 @@ export function ssrMiddlewares(app: Express): void {
 				publicPath: webpackConfig.output.publicPath,
 			})
 		);
-		app.use(webpackHotMiddleware(compiler));
+		app.use(webpackHotMiddleware(compiler as Compiler));
 	}
 
-	app.get('*', ssrInsertAppMiddleware);
+	app.get('*', createSupportSSR);
 }

@@ -13,7 +13,7 @@ const root = process.cwd();
 const statsFile = path.resolve(root, 'dist', 'client', 'loadable-stats.json');
 const extractor = new ChunkExtractor({ statsFile });
 
-export const ssrInsertAppMiddleware = (
+export const createSupportSSR = (
 	req: Request<string>,
 	res: Response<string>,
 	next: NextFunction
