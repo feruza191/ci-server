@@ -24,11 +24,6 @@
 			"src/*": ["./src/*"]
 		}
 	},
-	"include": [
-		"src",
-		"server",
-		"./src/types/global.d.ts",
-		"./server/types/global.d.ts"
-	],
+	"include": ["src", "server"],
 	"exclude": ["node_modules"]
 }

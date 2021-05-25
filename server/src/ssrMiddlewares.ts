@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import express, { Express } from 'express';
-import webpack, { Compiler } from 'webpack';
+import webpack from 'webpack';
 import path from 'path';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
@@ -29,12 +29,13 @@ export function ssrMiddlewares(app: Express): void {
 		webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 		const compiler = webpack(webpackConfig);
+
 		app.use(
 			webpackDevMiddleware(compiler, {
 				publicPath: webpackConfig.output.publicPath,
 			})
 		);
-		app.use(webpackHotMiddleware(compiler as Compiler));
+		app.use(webpackHotMiddleware(compiler));
 	}
 
 	app.get('*', createSupportSSR);
