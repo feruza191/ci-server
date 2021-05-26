@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { Row, Col } from 'antd';
 
+import { Layout } from 'client/core/layout/Layout';
+import { JobStatus } from 'client/core/enums/JobStatus';
 import { BuildLogs } from './components/BuildLogs';
-import { JobStatus } from 'src/core/enums/JobStatus';
-import { Layout } from 'src/core/layout/Layout';
 import { BuildDetailsItem } from './components/BuildDetailsItem';
 
 const buildProps = {

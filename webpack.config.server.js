@@ -17,7 +17,7 @@ module.exports = {
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js'],
 		alias: {
-			src: path.resolve(root, 'src'),
+			client: path.resolve(root, 'client'),
 			assets: path.resolve(root, 'assets'),
 		},
 	},

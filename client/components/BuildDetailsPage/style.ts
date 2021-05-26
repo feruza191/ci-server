@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { device } from 'src/core/theme';
-import { LineDevider } from 'src/core/theme/common';
-import { CONSTANT_PALETTES } from 'src/core/theme/palette';
+import { device } from 'client/core/theme';
+import { LineDevider } from 'client/core/theme/common';
+import { CONSTANT_PALETTES } from 'client/core/theme/palette';
 
 export const BuildLogsWrapper = styled.div`
 	width: 100%;

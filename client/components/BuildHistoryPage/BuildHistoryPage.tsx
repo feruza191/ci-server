@@ -3,9 +3,9 @@ import { Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 
 import { ShowMoreButton } from './style';
-import { BUILD_DETAILS_PATH } from 'src/constants';
-import TextKey from 'src/core/enums/TextKeys';
-import { Layout } from 'src/core/layout/Layout';
+import { BUILD_DETAILS_PATH } from 'client/constants';
+import TextKey from 'client/core/enums/TextKeys';
+import { Layout } from 'client/core/layout/Layout';
 import { BuildItem } from './components/BuildItem';
 import { jobs } from './jobs';
 

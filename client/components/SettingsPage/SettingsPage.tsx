@@ -2,13 +2,13 @@ import React, { FC } from 'react';
 import { Form } from 'antd';
 import { Link } from 'react-router-dom';
 
-import { BUILD_HISTORY_PATH } from 'src/constants';
-import { Button } from 'src/core/atoms/Button';
-import { Input } from 'src/core/atoms/Input';
-import TextKey from 'src/core/enums/TextKeys';
-import { Layout } from 'src/core/layout/Layout';
-import { Text, fontSize, fontWeight } from 'src/core/theme';
-import { BlockContainer, FlexBox } from 'src/core/theme/common';
+import { BUILD_HISTORY_PATH } from 'client/constants';
+import { Button } from 'client/core/atoms/Button';
+import { Input } from 'client/core/atoms/Input';
+import TextKey from 'client/core/enums/TextKeys';
+import { Layout } from 'client/core/layout/Layout';
+import { Text, fontSize, fontWeight } from 'client/core/theme';
+import { BlockContainer, FlexBox } from 'client/core/theme/common';
 import { FormTime, ButtonsWrapper } from './style';
 
 const SettingsPage: FC = () => {

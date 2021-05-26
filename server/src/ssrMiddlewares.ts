@@ -7,7 +7,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import dotenv from 'dotenv';
 
 import { getRequire } from './share/helpers/getRequire';
-import { createSupportSSR } from './createSupportSSR';
+import { createSupportSSR } from '../../client/server';
 
 const root = process.cwd();
 

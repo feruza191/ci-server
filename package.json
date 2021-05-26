@@ -6,11 +6,11 @@
 	"scripts": {
 		"start": "nodemon",
 		"start-server": "npm run build-server && nodemon dist/server/server.js",
-		"start-dev": "nodemon --exec ts-node --project server/tsconfig.json server/src/server.ts",
+		"start-dev": "nodemon --exec ts-node --project ./tsconfig.json server/src/server.ts",
 		"build-client": "cross-env NODE_ENV=development webpack",
 		"build-server": "cross-env TARGET=server NODE_ENV=development webpack",
-		"eslint": "eslint src/**/* server/src/**/* --ext .js,.ts,.tsx --no-error-on-unmatched-pattern",
-		"prettier": "prettier -c src/**/*.{ts,tsx} server/src/**/*.ts",
+		"eslint": "eslint client/**/* server/src/**/* --ext .js,.ts,.tsx --no-error-on-unmatched-pattern",
+		"prettier": "prettier -c client/**/*.{ts,tsx} server/src/**/*.ts",
 		"ts-check": "tsc -p ./tsconfig.json --noEmit"
 	},
 	"husky": {

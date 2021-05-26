@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-import { JobStatus } from 'src/core/enums/JobStatus';
-import { Text, device } from 'src/core/theme';
-import { FlexBox } from 'src/core/theme/common';
-import { CONSTANT_PALETTES } from 'src/core/theme/palette';
+import { JobStatus } from 'client/core/enums/JobStatus';
+import { Text, device } from 'client/core/theme';
+import { FlexBox } from 'client/core/theme/common';
+import { CONSTANT_PALETTES } from 'client/core/theme/palette';
 
 interface JobNumberProps {
 	status: JobStatus;

@@ -1,4 +1,4 @@
-import { JobStatus } from 'src/core/enums/JobStatus';
+import { JobStatus } from 'client/core/enums/JobStatus';
 
 export const jobs = [
 	{

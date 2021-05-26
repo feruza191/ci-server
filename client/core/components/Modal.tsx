@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import { Modal as ModalStyle } from 'antd';
 import styled from 'styled-components';
 
-import { Button } from 'src/core/atoms/Button';
-import { Input } from 'src/core/atoms/Input';
-import TextKey from 'src/core/enums/TextKeys';
-import { Text } from 'src/core/theme';
-import { BlockContainer } from 'src/core/theme/common';
+import { Button } from 'client/core/atoms/Button';
+import { Input } from 'client/core/atoms/Input';
+import TextKey from 'client/core/enums/TextKeys';
+import { Text } from 'client/core/theme';
+import { BlockContainer } from 'client/core/theme/common';
 
 interface ModalProps {
 	isModalVisible: boolean;

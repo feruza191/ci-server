@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { UserOutlined } from '@ant-design/icons';
 
-import { BranchNameItem } from 'src/core/components/BranchNameItem';
-import { DateTimeSection } from 'src/core/components/DateTimeSection';
-import { IconState } from 'src/core/components/IconState';
-import { JobNumberItem } from 'src/core/components/JobNumberItem/JobNumberItem';
-import { JobStatus } from 'src/core/enums/JobStatus';
-import { Text } from 'src/core/theme';
-import { BoxShadow, FlexBox, BlockContainer } from 'src/core/theme/common';
+import { BranchNameItem } from 'client/core/components/BranchNameItem';
+import { DateTimeSection } from 'client/core/components/DateTimeSection';
+import { IconState } from 'client/core/components/IconState';
+import { JobNumberItem } from 'client/core/components/JobNumberItem/JobNumberItem';
+import { JobStatus } from 'client/core/enums/JobStatus';
+import { Text } from 'client/core/theme';
+import { BoxShadow, FlexBox, BlockContainer } from 'client/core/theme/common';
 import { LineDeviderItem } from '../style';
 
 interface BuildDetailsItemProps {

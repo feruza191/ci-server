@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { Button } from 'src/core/atoms/Button';
-import { device } from 'src/core/theme';
-import { LineDevider } from 'src/core/theme/common';
+import { Button } from 'client/core/atoms/Button';
+import { device } from 'client/core/theme';
+import { LineDevider } from 'client/core/theme/common';
 
 export const DateTimeSectionDesktop = styled.div`
 	@media ${device.mobileL} {

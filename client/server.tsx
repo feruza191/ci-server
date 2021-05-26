@@ -7,7 +7,7 @@ import { ChunkExtractor } from '@loadable/server';
 import fs from 'fs';
 import path from 'path';
 
-import App from '../../src/App';
+import App from './client';
 
 const root = process.cwd();
 const statsFile = path.resolve(root, 'dist', 'client', 'loadable-stats.json');
@@ -23,7 +23,7 @@ export const createSupportSSR = (
 	}
 
 	fs.readFile(
-		path.resolve(root, './src/index.html'),
+		path.resolve(root, './client/index.html'),
 		'utf-8',
 		(err, data) => {
 			if (err) {

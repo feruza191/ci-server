@@ -7,7 +7,7 @@ import {
 import { Layout as LayoutDesign } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
 
-import { SETTINGS_PATH } from 'src/constants';
+import { SETTINGS_PATH } from 'client/constants';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { Modal } from '../components/Modal';

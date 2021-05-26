@@ -12,7 +12,7 @@ dotenv.config({ path: path.resolve(root, '.env') });
 
 module.exports = {
 	mode: 'development',
-	entry: path.resolve(root, 'src', 'index.tsx'),
+	entry: path.resolve(root, 'client', 'index.tsx'),
 	output: {
 		path: path.resolve(root, 'dist', 'client'),
 		publicPath: '/', // path until my dist folder
@@ -24,7 +24,7 @@ module.exports = {
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js'],
 		alias: {
-			src: path.resolve(root, 'src'),
+			client: path.resolve(root, 'client'),
 			assets: path.resolve(root, 'assets'),
 		},
 	},
@@ -35,7 +35,7 @@ module.exports = {
 				test: /\.(ts|tsx)$/,
 				exclude: /node_modules/,
 				use: 'babel-loader',
-				include: path.resolve(root, 'src'),
+				include: path.resolve(root, 'client'),
 			},
 			{
 				test: /\.(png|jpe?g|gif|ttf|woff|woff2|eot|svg)$/i,
