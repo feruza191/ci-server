@@ -17,26 +17,23 @@ dotenv.config({ path: path.resolve(root, '.env') });
 // eslint-disable-next-line import/no-dynamic-require
 const webpackConfig = getRequire()(path.resolve(root, 'webpack.config.client'));
 
-const productionEnabled = process.env.NODE_ENV === 'production';
-const devServerEnabled = process.env.NODE_ENV === 'development';
+const __DEV__ = process.env.NODE_ENV !== 'production';
 
 export function ssrMiddlewares(app: Express): void {
-	if (productionEnabled) {
+	if (!__DEV__) {
 		app.use(express.static(path.resolve(root, 'dist', 'client')));
 	}
 
-	if (devServerEnabled) {
-		webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+	webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 
-		const compiler = webpack(webpackConfig);
+	const compiler = webpack(webpackConfig);
 
-		app.use(
-			webpackDevMiddleware(compiler, {
-				publicPath: webpackConfig.output.publicPath,
-			})
-		);
-		app.use(webpackHotMiddleware(compiler));
-	}
+	app.use(
+		webpackDevMiddleware(compiler, {
+			publicPath: webpackConfig.output.publicPath,
+		})
+	);
+	app.use(webpackHotMiddleware(compiler));
 
 	app.get('*', createSupportSSR);
 }
