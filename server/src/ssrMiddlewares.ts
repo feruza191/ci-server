@@ -24,16 +24,18 @@ export function ssrMiddlewares(app: Express): void {
 		app.use(express.static(path.resolve(root, 'dist', 'client')));
 	}
 
-	webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+	if (__DEV__) {
+		webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 
-	const compiler = webpack(webpackConfig);
+		const compiler = webpack(webpackConfig);
 
-	app.use(
-		webpackDevMiddleware(compiler, {
-			publicPath: webpackConfig.output.publicPath,
-		})
-	);
-	app.use(webpackHotMiddleware(compiler));
+		app.use(
+			webpackDevMiddleware(compiler, {
+				publicPath: webpackConfig.output.publicPath,
+			})
+		);
+		app.use(webpackHotMiddleware(compiler));
+	}
 
 	app.get('*', createSupportSSR);
 }
