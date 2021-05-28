@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"target": "es5",
 		"sourceMap": true,
-		"outDir": "./build",
+		"outDir": "./dist",
 		"lib": ["dom", "dom.iterable", "esnext", "es6"],
 		"allowJs": true,
 		"skipLibCheck": true,
@@ -15,11 +15,15 @@
 		"resolveJsonModule": true,
 		"jsx": "react",
 		"removeComments": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"strictPropertyInitialization": false,
+		"rootDir": ".",
 		"baseUrl": ".",
 		"paths": {
-			"src/*": ["./src/*"]
+			"client/*": ["./client/*"]
 		}
 	},
-	"include": ["src", "assets/images/global.d.ts"],
+	"include": ["client", "server"],
 	"exclude": ["node_modules"]
 }

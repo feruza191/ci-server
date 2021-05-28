@@ -1,70 +1,8 @@
 const path = require('path');
-const HtmlPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const webpack = require('webpack');
 
-module.exports = {
-	entry: './src/index.tsx',
-	output: {
-		path: path.resolve(__dirname, 'build'),
-		filename:
-			process.env.NODE_ENV === 'development'
-				? '[name].js'
-				: '[name]-[hash:8].js',
-	},
-	resolve: {
-		extensions: ['.ts', '.tsx', '.js'],
-		alias: {
-			src: path.resolve(__dirname, 'src'),
-			assets: path.resolve(__dirname, 'assets'),
-		},
-	},
-	devtool: 'inline-source-map',
-	module: {
-		rules: [
-			{
-				test: /\.(ts|tsx)$/,
-				exclude: /node_modules/,
-				use: 'babel-loader',
-				include: path.resolve(__dirname, 'src'),
-			},
-			{
-				test: /\.(png|jpe?g|gif|ttf|woff|woff2|eot|svg)$/i,
-				use: 'file-loader',
-			},
-			{
-				test: /\.css$/,
-				use: [
-					{
-						loader: MiniCssExtractPlugin.loader,
-						options: {
-							publicPath: '',
-						},
-					},
-					{
-						loader: 'css-loader',
-					},
-				],
-			},
-		],
-	},
+const target = process.env.TARGET || 'client';
+const root = process.cwd();
 
-	plugins: [
-		new HtmlPlugin({
-			filename: 'index.html',
-			template: './src/index.html',
-		}),
-		new MiniCssExtractPlugin(),
-		new webpack.DefinePlugin({
-			'process.env': {
-				NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-			},
-		}),
-	],
-
-	devServer: {
-		host: '0.0.0.0',
-		historyApiFallback: true,
-		port: 5000,
-	},
-};
+const webpackPath = path.resolve(root, `webpack.config.${target}.js`);
+// eslint-disable-next-line import/no-dynamic-require
+module.exports = require(webpackPath);

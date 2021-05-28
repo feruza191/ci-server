@@ -1,0 +1,6 @@
+{
+	"ext": "ts tsx",
+	"ignore": ["**/*.(test|spec).(ts|js)"],
+	"watch": ["server/**/*.ts", "server/**/*.tsx"],
+	"exec": "cross-env NODE_ENV=development webpack && cross-env TARGET=server webpack && node dist/server/server.js"
+}

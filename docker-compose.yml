@@ -5,7 +5,7 @@ services:
             context: .
             dockerfile: ./server/Dockerfile
         container_name: backend
-        command: npm run start-server
+        command: npm start
         volumes:
             - .:/backend:delegated
         env_file:
@@ -13,19 +13,7 @@ services:
             - .env.local
         ports:
             - '3000:3000'
-    frontend:
-        build:
-            context: .
-            dockerfile: ./src/Dockerfile
-        container_name: frontend
-        command: npm run start
-        volumes:
-            - .:/frontend:delegated
-        env_file:
-            - .env
-            - .env.local
-        ports:
-            - '5000:5000'
+
     db: &postgres
         container_name: postgres
         image: postgres:11.5
