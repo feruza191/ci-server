@@ -13,8 +13,11 @@ import { LineDeviderItem } from '../style';
 interface BuildDetailsItemProps {
 	status: JobStatus;
 	commitMessage: string;
+	branchName: string;
+	commitHash: string;
 	jobNumber: number;
 	start: string | null;
+	authorName: string | null;
 	duration: number | null;
 }
 
@@ -24,6 +27,9 @@ export const BuildDetailsItem: FC<BuildDetailsItemProps> = ({
 	jobNumber,
 	start,
 	duration,
+	branchName,
+	commitHash,
+	authorName,
 }) => (
 	<BoxShadow>
 		<FlexBox>
@@ -37,14 +43,14 @@ export const BuildDetailsItem: FC<BuildDetailsItemProps> = ({
 				<BlockContainer top="10">
 					<FlexBox alignItems="center">
 						<BranchNameItem
-							branchName="master"
-							commitHash="b4636ab"
+							branchName={branchName}
+							commitHash={commitHash}
 						/>
 						<BlockContainer left="10">
 							<FlexBox alignItems="center">
 								<UserOutlined />
 								<BlockContainer left="5">
-									<Text>Philip Kirkorov</Text>
+									<Text>{authorName}</Text>
 								</BlockContainer>
 							</FlexBox>
 						</BlockContainer>

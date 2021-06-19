@@ -25,6 +25,9 @@ export class Job {
 	@Column('text')
 	branchName: string;
 
+	@Column({ nullable: true, type: 'text' })
+	authorName: string | null;
+
 	@Column({ type: 'enum', enum: JobStatus, default: JobStatus.Waiting })
 	status: JobStatus;
 

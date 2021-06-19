@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
-import { Form } from 'antd';
-import { Link } from 'react-router-dom';
+import React, { FC, useEffect, useContext } from 'react';
+import { Form, Spin } from 'antd';
+import { Link, RouteComponentProps } from 'react-router-dom';
+import { observer } from 'mobx-react';
 
-import { BUILD_HISTORY_PATH } from 'client/constants';
+import { BUILD_HISTORY_PATH, HOME_PATH } from 'client/constants';
 import { Button } from 'client/core/atoms/Button';
 import { Input } from 'client/core/atoms/Input';
 import TextKey from 'client/core/enums/TextKeys';
@@ -10,12 +11,30 @@ import { Layout } from 'client/core/layout/Layout';
 import { Text, fontSize, fontWeight } from 'client/core/theme';
 import { BlockContainer, FlexBox } from 'client/core/theme/common';
 import { FormTime, ButtonsWrapper } from './style';
+import { SettingsContext } from './SettingsStore';
 
-const SettingsPage: FC = () => {
-	const onFinish = () => {
-		// eslint-disable-next-line no-console
-		console.log('Success:');
+const SettingsPage: FC<RouteComponentProps> = observer(({ history }) => {
+	const store = useContext(SettingsContext);
+
+	interface ValuesProps {
+		repoName: string;
+		mainBranch: string;
+		period: number;
+	}
+
+	const onFinish = (values: ValuesProps) => {
+		const { repoName, mainBranch, period } = values;
+		store.saveSettings(repoName, mainBranch, period);
+		history.push(BUILD_HISTORY_PATH);
 	};
+
+	useEffect(() => {
+		store.getSettings();
+	}, []);
+
+	if (!store.settings) {
+		return <Spin />;
+	}
 
 	return (
 		<Layout>
@@ -29,62 +48,64 @@ const SettingsPage: FC = () => {
 			</BlockContainer>
 
 			<BlockContainer top="22">
-				<Form name="settings" onFinish={onFinish}>
-					<Form.Item>
-						<Text>{TextKey.GitHubRepository}</Text>
-						<Form.Item name="repo_name">
-							<Input
-								allowClear
-								placeholder={TextKey.RepoName}
-								width="474"
-							/>
-						</Form.Item>
+				<Form
+					name="settings"
+					onFinish={onFinish}
+					initialValues={{
+						repoName: store?.settings?.repoName,
+						mainBranch: store?.settings.mainBranch,
+						period: store?.settings?.period,
+					}}
+				>
+					<Text>{TextKey.GitHubRepository}</Text>
+					<Form.Item name="repoName">
+						<Input
+							allowClear
+							placeholder={TextKey.RepoName}
+							width="474"
+						/>
 					</Form.Item>
-					<Form.Item>
+
+					<Text>{TextKey.MainBranch}</Text>
+					<Form.Item name="mainBranch">
+						<Input
+							allowClear
+							placeholder={TextKey.BranchName}
+							width="474"
+						/>
+					</Form.Item>
+
+					<FlexBox alignItems="center">
 						<Text>{TextKey.MainBranch}</Text>
-						<Form.Item name="main_branch">
-							<Input
-								allowClear
-								placeholder={TextKey.BranchName}
-								width="474"
-							/>
+						<BlockContainer right="8" left="8">
+							<FormTime name="period">
+								<Input width="52" />
+							</FormTime>
+						</BlockContainer>
+
+						<Text>{TextKey.Minutes}</Text>
+					</FlexBox>
+
+					<ButtonsWrapper alignItems="center">
+						<Form.Item>
+							<Button bg="primary" width="69" htmlType="submit">
+								{TextKey.Save}
+							</Button>
 						</Form.Item>
-					</Form.Item>
-					<Form.Item>
-						<FlexBox alignItems="center">
-							<Text>{TextKey.MainBranch}</Text>
-							<BlockContainer right="8" left="8">
-								<FormTime name="time">
-									<Input width="52" />
-								</FormTime>
-							</BlockContainer>
-
-							<Text>{TextKey.Minutes}</Text>
-						</FlexBox>
-					</Form.Item>
-					<Form.Item>
-						<ButtonsWrapper alignItems="center">
-							<Link to={BUILD_HISTORY_PATH}>
-								<Button
-									bg="primary"
-									width="69"
-									htmlType="submit"
-								>
-									{TextKey.Save}
-								</Button>
-							</Link>
-
+						<Link to={HOME_PATH}>
 							<BlockContainer left="8">
-								<Button bg="secondary" width="80">
-									{TextKey.Cancel}
-								</Button>
+								<Form.Item>
+									<Button bg="secondary" width="80">
+										{TextKey.Cancel}
+									</Button>
+								</Form.Item>
 							</BlockContainer>
-						</ButtonsWrapper>
-					</Form.Item>
+						</Link>
+					</ButtonsWrapper>
 				</Form>
 			</BlockContainer>
 		</Layout>
 	);
-};
+});
 
 export default SettingsPage;
