@@ -1,15 +1,17 @@
-import React, { FC, useContext, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Row, Col, Spin } from 'antd';
 import { observer } from 'mobx-react';
 import { RouteComponentProps } from 'react-router';
 
 import { Layout } from 'client/core/layout/Layout';
+import { useStore } from 'client/shared/customHooks/useStore';
 import { BuildLogs } from './components/BuildLogs';
 import { BuildDetailsItem } from './components/BuildDetailsItem';
-import { BuildDetailsContext } from './BuildDetailsStore';
 
-const BuildDetails: FC<RouteComponentProps> = observer(({ location }) => {
-	const store = useContext(BuildDetailsContext);
+type Props = RouteComponentProps<{ jobId: string }>;
+
+const BuildDetails: FC<Props> = observer(({ location }) => {
+	const store = useStore();
 	const { jobId } = location.state;
 
 	useEffect(() => {

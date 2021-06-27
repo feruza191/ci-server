@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, { FC } from 'react';
 import { Modal as ModalStyle, Form } from 'antd';
 import styled from 'styled-components';
 
@@ -7,25 +7,25 @@ import { Input } from 'client/core/atoms/Input';
 import TextKey from 'client/core/enums/TextKeys';
 import { Text } from 'client/core/theme';
 import { BlockContainer, FlexBox } from 'client/core/theme/common';
-import { BuildHistoryContext } from 'client/components/BuildHistoryPage/BuildHistoryStore';
+import { useStore } from 'client/shared/customHooks/useStore';
 
 interface ModalProps {
 	isModalVisible: boolean;
 	hideModal: () => void;
 }
 
+interface ValuesProps {
+	commitHash: string;
+	jobCommand: string;
+}
+
 export const Modal: FC<ModalProps> = ({ isModalVisible, hideModal }) => {
-	const store = useContext(BuildHistoryContext);
+	const store = useStore();
 
-	interface ValuesProps {
-		commitHash: string;
-		jobCommand: string;
-	}
-
-	const onFinish = (values: ValuesProps) => {
+	const onFinish = async (values: ValuesProps) => {
 		const { commitHash, jobCommand } = values;
 
-		store.addJob(commitHash, jobCommand);
+		await store.addJob(commitHash, jobCommand);
 		store.getJobs();
 	};
 	return (

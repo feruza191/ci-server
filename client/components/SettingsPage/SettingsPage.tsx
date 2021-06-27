@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useContext } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Form, Spin } from 'antd';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { observer } from 'mobx-react';
@@ -10,21 +10,21 @@ import TextKey from 'client/core/enums/TextKeys';
 import { Layout } from 'client/core/layout/Layout';
 import { Text, fontSize, fontWeight } from 'client/core/theme';
 import { BlockContainer, FlexBox } from 'client/core/theme/common';
+import { useStore } from 'client/shared/customHooks/useStore';
 import { FormTime, ButtonsWrapper } from './style';
-import { SettingsContext } from './SettingsStore';
+
+interface ValuesProps {
+	repoName: string;
+	mainBranch: string;
+	period: number;
+}
 
 const SettingsPage: FC<RouteComponentProps> = observer(({ history }) => {
-	const store = useContext(SettingsContext);
+	const store = useStore();
 
-	interface ValuesProps {
-		repoName: string;
-		mainBranch: string;
-		period: number;
-	}
-
-	const onFinish = (values: ValuesProps) => {
+	const onFinish = async (values: ValuesProps) => {
 		const { repoName, mainBranch, period } = values;
-		store.saveSettings(repoName, mainBranch, period);
+		await store.saveSettings(repoName, mainBranch, period);
 		history.push(BUILD_HISTORY_PATH);
 	};
 

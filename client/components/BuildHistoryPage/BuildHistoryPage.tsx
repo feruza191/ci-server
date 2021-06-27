@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useContext } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Row, Col, Spin } from 'antd';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react';
@@ -7,11 +7,11 @@ import { ShowMoreButton } from './style';
 import { BUILD_DETAILS_PATH } from 'client/constants';
 import TextKey from 'client/core/enums/TextKeys';
 import { Layout } from 'client/core/layout/Layout';
+import { useStore } from 'client/shared/customHooks/useStore';
 import { BuildItem } from './components/BuildItem';
-import { BuildHistoryContext } from './BuildHistoryStore';
 
 const BuildHistory: FC = observer(() => {
-	const store = useContext(BuildHistoryContext);
+	const store = useStore();
 
 	useEffect(() => {
 		store.getJobs();
