@@ -1,28 +1,37 @@
-import React, { FC } from 'react';
-import { Row, Col } from 'antd';
+import React, { FC, useEffect } from 'react';
+import { Row, Col, Spin } from 'antd';
+import { observer } from 'mobx-react';
+import { RouteComponentProps } from 'react-router';
 
 import { Layout } from 'client/core/layout/Layout';
-import { JobStatus } from 'client/core/enums/JobStatus';
+import { useStore } from 'client/shared/customHooks/useStore';
 import { BuildLogs } from './components/BuildLogs';
 import { BuildDetailsItem } from './components/BuildDetailsItem';
 
-const buildProps = {
-	status: JobStatus.Success,
-	commitMessage: 'add documentation for postgres scaler',
-	jobNumber: 1564,
-	start: '22 янв, 03:06',
-	duration: 26,
-};
+type Props = RouteComponentProps<{ jobId: string }>;
 
-const BuildDetails: FC = () => (
-	<Layout>
-		<Row>
-			<Col xs={24}>
-				<BuildDetailsItem {...buildProps} />
-				<BuildLogs />
-			</Col>
-		</Row>
-	</Layout>
-);
+const BuildDetails: FC<Props> = observer(({ location }) => {
+	const store = useStore();
+	const { jobId } = location.state;
+
+	useEffect(() => {
+		store.getJob(jobId);
+	}, []);
+
+	if (!store.job) {
+		return <Spin />;
+	}
+
+	return (
+		<Layout>
+			<Row>
+				<Col xs={24}>
+					<BuildDetailsItem {...store.job} />
+					<BuildLogs jobLogs={store.job.jobLogs} />
+				</Col>
+			</Row>
+		</Layout>
+	);
+});
 
 export default BuildDetails;

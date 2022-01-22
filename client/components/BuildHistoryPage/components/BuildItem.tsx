@@ -6,7 +6,6 @@ import { BranchNameItem } from 'client/core/components/BranchNameItem';
 import { DateTimeSection } from 'client/core/components/DateTimeSection';
 import { IconState } from 'client/core/components/IconState';
 import { JobNumberItem } from 'client/core/components/JobNumberItem/JobNumberItem';
-import { JobStatus } from 'client/core/enums/JobStatus';
 import { Text } from 'client/core/theme';
 import { BoxShadow, FlexBox, BlockContainer } from 'client/core/theme/common';
 import {
@@ -14,20 +13,7 @@ import {
 	DateTimeSectionMobile,
 	LineDeviderItem,
 } from '../style';
-
-interface JobItem {
-	id: string;
-	jobNumber: number;
-	commitMessage: string;
-	commitHash: string;
-	branchName: string;
-	status: JobStatus;
-	start: string | null;
-	finish: string | null;
-	duration: number | null;
-	jobLogs: string | null;
-	buildCommand: string;
-}
+import { JobItem } from 'client/types/types';
 
 interface JobProps {
 	job: JobItem;

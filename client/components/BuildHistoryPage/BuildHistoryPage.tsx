@@ -1,29 +1,49 @@
-import React, { FC } from 'react';
-import { Row, Col } from 'antd';
+import React, { FC, useEffect } from 'react';
+import { Row, Col, Spin } from 'antd';
 import { Link } from 'react-router-dom';
+import { observer } from 'mobx-react';
 
 import { ShowMoreButton } from './style';
 import { BUILD_DETAILS_PATH } from 'client/constants';
 import TextKey from 'client/core/enums/TextKeys';
 import { Layout } from 'client/core/layout/Layout';
+import { useStore } from 'client/shared/customHooks/useStore';
 import { BuildItem } from './components/BuildItem';
-import { jobs } from './jobs';
 
-const BuildHistory: FC = () => (
-	<Layout>
-		<Row>
-			<Col xs={24}>
-				<Link to={BUILD_DETAILS_PATH}>
-					{jobs.map((job) => (
-						<BuildItem key={job.id} job={job} />
+const BuildHistory: FC = observer(() => {
+	const store = useStore();
+
+	useEffect(() => {
+		store.getJobs();
+	}, []);
+
+	if (!store.jobs) {
+		return <Spin />;
+	}
+
+	return (
+		<Layout>
+			<Row>
+				<Col xs={24}>
+					{store.jobs.map((job) => (
+						<Link
+							to={{
+								pathname: BUILD_DETAILS_PATH,
+								state: { jobId: job.id },
+							}}
+							key={job.id}
+						>
+							<BuildItem job={job} />
+						</Link>
 					))}
-				</Link>
-				<ShowMoreButton bg="secondary">
-					{TextKey.ShowMore}
-				</ShowMoreButton>
-			</Col>
-		</Row>
-	</Layout>
-);
+
+					<ShowMoreButton bg="secondary">
+						{TextKey.ShowMore}
+					</ShowMoreButton>
+				</Col>
+			</Row>
+		</Layout>
+	);
+});
 
 export default BuildHistory;

@@ -80,16 +80,16 @@ export const addJob = async (
 			branchName = settings.mainBranch;
 		}
 
-		const { commitMessage } = await sandBoxService.getCommitByHash(
-			commitHash
-		);
+		const { commitMessage, authorName } =
+			await sandBoxService.getCommitByHash(commitHash);
 
 		const job = await jobsServices.addJobToQueue(
 			commitHash,
 			buildCommand,
 			commitMessage,
 			branchName,
-			jobNumber
+			jobNumber,
+			authorName
 		);
 
 		return res.json(job);

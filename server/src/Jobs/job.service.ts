@@ -35,7 +35,8 @@ export class JobService {
 		buildCommand: string,
 		commitMessage: string,
 		branchName: string,
-		jobNumber: number
+		jobNumber: number,
+		authorName: string
 	): Promise<Job> {
 		try {
 			const jobRepository = getRepository(Job);
@@ -45,6 +46,7 @@ export class JobService {
 				commitMessage,
 				branchName,
 				jobNumber,
+				authorName,
 			});
 
 			return jobRepository.save(job);
