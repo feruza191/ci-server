@@ -7,8 +7,15 @@ import { SandboxService } from './sandboxService';
 
 const sandBoxService = new SandboxService();
 
+interface RunParameters {
+	id: string;
+	repoName: string;
+	commitHash: string;
+	command: string;
+}
+
 export const runAgent = async (
-	req: Request,
+	req: Request<RunParameters>,
 	res: Response,
 	next: NextFunction
 ): Promise<Response<string> | undefined> => {
@@ -20,10 +27,10 @@ export const runAgent = async (
 		}
 
 		await sandBoxService.gitClone(repoName);
-		await sandBoxService.installDependencies(repoName, commitHash);
-		await sandBoxService.runCheckCommands();
+		await sandBoxService.installDependencies(commitHash);
+		const result = await sandBoxService.runCheckCommands(command);
 
-		return res.status(200).send({ message: 'Job is running' });
+		return res.status(200).send({ message: result });
 	} catch (err) {
 		next(err);
 	}

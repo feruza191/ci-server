@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { exec } from 'child_process';
 import util from 'util';
 
@@ -6,9 +5,14 @@ import TextKeys from '../server/src/share/enums/TextKeys';
 
 const execPromise = util.promisify(exec);
 
+const localRepoPath = 'clonedProject/my-mobx';
 export class SandboxService {
+	private moveToDirectoryRunCommand(command: string): string {
+		return `cd ${localRepoPath} && ${command}`;
+	}
+
 	public async gitClone(repoName: string): Promise<void> {
-		const gitCommand = `git clone https://github.com/${repoName}`;
+		const gitCommand = `cd clonedProject && git clone https://github.com/${repoName} `;
 
 		try {
 			await execPromise(gitCommand);
@@ -18,31 +22,31 @@ export class SandboxService {
 		}
 	}
 
-	public async installDependencies(
-		repoName: string,
-		commitHash: string
-	): Promise<void> {
-		const gitCommand = `npm install https://github.com/${repoName}#${commitHash}`;
+	public async installDependencies(commitHash: string): Promise<void> {
+		const gitCommand = `git checkout ${commitHash}`;
+		const npmCommand = `npm i`;
 
 		try {
-			const { stdout, stderr } = await execPromise(gitCommand);
-
-			console.log({ stdout });
-			console.log({ stderr });
+			await execPromise(this.moveToDirectoryRunCommand(gitCommand));
+			await execPromise(npmCommand);
 		} catch (err) {
 			console.log({ err });
 			throw Error(`${TextKeys.FailedToInstallDependencies}`);
 		}
 	}
 
-	public async runCheckCommands(): Promise<void> {
-		const gitCommand1 = 'npm run eslint';
-		const gitCommand2 = 'npm run prettier';
-		const gitCommand3 = 'npm run ts-check';
+	public async runCheckCommands(command: string): Promise<string> {
 		try {
-			const { stdout, stderr } = await execPromise(gitCommand1);
-			const { stdout, stderr } = await execPromise(gitCommand2);
-			const { stdout, stderr } = await execPromise(gitCommand3);
+			const { stdout, stderr } = await execPromise(command);
+
+			console.log({ stdout });
+			console.log({ stderr });
+
+			if (stdout) {
+				return stdout;
+			}
+
+			return stderr;
 		} catch (err) {
 			console.log({ err });
 			throw Error(`${TextKeys.FailedToRunCheckCommands}`);
