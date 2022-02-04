@@ -26,9 +26,7 @@ export const runAgent = async (
 			throw new AppError(TextKeys.JobRunning, HttpCodes.NotFound);
 		}
 
-		await sandBoxService.gitClone(repoName);
-		await sandBoxService.installDependencies(commitHash);
-		const result = await sandBoxService.runCheckCommands(command);
+		const result = await sandBoxService.run(command, repoName, commitHash);
 
 		return res.status(200).send({ message: result });
 	} catch (err) {
