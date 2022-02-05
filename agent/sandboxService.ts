@@ -14,20 +14,6 @@ export class SandboxService {
 		await execPromise(gitCommand);
 	}
 
-	private async moveToDirectoryRunCommandReturnResult(
-		command: string
-	): Promise<string> {
-		const gitCommand = `cd ${localRepoPath} && ${command}`;
-
-		const { stdout, stderr } = await execPromise(gitCommand);
-
-		if (stdout) {
-			return stdout;
-		}
-
-		return stderr;
-	}
-
 	private async gitClone(repoName: string): Promise<void> {
 		const gitCommand = `cd clonedProject && git clone https://github.com/${repoName} `;
 
@@ -41,7 +27,7 @@ export class SandboxService {
 
 	private async installDependencies(commitHash: string): Promise<void> {
 		const gitCommand = `git checkout ${commitHash}`;
-		const npmCommand = `npm i`;
+		const npmCommand = `npm ci`;
 
 		try {
 			await this.moveToDirectoryRunCommand(gitCommand);
@@ -54,11 +40,15 @@ export class SandboxService {
 
 	private async runCheckCommands(command: string): Promise<string> {
 		try {
-			const result = await this.moveToDirectoryRunCommandReturnResult(
-				command
-			);
+			const gitCommand = `cd ${localRepoPath} && ${command}`;
 
-			return result;
+			const { stdout, stderr } = await execPromise(gitCommand);
+
+			if (stdout) {
+				return stdout;
+			}
+
+			return stderr;
 		} catch (err) {
 			console.log({ err });
 			throw Error(`${TextKeys.FailedToRunCheckCommands}`);
