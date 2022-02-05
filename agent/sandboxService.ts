@@ -8,10 +8,12 @@ const execPromise = util.promisify(exec);
 const localRepoPath = 'clonedProject/my-mobx';
 
 export class SandboxService {
-	private async moveToDirectoryRunCommand(command: string): Promise<void> {
+	private async moveToDirectoryRunCommand(
+		command: string
+	): Promise<{ stdout: string; stderr: string }> {
 		const gitCommand = `cd ${localRepoPath} && ${command}`;
 
-		await execPromise(gitCommand);
+		return execPromise(gitCommand);
 	}
 
 	private async gitClone(repoName: string): Promise<void> {
@@ -27,7 +29,7 @@ export class SandboxService {
 
 	private async installDependencies(commitHash: string): Promise<void> {
 		const gitCommand = `git checkout ${commitHash}`;
-		const npmCommand = `npm ci`;
+		const npmCommand = `npm i`;
 
 		try {
 			await this.moveToDirectoryRunCommand(gitCommand);
@@ -40,9 +42,9 @@ export class SandboxService {
 
 	private async runCheckCommands(command: string): Promise<string> {
 		try {
-			const gitCommand = `cd ${localRepoPath} && ${command}`;
-
-			const { stdout, stderr } = await execPromise(gitCommand);
+			const { stdout, stderr } = await this.moveToDirectoryRunCommand(
+				command
+			);
 
 			if (stdout) {
 				return stdout;
