@@ -25,5 +25,5 @@
 		}
 	},
 	"include": ["client", "server", "agent"],
-	"exclude": ["node_modules"]
+	"exclude": ["node_modules", "client/**/*.spec.ts", "server/src/**/*.spec.ts", "agent/*.spec.ts"]
 }
