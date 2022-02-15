@@ -1,23 +1,25 @@
 import React, { FC, useEffect } from 'react';
 import { Row, Col, Spin } from 'antd';
 import { Link } from 'react-router-dom';
-import { observer } from 'mobx-react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ShowMoreButton } from './style';
 import { BUILD_DETAILS_PATH } from 'client/constants';
 import TextKey from 'client/core/enums/TextKeys';
 import { Layout } from 'client/core/layout/Layout';
-import { useStore } from 'client/shared/customHooks/useStore';
 import { BuildItem } from './components/BuildItem';
+import { fetchJobs } from 'client/store/actions/jobs.actions';
+import { RootState } from 'client/store/store';
 
-const BuildHistory: FC = observer(() => {
-	const store = useStore();
+const BuildHistory: FC = () => {
+	const dispatch = useDispatch();
+	const jobs = useSelector((state: RootState) => state.jobs.jobs);
 
 	useEffect(() => {
-		store.getJobs();
+		dispatch(fetchJobs());
 	}, []);
 
-	if (!store.jobs) {
+	if (!jobs) {
 		return <Spin />;
 	}
 
@@ -25,7 +27,7 @@ const BuildHistory: FC = observer(() => {
 		<Layout>
 			<Row>
 				<Col xs={24}>
-					{store.jobs.map((job) => (
+					{jobs.map((job) => (
 						<Link
 							to={{
 								pathname: BUILD_DETAILS_PATH,
@@ -44,6 +46,6 @@ const BuildHistory: FC = observer(() => {
 			</Row>
 		</Layout>
 	);
-});
+};
 
 export default BuildHistory;

@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { Form, Spin } from 'antd';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { observer } from 'mobx-react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { BUILD_HISTORY_PATH, HOME_PATH } from 'client/constants';
 import { Button } from 'client/core/atoms/Button';
@@ -10,8 +10,12 @@ import TextKey from 'client/core/enums/TextKeys';
 import { Layout } from 'client/core/layout/Layout';
 import { Text, fontSize, fontWeight } from 'client/core/theme';
 import { BlockContainer, FlexBox } from 'client/core/theme/common';
-import { useStore } from 'client/shared/customHooks/useStore';
 import { FormTime, ButtonsWrapper } from './style';
+import { RootState } from 'client/store/store';
+import {
+	getSettings,
+	saveSettings,
+} from 'client/store/actions/settings.actions';
 
 interface ValuesProps {
 	repoName: string;
@@ -19,20 +23,21 @@ interface ValuesProps {
 	period: number;
 }
 
-const SettingsPage: FC<RouteComponentProps> = observer(({ history }) => {
-	const store = useStore();
+const SettingsPage: FC<RouteComponentProps> = ({ history }) => {
+	const dispatch = useDispatch();
+	const settings = useSelector((state: RootState) => state.settings.settings);
 
 	const onFinish = async (values: ValuesProps) => {
 		const { repoName, mainBranch, period } = values;
-		await store.saveSettings(repoName, mainBranch, period);
+		await dispatch(saveSettings({ repoName, mainBranch, period }));
 		history.push(BUILD_HISTORY_PATH);
 	};
 
 	useEffect(() => {
-		store.getSettings();
+		dispatch(getSettings());
 	}, []);
 
-	if (!store.settings) {
+	if (!settings.repoName) {
 		return <Spin />;
 	}
 
@@ -52,9 +57,9 @@ const SettingsPage: FC<RouteComponentProps> = observer(({ history }) => {
 					name="settings"
 					onFinish={onFinish}
 					initialValues={{
-						repoName: store?.settings?.repoName,
-						mainBranch: store?.settings.mainBranch,
-						period: store?.settings?.period,
+						repoName: settings?.repoName,
+						mainBranch: settings?.mainBranch,
+						period: settings?.period,
 					}}
 				>
 					<Text>{TextKey.GitHubRepository}</Text>
@@ -106,6 +111,6 @@ const SettingsPage: FC<RouteComponentProps> = observer(({ history }) => {
 			</BlockContainer>
 		</Layout>
 	);
-});
+};
 
 export default SettingsPage;

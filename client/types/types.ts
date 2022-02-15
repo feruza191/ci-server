@@ -14,3 +14,10 @@ export interface JobItem {
 	authorName: string | null;
 	buildCommand: string;
 }
+
+export interface SettingsItem {
+	id: string;
+	repoName: string;
+	mainBranch: string;
+	period: number;
+}

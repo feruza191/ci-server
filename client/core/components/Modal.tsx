@@ -1,13 +1,14 @@
 import React, { FC } from 'react';
 import { Modal as ModalStyle, Form } from 'antd';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 
 import { Button } from 'client/core/atoms/Button';
 import { Input } from 'client/core/atoms/Input';
 import TextKey from 'client/core/enums/TextKeys';
 import { Text } from 'client/core/theme';
 import { BlockContainer, FlexBox } from 'client/core/theme/common';
-import { useStore } from 'client/shared/customHooks/useStore';
+import { fetchAddJob, fetchJobs } from 'client/store/actions/jobs.actions';
 
 interface ModalProps {
 	isModalVisible: boolean;
@@ -16,17 +17,17 @@ interface ModalProps {
 
 interface ValuesProps {
 	commitHash: string;
-	jobCommand: string;
+	buildCommand: string;
 }
 
 export const Modal: FC<ModalProps> = ({ isModalVisible, hideModal }) => {
-	const store = useStore();
+	const dispatch = useDispatch();
 
 	const onFinish = async (values: ValuesProps) => {
-		const { commitHash, jobCommand } = values;
+		const { commitHash, buildCommand } = values;
 
-		await store.addJob(commitHash, jobCommand);
-		store.getJobs();
+		await dispatch(fetchAddJob({ commitHash, buildCommand }));
+		fetchJobs();
 	};
 	return (
 		<ModalWrapper
@@ -42,7 +43,7 @@ export const Modal: FC<ModalProps> = ({ isModalVisible, hideModal }) => {
 						<Input placeholder={TextKey.CommitHash} height="40" />
 					</Form.Item>
 				</BlockContainer>
-				<Form.Item name="jobCommand">
+				<Form.Item name="buildCommand">
 					<Input placeholder={TextKey.JobCommand} height="40" />
 				</Form.Item>
 				<FlexBox>
