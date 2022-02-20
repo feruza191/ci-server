@@ -1,9 +1,6 @@
-import { createReducer } from '@reduxjs/toolkit';
-
 import { JobStatus } from 'client/core/enums/JobStatus';
-import { RequestStatus } from 'client/core/enums/RequestStatus';
 import { JobItem } from 'client/types/types';
-import { fetchAddJob, fetchJob, fetchJobs } from '../actions/jobs.actions';
+import { SET_ADD_JOB, SET_ALL_JOBS, SET_JOB } from '../actions/actionTypes';
 
 interface JobsState {
 	loading: string | null;
@@ -30,38 +27,21 @@ const initialState: JobsState = {
 	},
 };
 
-export const jobsReducer = createReducer(initialState, (builder) => {
-	builder
-		.addCase(fetchJobs.pending, (state) => {
-			state.loading = RequestStatus.Pending;
-		})
-		.addCase(fetchJobs.fulfilled, (state, action) => {
-			state.loading = RequestStatus.Fulfilled;
-			state.jobs = action.payload;
-		})
-		.addCase(fetchJobs.rejected, (state) => {
-			state.loading = RequestStatus.Rejected;
-		});
-	builder
-		.addCase(fetchJob.pending, (state) => {
-			state.loading = RequestStatus.Pending;
-		})
-		.addCase(fetchJob.fulfilled, (state, action) => {
-			state.loading = RequestStatus.Fulfilled;
-			state.job = action.payload;
-		})
-		.addCase(fetchJob.rejected, (state) => {
-			state.loading = RequestStatus.Rejected;
-		});
-	builder
-		.addCase(fetchAddJob.pending, (state) => {
-			state.loading = RequestStatus.Pending;
-		})
-		.addCase(fetchAddJob.fulfilled, (state, action) => {
-			state.loading = RequestStatus.Fulfilled;
-			state.jobs.push(action.payload);
-		})
-		.addCase(fetchAddJob.rejected, (state) => {
-			state.loading = RequestStatus.Rejected;
-		});
-});
+export const jobsReducer = (state = initialState, action) => {
+	switch (action.type) {
+		case SET_ALL_JOBS: {
+			const { jobs } = action;
+			return { ...state, jobs };
+		}
+		case SET_JOB: {
+			const { job } = action;
+			return { ...state, job };
+		}
+		case SET_ADD_JOB: {
+			const { job } = action;
+			return { ...state, job };
+		}
+		default:
+			return state;
+	}
+};

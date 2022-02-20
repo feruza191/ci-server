@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ReactElement } from 'react';
 
 import CalendarSvg from 'assets/images/calendar.svg';
 import ClockSvg from 'assets/images/clock.svg';
@@ -19,7 +19,7 @@ interface JobProps {
 	job: JobItem;
 }
 
-export const BuildItem: FC<JobProps> = ({ job }) => {
+export const BuildItem = ({ job }: JobProps): ReactElement => {
 	const {
 		start,
 		duration,

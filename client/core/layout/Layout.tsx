@@ -1,4 +1,4 @@
-import React, { FC, useState, ReactNode } from 'react';
+import React, { ReactElement, useState, ReactNode } from 'react';
 import {
 	SettingFilled,
 	CaretRightOutlined,
@@ -21,7 +21,7 @@ interface HeaderContent {
 	children?: ReactNode;
 }
 
-export const Layout: FC = ({ children }) => {
+export const Layout = ({ children }): ReactElement => {
 	const { pathname } = useLocation();
 	const [isModalVisible, setIsModalVisible] = useState(false);
 

@@ -1,49 +1,60 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { message } from 'antd';
+import { ActionReturn, JobItem } from 'client/types/types';
+import {
+	ADD_JOB,
+	GET_ALL_JOBS,
+	GET_JOB,
+	SET_ADD_JOB,
+	SET_ALL_JOBS,
+	SET_JOB,
+} from './actionTypes';
 
-import endpoint from 'client/endpoint';
-
-interface AddJobArgs {
-	commitHash: string;
-	buildCommand: string;
+interface JobsReturn {
+	jobs: JobItem[];
+	type: string;
 }
 
-export const fetchJobs = createAsyncThunk('jobs/fetchJobs', async () => {
-	try {
-		const { data } = await endpoint.get('/api/jobs');
+interface JobReturn {
+	job: JobItem;
+	type: string;
+}
 
-		return data;
-	} catch (error) {
-		message.error(error.response.data);
-	}
-});
+export const getAllJobs = (): ActionReturn => {
+	return {
+		type: GET_ALL_JOBS,
+	};
+};
+export const setAllJobs = (jobs: JobItem[]): JobsReturn => {
+	return {
+		type: SET_ALL_JOBS,
+		jobs,
+	};
+};
 
-export const fetchJob = createAsyncThunk(
-	'job/fetchJob',
-	async (jobId: string) => {
-		try {
-			const { data } = await endpoint.get(`/api/jobs/${jobId}`);
+export const getJobAction = (jobId: string) => {
+	return {
+		type: GET_JOB,
+		jobId,
+	};
+};
+export const setJob = (job: JobItem): JobReturn => {
+	return {
+		type: SET_JOB,
+		job,
+	};
+};
 
-			return data;
-		} catch (error) {
-			message.error(error.response.data);
-		}
-	}
-);
-
-export const fetchAddJob = createAsyncThunk(
-	'job/fetchAddJob',
-	async ({ commitHash, buildCommand }: AddJobArgs) => {
-		try {
-			const { data } = await endpoint.post(`/api/jobs/${commitHash}`, {
-				buildCommand,
-			});
-
-			return data;
-		} catch (error) {
-			message.error(error.response.data);
-		}
-	}
-);
-
-// export const getJobs = createAction('getJobs');
+export const addJob = (commitHash: string, buildCommand: string) => {
+	return {
+		type: ADD_JOB,
+		payload: {
+			commitHash,
+			buildCommand,
+		},
+	};
+};
+export const setAddJob = (job: JobItem): JobReturn => {
+	return {
+		type: SET_ADD_JOB,
+		job,
+	};
+};

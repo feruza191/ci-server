@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ReactElement, useCallback } from 'react';
 import { Modal as ModalStyle, Form } from 'antd';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
@@ -8,7 +8,7 @@ import { Input } from 'client/core/atoms/Input';
 import TextKey from 'client/core/enums/TextKeys';
 import { Text } from 'client/core/theme';
 import { BlockContainer, FlexBox } from 'client/core/theme/common';
-import { fetchAddJob, fetchJobs } from 'client/store/actions/jobs.actions';
+import { addJob, getAllJobs } from 'client/store/actions/jobs.actions';
 
 interface ModalProps {
 	isModalVisible: boolean;
@@ -20,15 +20,19 @@ interface ValuesProps {
 	buildCommand: string;
 }
 
-export const Modal: FC<ModalProps> = ({ isModalVisible, hideModal }) => {
+export const Modal = ({
+	isModalVisible,
+	hideModal,
+}: ModalProps): ReactElement => {
 	const dispatch = useDispatch();
 
-	const onFinish = async (values: ValuesProps) => {
+	const onFinish = useCallback(async (values: ValuesProps) => {
 		const { commitHash, buildCommand } = values;
 
-		await dispatch(fetchAddJob({ commitHash, buildCommand }));
-		fetchJobs();
-	};
+		dispatch(addJob(commitHash, buildCommand));
+		dispatch(getAllJobs());
+	}, []);
+
 	return (
 		<ModalWrapper
 			title={TextKey.NewJob}

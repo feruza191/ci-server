@@ -21,3 +21,12 @@ export interface SettingsItem {
 	mainBranch: string;
 	period: number;
 }
+
+export interface ActionReturn {
+	type: string;
+}
+
+export interface RequestReturn {
+	method: string;
+	url: string;
+}

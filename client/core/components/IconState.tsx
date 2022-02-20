@@ -1,4 +1,4 @@
-import React, { useMemo, FC } from 'react';
+import React, { useMemo, ReactElement } from 'react';
 
 import FailSvg from 'assets/images/fail.svg';
 import SuccessSvg from 'assets/images/success.svg';
@@ -9,7 +9,7 @@ interface IconStateProps {
 	status: JobStatus;
 }
 
-export const IconState: FC<IconStateProps> = ({ status }) => {
+export const IconState = ({ status }: IconStateProps): ReactElement => {
 	const jobStatus = useMemo(() => {
 		return {
 			[JobStatus.Success]: SuccessSvg,

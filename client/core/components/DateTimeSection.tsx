@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ReactElement } from 'react';
 
 import CalendarSvg from 'assets/images/calendar.svg';
 import ClockSvg from 'assets/images/clock.svg';
@@ -10,10 +10,10 @@ interface DateTimeSectionProps {
 	duration: number | null;
 }
 
-export const DateTimeSection: FC<DateTimeSectionProps> = ({
+export const DateTimeSection = ({
 	start,
 	duration,
-}) => (
+}: DateTimeSectionProps): ReactElement => (
 	<>
 		<FlexBox>
 			<img src={CalendarSvg} alt="calendar" />

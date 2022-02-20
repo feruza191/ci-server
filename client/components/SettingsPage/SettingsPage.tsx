@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { ReactElement, useCallback, useEffect } from 'react';
 import { Form, Spin } from 'antd';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,11 +11,11 @@ import { Layout } from 'client/core/layout/Layout';
 import { Text, fontSize, fontWeight } from 'client/core/theme';
 import { BlockContainer, FlexBox } from 'client/core/theme/common';
 import { FormTime, ButtonsWrapper } from './style';
-import { RootState } from 'client/store/store';
 import {
-	getSettings,
+	getAllSettings,
 	saveSettings,
 } from 'client/store/actions/settings.actions';
+import { getSettings } from 'client/store/selectors/selectors';
 
 interface ValuesProps {
 	repoName: string;
@@ -23,18 +23,18 @@ interface ValuesProps {
 	period: number;
 }
 
-const SettingsPage: FC<RouteComponentProps> = ({ history }) => {
+const SettingsPage = ({ history }: RouteComponentProps): ReactElement => {
 	const dispatch = useDispatch();
-	const settings = useSelector((state: RootState) => state.settings.settings);
+	const settings = useSelector(getSettings);
 
-	const onFinish = async (values: ValuesProps) => {
+	const onFinish = useCallback(async (values: ValuesProps) => {
 		const { repoName, mainBranch, period } = values;
-		await dispatch(saveSettings({ repoName, mainBranch, period }));
+		dispatch(saveSettings({ repoName, mainBranch, period }));
 		history.push(BUILD_HISTORY_PATH);
-	};
+	}, []);
 
 	useEffect(() => {
-		dispatch(getSettings());
+		dispatch(getAllSettings());
 	}, []);
 
 	if (!settings.repoName) {

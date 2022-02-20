@@ -1,41 +1,41 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { message } from 'antd';
+import { ActionReturn, SettingsItem } from 'client/types/types';
+import {
+	GET_SETTINGS,
+	SAVE_SETTINGS,
+	SET_SAVE_SETTINGS,
+	SET_SETTINGS,
+} from './actionTypes';
 
-import endpoint from 'client/endpoint';
-
-interface SettingsArgs {
-	repoName: string;
-	mainBranch: string;
-	period: number;
+interface SettingsReturn {
+	type: string;
+	settings: SettingsItem;
 }
-export const getSettings = createAsyncThunk(
-	'settings/getSettings',
-	async () => {
-		try {
-			const { data } = await endpoint.get('/api/settings');
 
-			return data;
-		} catch (error) {
-			message.error(error.response.data);
-		}
-	}
-);
+export const getAllSettings = (): ActionReturn => {
+	return {
+		type: GET_SETTINGS,
+	};
+};
+export const setSettings = (settings: SettingsItem): SettingsReturn => {
+	return {
+		type: SET_SETTINGS,
+		settings,
+	};
+};
 
-export const saveSettings = createAsyncThunk(
-	'settings/saveSettings',
-	async ({ repoName, mainBranch, period }: SettingsArgs) => {
-		try {
-			const { data } = await endpoint.post('/api/settings', {
-				repoName,
-				mainBranch,
-				period,
-			});
-
-			message.success('Settings saved');
-
-			return data;
-		} catch (error) {
-			message.error(error.response.data);
-		}
-	}
-);
+export const saveSettings = ({ repoName, mainBranch, period }) => {
+	return {
+		type: SAVE_SETTINGS,
+		payload: {
+			repoName,
+			mainBranch,
+			period,
+		},
+	};
+};
+export const setSaveSettings = (settings: SettingsItem): SettingsReturn => {
+	return {
+		type: SET_SAVE_SETTINGS,
+		settings,
+	};
+};

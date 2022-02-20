@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { Row, Col, Spin } from 'antd';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,15 +8,15 @@ import { BUILD_DETAILS_PATH } from 'client/constants';
 import TextKey from 'client/core/enums/TextKeys';
 import { Layout } from 'client/core/layout/Layout';
 import { BuildItem } from './components/BuildItem';
-import { fetchJobs } from 'client/store/actions/jobs.actions';
-import { RootState } from 'client/store/store';
+import { getAllJobs } from 'client/store/actions/jobs.actions';
+import { getJobs } from 'client/store/selectors/selectors';
 
-const BuildHistory: FC = () => {
+const BuildHistory = (): ReactElement => {
 	const dispatch = useDispatch();
-	const jobs = useSelector((state: RootState) => state.jobs.jobs);
+	const jobs = useSelector(getJobs);
 
 	useEffect(() => {
-		dispatch(fetchJobs());
+		dispatch(getAllJobs());
 	}, []);
 
 	if (!jobs) {

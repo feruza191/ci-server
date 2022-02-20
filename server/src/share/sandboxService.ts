@@ -10,12 +10,13 @@ interface JobBuild {
 	branchName: string;
 }
 
-const localRepoPath = 'clonedProject/my-mobx';
+const directory = 'clonedProject';
+const localRepoPath = `${directory}/my-mobx`;
 const execPromise = util.promisify(exec);
 
 export class SandboxService {
 	public async gitClone(repoName: string): Promise<void> {
-		const gitCommand = `cd clonedProject && git clone https://github.com/${repoName}`;
+		const gitCommand = `cd ${directory} && git clone https://github.com/${repoName}`;
 
 		try {
 			await execPromise(gitCommand);

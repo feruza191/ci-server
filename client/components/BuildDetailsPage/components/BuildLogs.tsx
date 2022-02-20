@@ -1,7 +1,11 @@
-import React, { FC } from 'react';
+import React, { ReactElement } from 'react';
 
 import { BuildLogsWrapper } from '../style';
 
-export const BuildLogs: FC<{ jobLogs: string | null }> = ({ jobLogs }) => {
+export const BuildLogs = ({
+	jobLogs,
+}: {
+	jobLogs: string | null;
+}): ReactElement => {
 	return <BuildLogsWrapper>{jobLogs}</BuildLogsWrapper>;
 };

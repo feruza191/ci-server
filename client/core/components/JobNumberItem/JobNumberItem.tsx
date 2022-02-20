@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ReactElement } from 'react';
 
 import { JobStatus } from 'client/core/enums/JobStatus';
 import { Text, fontSize } from 'client/core/theme';
@@ -11,11 +11,11 @@ interface JobNumberItemProps {
 	jobNumber: number;
 }
 
-export const JobNumberItem: FC<JobNumberItemProps> = ({
+export const JobNumberItem = ({
 	status,
 	commitMessage,
 	jobNumber,
-}) => (
+}: JobNumberItemProps): ReactElement => (
 	<JobNumberWrapper>
 		<JobNumber status={status} fontSize={fontSize.semiMedium}>
 			#{jobNumber}

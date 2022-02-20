@@ -1,0 +1,10 @@
+export const SET_ALL_JOBS = 'SET_ALL_JOBS';
+export const SET_SETTINGS = 'SET_SETTINGS';
+export const SET_SAVE_SETTINGS = 'SET_SAVE_SETTINGS';
+export const GET_SETTINGS = 'GET_SETTINGS';
+export const GET_ALL_JOBS = 'GET_ALL_JOBS';
+export const SAVE_SETTINGS = 'SAVE_SETTINGS';
+export const GET_JOB = 'GET_JOB';
+export const SET_JOB = 'SET_JOB';
+export const ADD_JOB = 'ADD_JOB';
+export const SET_ADD_JOB = 'SET_ADD_JOB';
