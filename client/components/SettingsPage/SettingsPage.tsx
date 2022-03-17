@@ -17,7 +17,7 @@ import {
 } from 'client/store/actions/settings.actions';
 import { getSettings } from 'client/store/selectors/selectors';
 
-interface ValuesProps {
+interface Props {
 	repoName: string;
 	mainBranch: string;
 	period: number;
@@ -27,7 +27,7 @@ const SettingsPage = ({ history }: RouteComponentProps): ReactElement => {
 	const dispatch = useDispatch();
 	const settings = useSelector(getSettings);
 
-	const onFinish = useCallback(async (values: ValuesProps) => {
+	const onFinish = useCallback(async (values: Props) => {
 		const { repoName, mainBranch, period } = values;
 		dispatch(saveSettings({ repoName, mainBranch, period }));
 		history.push(BUILD_HISTORY_PATH);

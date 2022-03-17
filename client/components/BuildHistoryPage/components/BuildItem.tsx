@@ -15,11 +15,11 @@ import {
 } from '../style';
 import { JobItem } from 'client/types/types';
 
-interface JobProps {
+interface Props {
 	job: JobItem;
 }
 
-export const BuildItem = ({ job }: JobProps): ReactElement => {
+export const BuildItem = ({ job }: Props): ReactElement => {
 	const {
 		start,
 		duration,

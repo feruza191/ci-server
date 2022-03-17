@@ -5,15 +5,12 @@ import ClockSvg from 'assets/images/clock.svg';
 import { Text } from '../theme';
 import { FlexBox, BlockContainer } from '../theme/common';
 
-interface DateTimeSectionProps {
+interface Props {
 	start: string | null;
 	duration: number | null;
 }
 
-export const DateTimeSection = ({
-	start,
-	duration,
-}: DateTimeSectionProps): ReactElement => (
+export const DateTimeSection = ({ start, duration }: Props): ReactElement => (
 	<>
 		<FlexBox>
 			<img src={CalendarSvg} alt="calendar" />

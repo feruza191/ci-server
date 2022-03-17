@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 
 import { CompanyLogo, HeaderWrapper } from './style';
 
-interface HeaderProps {
+interface Props {
 	title: string;
 }
 
-export const Header = ({ title, children }: HeaderProps): ReactElement => {
+export const Header = ({ title, children }: Props): ReactElement => {
 	return (
 		<Row>
 			<Col xs={24}>

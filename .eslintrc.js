@@ -32,7 +32,6 @@ module.exports = {
 		'no-use-before-define': 'off',
 		'no-undef': 'off',
 		'no-unused-vars': 'off', //ignore underscore parameters
-		'no-param-reassign': 'off',
 		'@typescript-eslint/no-unused-vars': [
 			2,
 			{ args: 'all', argsIgnorePattern: '^_' },

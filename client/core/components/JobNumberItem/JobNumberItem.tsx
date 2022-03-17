@@ -5,7 +5,7 @@ import { Text, fontSize } from 'client/core/theme';
 import { BlockContainer } from 'client/core/theme/common';
 import { JobNumberWrapper, JobNumber } from './style';
 
-interface JobNumberItemProps {
+interface Props {
 	status: JobStatus;
 	commitMessage: string;
 	jobNumber: number;
@@ -15,7 +15,7 @@ export const JobNumberItem = ({
 	status,
 	commitMessage,
 	jobNumber,
-}: JobNumberItemProps): ReactElement => (
+}: Props): ReactElement => (
 	<JobNumberWrapper>
 		<JobNumber status={status} fontSize={fontSize.semiMedium}>
 			#{jobNumber}

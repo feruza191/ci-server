@@ -5,11 +5,11 @@ import SuccessSvg from 'assets/images/success.svg';
 import WaitingSvg from 'assets/images/waiting.svg';
 import { JobStatus } from '../enums/JobStatus';
 
-interface IconStateProps {
+interface Props {
 	status: JobStatus;
 }
 
-export const IconState = ({ status }: IconStateProps): ReactElement => {
+export const IconState = ({ status }: Props): ReactElement => {
 	const jobStatus = useMemo(() => {
 		return {
 			[JobStatus.Success]: SuccessSvg,

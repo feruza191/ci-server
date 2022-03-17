@@ -10,7 +10,7 @@ import { Text } from 'client/core/theme';
 import { BlockContainer, FlexBox } from 'client/core/theme/common';
 import { addJob, getAllJobs } from 'client/store/actions/jobs.actions';
 
-interface ModalProps {
+interface Props {
 	isModalVisible: boolean;
 	hideModal: () => void;
 }
@@ -20,10 +20,7 @@ interface ValuesProps {
 	buildCommand: string;
 }
 
-export const Modal = ({
-	isModalVisible,
-	hideModal,
-}: ModalProps): ReactElement => {
+export const Modal = ({ isModalVisible, hideModal }: Props): ReactElement => {
 	const dispatch = useDispatch();
 
 	const onFinish = useCallback(async (values: ValuesProps) => {

@@ -1,3 +1,5 @@
+import produce from 'immer';
+
 import { JobStatus } from 'client/core/enums/JobStatus';
 import { JobItem } from 'client/types/types';
 import { SET_ADD_JOB, SET_ALL_JOBS, SET_JOB } from '../actions/actionTypes';
@@ -27,21 +29,26 @@ const initialState: JobsState = {
 	},
 };
 
-export const jobsReducer = (state = initialState, action) => {
+export const jobsReducer = produce((draftState, action) => {
 	switch (action.type) {
 		case SET_ALL_JOBS: {
 			const { jobs } = action;
-			return { ...state, jobs };
+			return;
+			draftState.push(jobs);
 		}
 		case SET_JOB: {
 			const { job } = action;
-			return { ...state, job };
+			return produce(state, (draftState) => {
+				draftState.push(job);
+			});
 		}
 		case SET_ADD_JOB: {
 			const { job } = action;
-			return { ...state, job };
+			return produce(state, (draftState) => {
+				draftState.push(job);
+			});
 		}
 		default:
 			return state;
 	}
-};
+});

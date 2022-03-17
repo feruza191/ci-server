@@ -2,10 +2,9 @@ import React, { ReactElement } from 'react';
 
 import { BuildLogsWrapper } from '../style';
 
-export const BuildLogs = ({
-	jobLogs,
-}: {
+interface Props {
 	jobLogs: string | null;
-}): ReactElement => {
+}
+export const BuildLogs = ({ jobLogs }: Props): ReactElement => {
 	return <BuildLogsWrapper>{jobLogs}</BuildLogsWrapper>;
 };

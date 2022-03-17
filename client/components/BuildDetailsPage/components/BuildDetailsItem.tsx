@@ -10,7 +10,7 @@ import { Text } from 'client/core/theme';
 import { BoxShadow, FlexBox, BlockContainer } from 'client/core/theme/common';
 import { LineDeviderItem } from '../style';
 
-interface BuildDetailsItemProps {
+interface Props {
 	status: JobStatus;
 	commitMessage: string;
 	branchName: string;
@@ -30,7 +30,7 @@ export const BuildDetailsItem = ({
 	branchName,
 	commitHash,
 	authorName,
-}: BuildDetailsItemProps): ReactElement => (
+}: Props): ReactElement => (
 	<BoxShadow>
 		<FlexBox>
 			<IconState status={status} />
