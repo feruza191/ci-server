@@ -21,6 +21,7 @@ export class SandboxService {
 			await execPromise(gitCommand);
 		} catch (err) {
 			console.error({ err });
+			throw Error(`${TextKeys.FailedToCloneRepository} ${repoName}`);
 		}
 	}
 

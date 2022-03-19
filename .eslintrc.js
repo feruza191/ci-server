@@ -27,7 +27,7 @@ module.exports = {
 	},
 	rules: {
 		'no-shadow': 'off',
-		'no-console': 'error',
+		'no-console': 'warn',
 		'no-tabs': 'off',
 		'no-use-before-define': 'off',
 		'no-undef': 'off',
