@@ -1,7 +1,7 @@
-import React, { FC, useEffect } from 'react';
+import React, { ReactElement, useCallback, useEffect } from 'react';
 import { Form, Spin } from 'antd';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { observer } from 'mobx-react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { BUILD_HISTORY_PATH, HOME_PATH } from 'client/constants';
 import { Button } from 'client/core/atoms/Button';
@@ -10,29 +10,34 @@ import TextKey from 'client/core/enums/TextKeys';
 import { Layout } from 'client/core/layout/Layout';
 import { Text, fontSize, fontWeight } from 'client/core/theme';
 import { BlockContainer, FlexBox } from 'client/core/theme/common';
-import { useStore } from 'client/shared/customHooks/useStore';
 import { FormTime, ButtonsWrapper } from './style';
+import {
+	getAllSettings,
+	saveSettings,
+} from 'client/store/actions/settings.actions';
+import { getSettings } from 'client/store/selectors/selectors';
 
-interface ValuesProps {
+interface Props {
 	repoName: string;
 	mainBranch: string;
 	period: number;
 }
 
-const SettingsPage: FC<RouteComponentProps> = observer(({ history }) => {
-	const store = useStore();
+const SettingsPage = ({ history }: RouteComponentProps): ReactElement => {
+	const dispatch = useDispatch();
+	const settings = useSelector(getSettings);
 
-	const onFinish = async (values: ValuesProps) => {
+	const onFinish = useCallback(async (values: Props) => {
 		const { repoName, mainBranch, period } = values;
-		await store.saveSettings(repoName, mainBranch, period);
+		dispatch(saveSettings({ repoName, mainBranch, period }));
 		history.push(BUILD_HISTORY_PATH);
-	};
-
-	useEffect(() => {
-		store.getSettings();
 	}, []);
 
-	if (!store.settings) {
+	useEffect(() => {
+		dispatch(getAllSettings());
+	}, []);
+
+	if (!settings.repoName) {
 		return <Spin />;
 	}
 
@@ -52,9 +57,9 @@ const SettingsPage: FC<RouteComponentProps> = observer(({ history }) => {
 					name="settings"
 					onFinish={onFinish}
 					initialValues={{
-						repoName: store?.settings?.repoName,
-						mainBranch: store?.settings.mainBranch,
-						period: store?.settings?.period,
+						repoName: settings?.repoName,
+						mainBranch: settings?.mainBranch,
+						period: settings?.period,
 					}}
 				>
 					<Text>{TextKey.GitHubRepository}</Text>
@@ -106,6 +111,6 @@ const SettingsPage: FC<RouteComponentProps> = observer(({ history }) => {
 			</BlockContainer>
 		</Layout>
 	);
-});
+};
 
 export default SettingsPage;

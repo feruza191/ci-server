@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 
 import Instrument from 'assets/images/instrument.svg';
@@ -10,7 +10,7 @@ import { lineHeight } from 'client/core/theme';
 import { BlockContainer } from 'client/core/theme/common';
 import { StartScreenWrapper, SettingsText } from './style';
 
-const StartScreenPage: FC = () => (
+const StartScreenPage = (): ReactElement => (
 	<Layout>
 		<StartScreenWrapper
 			flexDirection="column"

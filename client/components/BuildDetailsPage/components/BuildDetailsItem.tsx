@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ReactElement } from 'react';
 import { UserOutlined } from '@ant-design/icons';
 
 import { BranchNameItem } from 'client/core/components/BranchNameItem';
@@ -10,7 +10,7 @@ import { Text } from 'client/core/theme';
 import { BoxShadow, FlexBox, BlockContainer } from 'client/core/theme/common';
 import { LineDeviderItem } from '../style';
 
-interface BuildDetailsItemProps {
+interface Props {
 	status: JobStatus;
 	commitMessage: string;
 	branchName: string;
@@ -21,7 +21,7 @@ interface BuildDetailsItemProps {
 	duration: number | null;
 }
 
-export const BuildDetailsItem: FC<BuildDetailsItemProps> = ({
+export const BuildDetailsItem = ({
 	status,
 	commitMessage,
 	jobNumber,
@@ -30,7 +30,7 @@ export const BuildDetailsItem: FC<BuildDetailsItemProps> = ({
 	branchName,
 	commitHash,
 	authorName,
-}) => (
+}: Props): ReactElement => (
 	<BoxShadow>
 		<FlexBox>
 			<IconState status={status} />

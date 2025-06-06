@@ -6,7 +6,9 @@ import { ServerStyleSheet } from 'styled-components';
 import { ChunkExtractor } from '@loadable/server';
 import fs from 'fs';
 import path from 'path';
+import { Provider } from 'react-redux';
 
+import { store } from './store/store';
 import App from './client';
 
 const root = process.cwd();
@@ -34,9 +36,11 @@ export const createSupportSSR = (
 			const serverStyles = new ServerStyleSheet();
 
 			const jsx = extractor.collectChunks(
-				<StaticRouter location={req.url}>
-					<App />
-				</StaticRouter>
+				<Provider store={store}>
+					<StaticRouter location={req.url}>
+						<App />
+					</StaticRouter>
+				</Provider>
 			);
 
 			const scripts = extractor.getScriptTags();

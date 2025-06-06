@@ -1,11 +1,11 @@
-import React, { FC } from 'react';
+import React, { ReactElement } from 'react';
 import { Row, Col } from 'antd';
 
 import TextKey from '../enums/TextKeys';
 import { lineHeight } from '../theme';
 import { FooterWrapper, CopyRight } from './style';
 
-export const Footer: FC = () => (
+export const Footer = (): ReactElement => (
 	<FooterWrapper>
 		<Row>
 			<Col xs={24} sm={12}>

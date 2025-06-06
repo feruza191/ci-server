@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ReactElement } from 'react';
 
 import CalendarSvg from 'assets/images/calendar.svg';
 import ClockSvg from 'assets/images/clock.svg';
@@ -15,11 +15,11 @@ import {
 } from '../style';
 import { JobItem } from 'client/types/types';
 
-interface JobProps {
+interface Props {
 	job: JobItem;
 }
 
-export const BuildItem: FC<JobProps> = ({ job }) => {
+export const BuildItem = ({ job }: Props): ReactElement => {
 	const {
 		start,
 		duration,

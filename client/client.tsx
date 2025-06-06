@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ReactElement } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import loadable from '@loadable/component';
 
@@ -39,7 +39,7 @@ const StartScreenPage = loadable(
 	{ ssr: true }
 );
 
-const App: FC = () => (
+const App = (): ReactElement => (
 	<Switch>
 		<Route exact path={HOME_PATH} component={StartScreenPage} />
 		<Route path={SETTINGS_PATH} component={SettingsPage} />

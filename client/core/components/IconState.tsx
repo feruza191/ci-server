@@ -1,15 +1,15 @@
-import React, { useMemo, FC } from 'react';
+import React, { useMemo, ReactElement } from 'react';
 
 import FailSvg from 'assets/images/fail.svg';
 import SuccessSvg from 'assets/images/success.svg';
 import WaitingSvg from 'assets/images/waiting.svg';
 import { JobStatus } from '../enums/JobStatus';
 
-interface IconStateProps {
+interface Props {
 	status: JobStatus;
 }
 
-export const IconState: FC<IconStateProps> = ({ status }) => {
+export const IconState = ({ status }: Props): ReactElement => {
 	const jobStatus = useMemo(() => {
 		return {
 			[JobStatus.Success]: SuccessSvg,
